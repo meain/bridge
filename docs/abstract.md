@@ -11,12 +11,12 @@ It is at times really hard for teachers to reach students most of time and they 
 **Bridge** intents to solve all the above stated problems by implementing a application using which the teachers and students can communicate seamlessly with each other,
 keep track of everything that they have to do, get replies asap and just about anything that helps make the student teacher communication much more effective and easy.
 
-In here we will have ways in which 
+In here we will have ways in which
 
 * Teachers will be able to contact to a group of students ( a class ) or specifically to an individual student.
 * Teachers will be able to post all details about assignments and schedule exams to a common calender which will be visible to the respective students at any time.
 * Teachers can also publish any results as well as remarks about a student or a group.
-* Students will be able to post queries which can be answered by
+* Students will be able to post queries which can be answered by teachers
 
 Now, for students
 
