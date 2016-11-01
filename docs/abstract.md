@@ -8,7 +8,7 @@ There lacks an efficient way for teachers to communicate to students directly as
 Also there is no easy way for the students and teachers to keep track of the tasks they have in hand.
 It is at times really hard for teachers to reach students most of time and they end up relying on the class representative to deliver the message which in itself is not bad, but is less efficient.
 
-**Bridge** intents to solve all the above stated problems by implementing a web application on which the teachers and students can communicate seamlessly with each other,
+**Bridge** intents to solve all the above stated problems by implementing a application using which the teachers and students can communicate seamlessly with each other,
 keep track of everything that they have to do, get replies asap and just about anything that helps make the student teacher communication much more effective and easy.
 
 In here we will have ways in which 
@@ -19,5 +19,6 @@ In here we will have ways in which
 * Students will be able to post queries which can be answered by
 
 Now, for students
+
 * They can always see what is coming up next in their calender
 * They will be able to chat with a teacher to clarify anything he/she has doubts on.
