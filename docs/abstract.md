@@ -10,6 +10,7 @@ It is at times really hard for teachers to reach students most of time and they 
 
 **Bridge** intents to solve all the above stated problems by implementing a web application on which the teachers and students can communicate seamlessly with each other,
 keep track of everything that they have to do, get replies asap and just about anything that helps make the student teacher communication much more effective and easy.
+
 In here we will have ways in which 
 
 * Teachers will be able to contact to a group of students ( a class ) or specifically to an individual student.
