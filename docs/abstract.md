@@ -1,7 +1,7 @@
 # Bridge
 
 We are living in an age where the art of technology and the art of teaching has come a long way.
-With **Bridge** we intent to interlace those by helping to **bridge** the communication gap between teachers and students.
+With **bridge** we intent to interlace those by helping to **bridge** the communication gap between teachers and students.
 Currently, even though teachers use technology to reach out to students the solutions are more or less ad-hoc.
 The communication is spread over different channels, sometimes a phone call, sometimes a text message, and sometimes nothing at all.
 There lacks an efficient way for teachers to communicate to students directly as a group or individually.
