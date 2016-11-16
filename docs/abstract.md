@@ -1,4 +1,4 @@
-# Project Abstrct
+# Project Abstract
 
 ## Bridge
 > A way to **bridge** the communication gap between teachers and students
@@ -50,3 +50,10 @@ The backend will be written in `python 2` using the `django` framework and `flas
 The frontend will be developed initially on `pug`, `stylus` and `coffescript`  which will be precompiled to `html`, `css` and `javascript` for delivery.
 We will be using an `SQL` database to store and retrieve data essential for the project to function.
 All of the database interaction to the `SQL` server will be done through a python interface in order to go along with the other python components of the project.
+
+
+### Group members
+
+Aayisha A A  
+Abhai Kollara Dilip  
+Abin Simon
