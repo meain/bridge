@@ -90,3 +90,5 @@ ENV/
 
 # Others
 .DS_Store
+
+.zedstate
