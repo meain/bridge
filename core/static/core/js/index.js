@@ -1,3 +1,15 @@
+var user_data = {
+    'name': 'Juliet Andy',
+    'email': 'julietandy@gmail.com',
+    'photo': 'https://thumbs.dreamstime.com/z/beautiful-profile-face-young-woman-clean-fresh-skin-40988715.jpg',
+}
+
+
+var timetable = {
+    'monday': {'maths', 'physics', 'chemistry', 'computer science', 'party', 'none'}
+}
+
+
 var upcoming_events = [
     {
         'name': 'Submit something',
@@ -16,8 +28,12 @@ var upcoming_events = [
     },
 ]
 
+
+
+
+
 populate_upcoming = function(event){
-    htmlstr = ''
+    htmlstr = '';
     for( var i=0, len=event.length; i<len; i++ ){
         htmlstr +=
             "<div class='card small event'>"+
@@ -25,13 +41,25 @@ populate_upcoming = function(event){
                     event[i]['due']+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
-                    "<span class='span red'>subject: </span>"+ event[i]['name']+
+                    "<span class='span red name'>subject</span><span class='span white span-content'>"+ event[i]['name']+ "</span>"+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
-                    "<span class='span blue'>submission: </span>"+ event[i]['to']+
+                    "<span class='span blue name'>submission</span><span class='span white span-content'>"+ event[i]['to']+ "</span>"+
                 "</div>"+
             "</div>"
     }
     $('#rcontent').html(htmlstr);
 }
+populate_user_profile = function(user){
+    $('#profile-name').html(user['name']);
+    $('#profile-image').attr('src', user['photo']);
+}
 populate_upcoming(upcoming_events);
+populate_user_profile(user_data);
+
+
+
+
+
+
+
