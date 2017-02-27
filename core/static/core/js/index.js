@@ -132,7 +132,7 @@ populate_timetable_heder = function(timetable){
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
     for( var i=0; i<=count; i++ ){
         htmlstr+=
-            "<div class='card tiny timetable-subject'>"+
+            "<div class='card tiny timetable-subject' data="+i+">"+
                 timetable[dow][i]+
             "</div>"
     }
