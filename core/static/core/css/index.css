@@ -30,6 +30,12 @@ body{
     width: 20vw;
     height: calc(100% - 80px);
 }
+.card.tiny{
+    padding: 1px;
+    padding-left: 3px;
+    padding-right: 3px;
+    margin: 1px;
+}
 .card.small{
     padding: 5px;
     margin: 5px;
@@ -52,17 +58,60 @@ body{
     width: calc(100% - 20px);
     font-size: 20px;
     text-align: center;
-    font-family: 'Baloo Paaji', cursive;
+    font-family: 'Happy Monkey', cursive;
 }
 #lheading{
     color: #f5f5f5;
-    background-color: #16a085;
+    /* background-color: #16a085; */
+    background-color: #e74c3c;
 }
 #mheading{
-    color: #f5f5f5;
-    background-color: #e74c3c;
+    color: #000;
+    /* background-color: #e74c3c; */
+    float: right;
+    text-align: right;
+    padding-right: 30px;
+    /* don't know why this padding is not showing up */
+    padding-top: 10px;
 }
 #rheading{
     color: #f5f5f5;
     background-color: #2980b9;
+}
+.content{
+    height: calc(100% - 70px);
+}
+.event{
+    float: left;
+    width: calc(100% - 20px);
+}
+.date-card{
+    float: right;
+    background-color: #e74c3c;
+    font-family: 'Happy Monkey', cursive;
+    font-size: 14px;
+    font-weight: bold;
+    color: #f5f5f5;
+}
+.subject-card{
+    clear: both;
+    font-family: 'Happy Monkey', cursive;
+    font-size: 16px;
+    font-weight: bold;
+}
+.span.red{
+    /* background-color: red; */
+    /* color: #fff; */
+    /* padding:2px; */
+    /* padding-left: 5px; */
+    /* padding-right: 5px; */
+    color: red;
+}
+.span.blue{
+    color: blue;
+}
+#profile-image{
+    width: 7%;
+    border-radius: 50px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
 }
