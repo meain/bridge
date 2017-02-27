@@ -139,7 +139,7 @@ populate_timetable_heder = function(timetable){
         "<div id='timetable-banner'>"+
             htmlstr+
         "</div>"
-    $('#mcontent').append(htmlstr);
+    $('#mcontent').prepend(htmlstr);
 }
 populate_upcoming(upcoming_events);
 populate_timetable_heder(timetable);
