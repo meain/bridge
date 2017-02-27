@@ -1,8 +1,4 @@
-var user_data = {
-    'name': 'Juliet Andy',
-    'email': 'julietandy@gmail.com',
-    'photo': 'https://thumbs.dreamstime.com/z/beautiful-profile-face-young-woman-clean-fresh-skin-40988715.jpg',
-}
+var user_data = {}
 
 
 var timetable = {
@@ -121,6 +117,9 @@ populate_upcoming = function(event){
 populate_user_profile = function(user){
     $('#profile-name').html(user['name']);
     $('#profile-image').attr('src', user['photo']);
+    $('#popup-profile-name').html(user['name']);
+    $('#popup-profile-image').attr('src', user['photo']);
+    $('#popup-profile-email').html(user['email']);
 }
 populate_timetable_heder = function(timetable){
     var count = 0;
@@ -143,5 +142,40 @@ populate_timetable_heder = function(timetable){
     $('#mcontent').append(htmlstr);
 }
 populate_upcoming(upcoming_events);
-populate_user_profile(user_data);
 populate_timetable_heder(timetable);
+
+
+
+function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    user_data['id'] = profile.getId();
+    user_data['name'] = profile.getName();
+    user_data['email'] = profile.getEmail();
+    user_data['photo'] = profile.getImageUrl();
+    console.log(user_data);
+    populate_user_profile(user_data);
+    // $('#login-popup').addClass('hidden');
+    $('#login-popup').css('display', 'none');
+}
+
+$('#popup-profile-signout-button').click(function(){
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+        console.log('User signed out.');
+    });
+    // $('#login-popup').removeClass('hidden');
+    $('#login-popup').css('display', 'flex');
+    $($('#signout-popup').parent()).css('display', 'none');
+});
+
+$($('#signout-popup').parent()).click(function(){
+    $($('#signout-popup').parent()).css('display', 'none');
+});
+$('#signout-popup').click(function(e){
+    e.stopPropagation();
+});
+
+$('#profile-image').click(function(){
+    // $($('#signout-popup').parent()).removeClass('hidden');
+    $($('#signout-popup').parent()).css('display', 'flex');
+});
