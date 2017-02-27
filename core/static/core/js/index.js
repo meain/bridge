@@ -145,10 +145,3 @@ populate_timetable_heder = function(timetable){
 populate_upcoming(upcoming_events);
 populate_user_profile(user_data);
 populate_timetable_heder(timetable);
-
-
-
-
-
-
-

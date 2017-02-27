@@ -4,12 +4,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-signin-client_id" content="1063943850637-et38ok0k5jtfh19n17m6qa2bsmjitj60.apps.googleusercontent.com">
     <link rel="shortcut icon" href="{%  static 'core/images/favicon.png' %}">
     <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
     <title>bridge</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji|Happy+Monkey" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
   </head>
   <body>
 
@@ -37,7 +39,18 @@
         </div>
     </div>
 
+    <div id="login-popup">
+        <div id="login-stuff">
+            <img id="dummy-profile-image" src="https://lh3.googleusercontent.com/-qtfYMkBqTLU/U_Q0cLPPDbI/AAAAAAAAAGA/oWjn15ONPr4-gesBP6FmjrLWwBtlmXKLgCL0B/s1000-fcrop64=1,41490000ffa7be9f/low_poly_flower_by_maty241-d5oy8q8.png">
+            <div id="bridge-in-signin-popup">
+                BRIDGE
+            </div>
+            <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="{% static 'core/js/index.js' %}"></script>
   </body>
 </html>
