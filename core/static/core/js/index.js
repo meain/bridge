@@ -15,40 +15,38 @@ var timetable = {
 
 
 //attendece and stuff
-var track_data = {
-    '10-12-2017':[
-        {
-            'period': 0, //period number
-            'notes': 'random notes in period 0', //note data
-            'attendece' : '' // bunked|free|attended
-        },
-        {
-            'period': 1, //period number
-            'notes': '', //note data
-            'attendece' : '' // bunked|free|attended
-        },
-        {
-            'period': 2, //period number
-            'notes': '', //note data
-            'attendece' : '' // bunked|free|attended
-        },
-        {
-            'period': 3, //period number
-            'notes': '', //note data
-            'attendece' : '' // bunked|free|attended
-        },
-        {
-            'period': 4, //period number
-            'notes': '', //note data
-            'attendece' : '' // bunked|free|attended
-        },
-        {
-            'period': 5, //period number
-            'notes': '', //note data
-            'attendece' : '' // bunked|free|attended
-        }
-    ]
-}
+var track_data = [
+    {
+        'period': 0, //period number
+        'notes': 'random notes in period 0', //note data
+        'attendece' : '' // bunked|free|attended
+    },
+    {
+        'period': 1, //period number
+        'notes': '', //note data
+        'attendece' : '' // bunked|free|attended
+    },
+    {
+        'period': 2, //period number
+        'notes': '', //note data
+        'attendece' : '' // bunked|free|attended
+    },
+    {
+        'period': 3, //period number
+        'notes': '', //note data
+        'attendece' : '' // bunked|free|attended
+    },
+    {
+        'period': 4, //period number
+        'notes': '', //note data
+        'attendece' : '' // bunked|free|attended
+    },
+    {
+        'period': 5, //period number
+        'notes': '', //note data
+        'attendece' : '' // bunked|free|attended
+    }
+]
 
 
 // Will contain all the data for all the subjects that a student has
