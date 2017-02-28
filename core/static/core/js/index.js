@@ -15,32 +15,38 @@ var track_data = [
     {
         'period': 0, //period number
         'notes': 'random notes in period 0', //note data
-        'attendece' : '' // bunked|free|attended
+        'attendece' : '', // bunked|free|attended
+        'time': '9:00'
     },
     {
         'period': 1, //period number
         'notes': '', //note data
-        'attendece' : '' // bunked|free|attended
+        'attendece' : '', // bunked|free|attended
+        'time': '10:00'
     },
     {
         'period': 2, //period number
         'notes': '', //note data
-        'attendece' : '' // bunked|free|attended
+        'attendece' : '', // bunked|free|attended
+        'time': '11:00'
     },
     {
         'period': 3, //period number
         'notes': '', //note data
-        'attendece' : '' // bunked|free|attended
+        'attendece' : '', // bunked|free|attended
+        'time': '13:00'
     },
     {
         'period': 4, //period number
         'notes': '', //note data
-        'attendece' : '' // bunked|free|attended
+        'attendece' : '', // bunked|free|attended
+        'time': '14:00'
     },
     {
         'period': 5, //period number
         'notes': '', //note data
-        'attendece' : '' // bunked|free|attended
+        'attendece' : '', // bunked|free|attended
+        'time': '15:00'
     }
 ]
 
@@ -121,6 +127,13 @@ populate_user_profile = function(user){
     $('#popup-profile-image').attr('src', user['photo']);
     $('#popup-profile-email').html(user['email']);
 }
+populate_subject_data = function(subject_data, period_data, period_number){
+    $('#subject-name-content').html(subject_data['subject']);
+    $('#teacher-name-content').html(subject_data['teacher']);
+    $('#subject-time-content').html(period_data['time']);
+    $('#notes-text').html(period_data['notes']);
+    $('#subject-data').attr('data', period_number);
+}
 populate_timetable_heder = function(timetable){
     var count = 0;
     for (var i in timetable) {
@@ -140,9 +153,19 @@ populate_timetable_heder = function(timetable){
             htmlstr+
         "</div>"
     $('#mcontent').prepend(htmlstr);
+    $('.timetable-subject').click(function(){
+        period_number = $(this).attr('data');
+        console.log(period_number);
+        populate_subject_data(subject_data[timetable[dow][period_number]], track_data[period_number], period_number);
+    });
 }
 populate_upcoming(upcoming_events);
 populate_timetable_heder(timetable);
+// Initially set it to show the first period data
+
+var day = new Date().getDay();
+var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+populate_subject_data(subject_data[timetable[dow][0]], track_data[0],0);
 
 
 
