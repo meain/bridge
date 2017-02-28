@@ -102,6 +102,7 @@ var upcoming_events = [
 
 
 
+// Add in the upcoming events to the upcoming events tab
 populate_upcoming = function(event){
     htmlstr = '';
     for( var i=0, len=event.length; i<len; i++ ){
@@ -120,6 +121,9 @@ populate_upcoming = function(event){
     }
     $('#rcontent').html(htmlstr);
 }
+
+
+// Add in user profile information
 populate_user_profile = function(user){
     $('#profile-name').html(user['name']);
     $('#profile-image').attr('src', user['photo']);
@@ -127,13 +131,19 @@ populate_user_profile = function(user){
     $('#popup-profile-image').attr('src', user['photo']);
     $('#popup-profile-email').html(user['email']);
 }
+
+
+// Populate data for each subject ( called on user click )
 populate_subject_data = function(subject_data, period_data, period_number){
     $('#subject-name-content').html(subject_data['subject']);
     $('#teacher-name-content').html(subject_data['teacher']);
     $('#subject-time-content').html(period_data['time']);
-    $('#notes-text').html(period_data['notes']);
+    $('#notes-text').val(period_data['notes']);
     $('#subject-data').attr('data', period_number);
 }
+
+
+// Populate the list of subjects
 populate_timetable_heder = function(timetable){
     var count = 0;
     for (var i in timetable) {
@@ -159,16 +169,19 @@ populate_timetable_heder = function(timetable){
         populate_subject_data(subject_data[timetable[dow][period_number]], track_data[period_number], period_number);
     });
 }
+
+// Call initial functions
 populate_upcoming(upcoming_events);
 populate_timetable_heder(timetable);
-// Initially set it to show the first period data
 
+
+// Initially set it to show the first period data
 var day = new Date().getDay();
 var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
 populate_subject_data(subject_data[timetable[dow][0]], track_data[0],0);
 
 
-
+// User login
 function onSignIn(googleUser) {
     var profile = googleUser.getBasicProfile();
     user_data['id'] = profile.getId();
@@ -177,20 +190,20 @@ function onSignIn(googleUser) {
     user_data['photo'] = profile.getImageUrl();
     console.log(user_data);
     populate_user_profile(user_data);
-    // $('#login-popup').addClass('hidden');
     $('#login-popup').css('display', 'none');
 }
 
+// User logout
 $('#popup-profile-signout-button').click(function(){
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
         console.log('User signed out.');
     });
-    // $('#login-popup').removeClass('hidden');
     $('#login-popup').css('display', 'flex');
     $($('#signout-popup').parent()).css('display', 'none');
 });
 
+// Handle sinout popup remove click
 $($('#signout-popup').parent()).click(function(){
     $($('#signout-popup').parent()).css('display', 'none');
 });
@@ -198,7 +211,19 @@ $('#signout-popup').click(function(e){
     e.stopPropagation();
 });
 
+// Open up the signout popup
 $('#profile-image').click(function(){
-    // $($('#signout-popup').parent()).removeClass('hidden');
     $($('#signout-popup').parent()).css('display', 'flex');
+});
+
+// Add in notes data to the variable
+$('#notes-text').blur(function(){
+    note = $(this).val();
+    period_number = $('#subject-data').attr('data');
+    $.each(track_data, function(i, v) {
+        if (v.period == period_number) {
+            track_data[i].notes = note;
+            return;
+        }
+    });
 });
