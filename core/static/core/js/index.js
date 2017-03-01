@@ -102,6 +102,9 @@ var upcoming_events = [
 
 
 
+var notes_editor = new SimpleMDE({ element: document.getElementById("notes-text") });
+
+
 // Add in the upcoming events to the upcoming events tab
 populate_upcoming = function(event){
     htmlstr = '';
@@ -138,7 +141,7 @@ populate_subject_data = function(subject_data, period_data, period_number){
     $('#subject-name-content').html(subject_data['subject']);
     $('#teacher-name-content').html(subject_data['teacher']);
     $('#subject-time-content').html(period_data['time']);
-    $('#notes-text').val(period_data['notes']);
+    notes_editor.value(period_data['notes']);
     $('#subject-data').attr('data', period_number);
 }
 
@@ -218,7 +221,7 @@ $('#profile-image').click(function(){
 
 // Add in notes data to the variable
 $('#notes-text').blur(function(){
-    note = $(this).val();
+    note = notes_editor.value();
     period_number = $('#subject-data').attr('data');
     $.each(track_data, function(i, v) {
         if (v.period == period_number) {
