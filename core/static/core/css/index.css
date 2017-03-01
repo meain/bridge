@@ -24,16 +24,36 @@ body{
 .leftpane{
     width: 20vw;
     height: calc(100% - 80px);
+    transition-property: width, visibility;
+    transition-duration: 0.5s;
 }
 .midpane{
     width: calc(60vw - 120px);
     height: calc(100% - 80px);
+    transition-property: width;
+    transition-duration: 0.5s;
 }
 .rightpane{
     width: 20vw;
     height: calc(100% - 80px);
+    transition-property: width;
+    transition-duration: 0.5s;
 }
 @media screen and (max-width: 1050px){
+    /* Remove navigation */
+    .leftpane{
+        display: none;
+    }
+    .rightpane{
+        width: 190px;
+    }
+    .midpane{
+        /* width: calc(100vw - 40px); */
+        width: calc(100vw - 280px);
+    }
+}
+@media screen and (max-width: 730px){
+    /* Remove navigation and upcoming */
     .leftpane{
         display: none;
     }
@@ -84,7 +104,6 @@ body{
 #mheading{
     font-size: 20px;
     text-align: center;
-    /* font-family: 'Happy Monkey', cursive; */
     font-family: 'Josefin Sans', sans-serif;
     display: inline-block;
     color: #000;
@@ -113,7 +132,6 @@ body{
 .date-card{
     float: right;
     background-color: #e74c3c;
-    /* font-family: 'Happy Monkey', cursive; */
     font-family: 'Josefin Sans', sans-serif;
     font-size: 14px;
     font-weight: bold;
@@ -121,7 +139,6 @@ body{
 }
 .subject-card{
     clear: both;
-    /* font-family: 'Happy Monkey', cursive; */
     font-family: 'Josefin Sans', sans-serif;
     font-size: 16px;
     font-weight: bold;
@@ -171,7 +188,6 @@ body{
     width: 100%;
     font-size: 20px;
     text-align: center;
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'Josefin Sans', sans-serif;
     padding-top: 10px;
     overflow-x: auto;
@@ -211,7 +227,7 @@ body{
     text-align: center;
     font-size: 50px;
     /* font-family: 'Josefin Sans', sans-serif; */
-    font-family: 'Righteous', cursive;
+    font-family: 'Pacifico', cursive;
     padding-bottom: 20px;
 }
 #dummy-profile-image{
@@ -275,4 +291,14 @@ body{
     border-color: #fff;
     color: #000;
     font-size: 13px;
+}
+#hamburger-menu-button{
+    float: left;
+    width: 17px;
+    display: none;
+}
+@media screen and (max-width: 1050px){
+    #hamburger-menu-button{
+        display: block;
+    }
 }

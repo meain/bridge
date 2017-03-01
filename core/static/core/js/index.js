@@ -227,3 +227,26 @@ $('#notes-text').blur(function(){
         }
     });
 });
+
+
+// Hamburger menu thingy
+$('#hamburger-menu-button').click(function(e){
+    e.stopPropagation();
+    nav = $($('.leftpane')[0]);
+    nav.css('position', 'absolute');
+    nav.css('display', 'block');
+    nav.css('width', '50%');
+    // nav.css('visibility', 'visible');
+    // $($('.midpane')[0]).css('width', '50%');
+});
+
+$('div').not('.leftpane').click(function(){
+    cur_state = $('#hamburger-menu-button').css('display');  //Kinda hacky, eeks
+    if(cur_state == 'block'){
+        nav = $($('.leftpane')[0]);
+        nav.css('display', 'none');
+        nav.css('width', '20vw');
+        // nav.css('visibility', 'hidden');
+        // $($('.midpane')[0]).css('width', 'calc(100vw - 45px)');
+    }
+});

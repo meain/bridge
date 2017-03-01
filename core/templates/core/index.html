@@ -9,10 +9,8 @@
     <link rel="shortcut icon" href="{%  static 'core/images/favicon.ico' %}">
     <link rel="stylesheet" href="{% static 'core/css/index.css' %}">
     <title>bridge</title>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji|Happy+Monkey" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   </head>
   <body>
 
@@ -25,6 +23,7 @@
         </div>
         <div class='midpane pane'>
             <div id='mheading'>
+                <img id='hamburger-menu-button' src='{%  static 'core/images/hamburger.jpg' %}'>
                 <img id="profile-image" src="" alt="profile">
                 <div id='profile-name'></div>
             </div>
@@ -61,9 +60,10 @@
 
     <div id="login-popup">
         <div id="login-stuff">
-            <img id="dummy-profile-image" src="{%  static 'core/images/logo.jpg' %}">
+            <img id="dummy-profile-image" src="{%  static 'core/images/logo.png' %}">
+            <!-- <img id="dummy-profile-image" src="https://unsplash.it/200/300/?random"> -->
             <div id="bridge-in-signin-popup">
-                BRIDGE
+                bridge
             </div>
             <div class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>
