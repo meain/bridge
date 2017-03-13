@@ -101,56 +101,119 @@ var upcoming_events = [
 
 
 
-
-var notes_editor = new SimpleMDE({ element: document.getElementById("notes-text") });
-
-
-// Add in the upcoming events to the upcoming events tab
-populate_upcoming = function(event){
+InitializeUser = function(user){
+    this.class_name = 'initialize_user';
+    this.user = user;
+}
+InitializeUser.prototype.get_data_from_server = function(){
+    // the get call will be used to replace here
+    this.events = upcoming_events;
+}
+// Add in user profile information
+InitializeUser.prototype.populate_user_profile = function(){
+    $('#profile-name').html(this.user['name']);
+    $('#profile-image').attr('src', this.user['photo']);
+    $('#popup-profile-name').html(this.user['name']);
+    $('#popup-profile-image').attr('src', this.user['photo']);
+    $('#popup-profile-email').html(this.user['email']);
+}
+InitializeUser.prototype.init = function(events){
+    this.get_data_from_server();
+    this.populate_user_profile();
+    this.populate_upcoming();
+    this.click_handlers();
+}
+InitializeUser.prototype.populate_upcoming = function(){
     htmlstr = '';
-    for( var i=0, len=event.length; i<len; i++ ){
+    for( var i=0, len=this.events.length; i<len; i++ ){
         htmlstr +=
             "<div class='card small event'>"+
                 "<div class='card tiny date-card'>"+
-                    event[i]['due']+
+                    this.events[i]['due']+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
-                    "<span class='span red name'>subject</span><span class='span white span-content'>"+ event[i]['name']+ "</span>"+
+                    "<span class='span red name'>subject</span><span class='span white span-content'>"+ this.events[i]['name']+ "</span>"+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
-                    "<span class='span blue name'>submission</span><span class='span white span-content'>"+ event[i]['to']+ "</span>"+
+                    "<span class='span blue name'>submission</span><span class='span white span-content'>"+ this.events[i]['to']+ "</span>"+
                 "</div>"+
             "</div>"
     }
     $('#rcontent').html(htmlstr);
 }
-
-
-// Add in user profile information
-populate_user_profile = function(user){
-    $('#profile-name').html(user['name']);
-    $('#profile-image').attr('src', user['photo']);
-    $('#popup-profile-name').html(user['name']);
-    $('#popup-profile-image').attr('src', user['photo']);
-    $('#popup-profile-email').html(user['email']);
+InitializeUser.prototype.click_handlers = function(){
+    // User logout
+    $('#popup-profile-signout-button').click(function(){
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+        $('#login-popup').css('display', 'flex');
+        $($('#signout-popup').parent()).css('display', 'none');
+    });
+    // Handle sinout popup remove click
+    $($('#signout-popup').parent()).click(function(){
+        $($('#signout-popup').parent()).css('display', 'none');
+    });
+    $('#signout-popup').click(function(e){
+        e.stopPropagation();
+    });
+    // Open up the signout popup
+    $('#profile-image').click(function(){
+        $($('#signout-popup').parent()).css('display', 'flex');
+    });
 }
 
 
-// Populate data for each subject ( called on user click )
-populate_subject_data = function(subject_data, period_data, period_number){
-    $('#subject-name-content').html(subject_data['subject']);
-    $('#teacher-name-content').html(subject_data['teacher']);
-    $('#subject-time-content').html(period_data['time']);
-    notes_editor.value(period_data['notes']);
-    $('#subject-data').attr('data', period_number);
+
+Home = function(){
+    this.class_name = 'home'
 }
-
-
+Home.prototype.get_data_from_server = function(){
+    // get calls will replace this
+    this.timetable = timetable;
+    this.subject_data = subject_data;
+    this.track_data = track_data;
+}
+Home.prototype.create_base_template = function(){
+    htmlstr =
+        '<div id="subject-data" class="card huge">'+
+            '<!-- Use data tag  with the above element to store the period number -->'+
+            '<div id="subject-name" class="subject-module">'+
+                '<span class="span red name">subject</span>'+
+                '<span class="span white span-content" id="subject-name-content"></span>'+
+            '</div>'+
+            '<div id="teacher-name" class="subject-module">'+
+                '<span class="span blue name">teacher</span>'+
+                '<span class="span white span-content" id="teacher-name-content"></span>'+
+            '</div>'+
+            '<div id="subject-time" class="subject-module">'+
+                '<span class="span green name">time</span>'+
+                '<span class="span white span-content" id="subject-time-content"></span>'+
+            '</div>'+
+            '<div id="subject-notes" class="subject-module">'+
+                '<span class="span yellow name">notes</span>'+
+            '</div>'+
+            '<textarea id="notes-text" rows="15" placeholder="Boo, enter your notes here"></textarea>'+
+        '</div>'
+    $('#mcontent').html(htmlstr);
+    this.notes_editor = new SimpleMDE({ element: document.getElementById("notes-text") });
+}
+Home.prototype.init = function(){
+    this.get_data_from_server();
+    this.create_base_template();
+    this.populate_timetable_heder();
+    var day = new Date().getDay();
+    var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+    this.populate_subject_data(subject_data[this.timetable[dow][0]], this.track_data[0],0);
+    // this.populate_subject_data();
+    this.handlers();
+}
 // Populate the list of subjects
-populate_timetable_heder = function(timetable){
+Home.prototype.populate_timetable_heder = function(timetable){
     var count = 0;
-    for (var i in timetable) {
-       if (timetable.hasOwnProperty(i)) count++;
+    for (var i in this.timetable) {
+       if (this.timetable.hasOwnProperty(i)) count++;
     }
     htmlstr = ''
     var day = new Date().getDay();
@@ -158,7 +221,7 @@ populate_timetable_heder = function(timetable){
     for( var i=0; i<=count; i++ ){
         htmlstr+=
             "<div class='card tiny timetable-subject' data="+i+">"+
-                timetable[dow][i]+
+                this.timetable[dow][i]+
             "</div>"
     }
     htmlstr =
@@ -166,22 +229,44 @@ populate_timetable_heder = function(timetable){
             htmlstr+
         "</div>"
     $('#mcontent').prepend(htmlstr);
+}
+// Populate data for each subject ( called on user click )
+Home.prototype.populate_subject_data = function(subject_data, period_data, period_number){
+    $('#subject-name-content').html(subject_data['subject']);
+    $('#teacher-name-content').html(subject_data['teacher']);
+    $('#subject-time-content').html(period_data['time']);
+    this.notes_editor.value(period_data['notes']);
+    $('#subject-data').attr('data', period_number);
+}
+Home.prototype.handlers = function(){
+    var self = this;
+    // Add in notes data to the variable
+    this.notes_editor.codemirror.on("change", function(){
+        note = self.notes_editor.value();
+        period_number = $('#subject-data').attr('data');
+        // console.log('was supposed to save after this for period:' + period_number)
+        $.each(this.track_data, function(i, v) {    // probable to cause a bug
+            if (v.period == period_number) {
+                self.track_data[i].notes = note;
+                return;
+            }
+        });
+    });
     $('.timetable-subject').click(function(){
-        period_number = $(this).attr('data');
-        console.log(period_number);
-        populate_subject_data(subject_data[timetable[dow][period_number]], track_data[period_number], period_number);
+        var el = this;
+        var day = new Date().getDay();
+        var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+        period_number = $(el).attr('data');
+        $('#subject-data').attr('data', period_number);
+        self.populate_subject_data(self.subject_data[self.timetable[dow][period_number]], self.track_data[period_number], period_number);
     });
 }
 
-// Call initial functions
-populate_upcoming(upcoming_events);
-populate_timetable_heder(timetable);
 
 
-// Initially set it to show the first period data
-var day = new Date().getDay();
-var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-populate_subject_data(subject_data[timetable[dow][0]], track_data[0],0);
+
+
+
 
 
 // User login
@@ -192,44 +277,13 @@ function onSignIn(googleUser) {
     user_data['email'] = profile.getEmail();
     user_data['photo'] = profile.getImageUrl();
     console.log(user_data);
-    populate_user_profile(user_data);
+    // populate_user_profile(user_data);
+    initialize_user = new InitializeUser(user_data);
+    initialize_user.init();
+    home = new Home();
+    home.init();
     $('#login-popup').css('display', 'none');
 }
-
-// User logout
-$('#popup-profile-signout-button').click(function(){
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out.');
-    });
-    $('#login-popup').css('display', 'flex');
-    $($('#signout-popup').parent()).css('display', 'none');
-});
-
-// Handle sinout popup remove click
-$($('#signout-popup').parent()).click(function(){
-    $($('#signout-popup').parent()).css('display', 'none');
-});
-$('#signout-popup').click(function(e){
-    e.stopPropagation();
-});
-
-// Open up the signout popup
-$('#profile-image').click(function(){
-    $($('#signout-popup').parent()).css('display', 'flex');
-});
-
-// Add in notes data to the variable
-$('#notes-text').blur(function(){
-    note = notes_editor.value();
-    period_number = $('#subject-data').attr('data');
-    $.each(track_data, function(i, v) {
-        if (v.period == period_number) {
-            track_data[i].notes = note;
-            return;
-        }
-    });
-});
 
 
 // Hamburger menu thingy
