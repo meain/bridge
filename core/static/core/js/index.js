@@ -198,6 +198,9 @@ InitializeUser.prototype.click_handlers = function(){
     $('#notes').click(function(){
         new NotesView().init()
     });
+    $('#about').click(function(){
+        new AboutView().init()
+    });
 }
 
 
@@ -349,6 +352,58 @@ NotesView.prototype.create_base_template = function(){
             'Notes'+
         '</div>'+
         '<div id="notes-view-data">'+
+        '</div>'
+    $('#mcontent').html(htmlstr);
+}
+
+
+
+
+
+AboutView = function() {
+    this.name = 'aboutView';
+}
+AboutView.prototype.get_data_from_server = function(){
+    // might be an issue on async handling
+    // this.notes_data = notes_data;
+}
+AboutView.prototype.init = function(){
+    this.get_data_from_server()
+    this.create_base_template()
+    this.populate_about_content()
+}
+AboutView.prototype.populate_about_content = function(){
+    htmlstr = ''
+    htmlstr +=
+        '<div id="team-image-container">'+
+            '<img id="team-image" src="static/core/images/team.jpg" alt="Bridge Team">'+
+        '</div>'+
+        '<div class="team-data-heading">'+
+            'Team'+
+        '</div>'+
+        '<div class="team-data-content">'+
+            '<br>'+
+            'Team Bridge'+
+        '</div>'+
+        '<div class="team-data-heading">'+
+            'Team Members'+
+        '</div>'+
+        '<div class="team-data-content">'+
+            '<br>'+
+            '😜 Aayisha Shehsin 😜'+
+            '<br>'+
+            '🤔 Abhai Kollara 🤔'+
+            '<br>'+
+            '✌️ Abin Simon ✌️'+
+        '</div>'
+    $('#about-view-data').html(htmlstr);
+}
+AboutView.prototype.create_base_template = function(){
+    htmlstr =
+        '<div id="about-view-heading">'+
+            'About'+
+        '</div>'+
+        '<div id="about-view-data">'+
         '</div>'
     $('#mcontent').html(htmlstr);
 }
