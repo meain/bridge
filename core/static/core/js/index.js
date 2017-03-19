@@ -6,8 +6,35 @@ var timetable = {
     'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
     'wednessday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
     'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo']
+    'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
 }
+
+var notes_data = [
+    {
+        'date': '24-3-2014',
+        'note': 'lot of garbage'
+    },
+    {
+        'date': '21-3-2014',
+        'note': "random sutff for the heck of it, don't think I have time to use *lorem ipsum*"
+    },
+    {
+        'date': '22-3-2014',
+        'note': '# somethingggggggggggggggggggggggg'
+    },
+    {
+        'date': '25-3-2014',
+        'note': 'you bet it is soemtig not useful, just like you'
+    },
+    {
+        'date': '26-3-2014',
+        'note': 'dummy text, we really need to script this once the backed is set up'
+    },
+    {
+        'date': '28-3-2014',
+        'note': 'even more garbage, hahaa. crap, I hate my life'
+    },
+]
 
 
 //attendece and stuff
@@ -162,6 +189,15 @@ InitializeUser.prototype.click_handlers = function(){
     $('#profile-image').click(function(){
         $($('#signout-popup').parent()).css('display', 'flex');
     });
+
+
+    //other handles (menu items)
+    $('#home').click(function(){
+        new Home().init()
+    });
+    $('#notes').click(function(){
+        new NotesView().init()
+    });
 }
 
 
@@ -201,13 +237,19 @@ Home.prototype.create_base_template = function(){
 }
 Home.prototype.init = function(){
     this.get_data_from_server();
-    this.create_base_template();
-    this.populate_timetable_heder();
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-    this.populate_subject_data(subject_data[this.timetable[dow][0]], this.track_data[0],0);
-    // this.populate_subject_data();
-    this.handlers();
+    if(this.timetable[dow] != undefined){
+        this.create_base_template();
+        this.populate_timetable_heder();
+        this.populate_subject_data(subject_data[this.timetable[dow][0]], this.track_data[0],0);
+        // this.populate_subject_data();
+        this.handlers();
+    }
+    else{
+        text = "<div style='text-align:center; width:100%; height:100%; font-size:30px; padding-top: 200px;'>It's a " + dow + ". You are free today!<div>"
+        $('#mcontent').html(text);
+    }
 }
 // Populate the list of subjects
 Home.prototype.populate_timetable_heder = function(timetable){
@@ -218,7 +260,9 @@ Home.prototype.populate_timetable_heder = function(timetable){
     htmlstr = ''
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+    console.log(this.timetable, dow)
     for( var i=0; i<=count; i++ ){
+        console.log(i)
         htmlstr+=
             "<div class='card tiny timetable-subject' data="+i+">"+
                 this.timetable[dow][i]+
@@ -261,6 +305,54 @@ Home.prototype.handlers = function(){
         self.populate_subject_data(self.subject_data[self.timetable[dow][period_number]], self.track_data[period_number], period_number);
     });
 }
+
+
+
+NotesView = function() {
+    this.name = 'notesView';
+}
+NotesView.prototype.get_data_from_server = function(){
+    // might be an issue on async handling
+    this.notes_data = notes_data;
+}
+NotesView.prototype.init = function(){
+    this.get_data_from_server()
+    this.create_base_template()
+    this.populate_notes()
+}
+NotesView.prototype.populate_notes = function(){
+    htmlstr = ''
+    for(note in this.notes_data){
+        console.log(this.notes_data[note]);
+        htmlstr += '<div class="note-date">'+
+                        this.notes_data[note]['date']+
+                    '</div>'+
+                    '<textarea class="notes-content" id="notes-content-' + note + '">'+
+                        this.notes_data[note]['note']+
+                    '</textarea>'
+    }
+    $('#notes-view-data').html(htmlstr);
+    editor_items_notes = $('.notes-content')
+    for(var item=0, len=editor_items_notes.length; item<len; item++){
+        elem = $('#notes-content-'+item)
+        console.log(elem[0])
+        new SimpleMDE({
+            element: elem[0],
+            status: false,
+            toolbar: false,
+        }).togglePreview();
+    }
+}
+NotesView.prototype.create_base_template = function(){
+    htmlstr =
+        '<div id="notes-view-heading">'+
+            'Notes'+
+        '</div>'+
+        '<div id="notes-view-data">'+
+        '</div>'
+    $('#mcontent').html(htmlstr);
+}
+
 
 
 
