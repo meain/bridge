@@ -390,11 +390,16 @@ AboutView.prototype.populate_about_content = function(){
         '</div>'+
         '<div class="team-data-content">'+
             '<br>'+
-            '😜 Aayisha Shehsin 😜'+
+            '😜 Aayisha Shehsin 😜<br>'+
+            'Yeah, it was hard getting her up and running'+
             '<br>'+
-            '🤔 Abhai Kollara 🤔'+
             '<br>'+
-            '✌️ Abin Simon ✌️'+
+            '🤔 Abhai Kollara 🤔<br>'+
+            "Well, this guy's second name is Kollara"+
+            '<br>'+
+            '<br>'+
+            '✌️ Abin Simon ✌️<br>'+
+            'I need help, seriously!'
         '</div>'
     $('#about-view-data').html(htmlstr);
 }
