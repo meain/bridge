@@ -15,19 +15,21 @@ sem_choices = (
 )
 
 class Student(models.Model):
-	roll_no = models.SmallIntegerField(verbose_name="Roll no.") #For reference only, database primary is key different
+	SID = models.CharField(max_length=120, primary_key=True)
 	stud_name = models.CharField(max_length=40,verbose_name="Name")
 	current_class = models.ForeignKey('Class', on_delete=models.CASCADE,verbose_name="Class")
 
 	def __str__(self):
 		return str(self.stud_name)
 
+
 class Department(models.Model):
-	dep_code = models.CharField(max_length=3, verbose_name="Department Code")
+	dep_code = models.CharField(max_length=3, verbose_name="Department Code", primary_key=True)
 	dep_name = models.CharField(max_length=60, verbose_name="Department Name")
 
 	def __str__(self):
 		return str(self.dep_name)
+
 
 class Subject(models.Model):
 	subject_code = models.CharField(verbose_name="Subject Code",max_length=6,primary_key=True)
@@ -38,6 +40,7 @@ class Subject(models.Model):
 	def __str__(self):
 		return self.subject_title
 
+
 class Teacher(models.Model):
 	teacher_name = models.CharField(max_length=40)
 	dept = models.ForeignKey('Department', on_delete=models.CASCADE)
@@ -47,13 +50,16 @@ class Teacher(models.Model):
 	def __str__(self):
 		return self.teacher_name
 
+
 class Class(models.Model):
 	current_sem = models.PositiveSmallIntegerField(choices=sem_choices)
 	branch = models.ForeignKey('Department', on_delete=models.CASCADE)
 	batch  = models.CharField(max_length=1)
+	timeTable = models.TextField()
 
 	def __str__(self):
 		return str(self.branch.dep_code)+" "+str(self.current_sem)+str(self.batch)
+
 
 class Events(models.Model):
 	title = models.CharField(max_length=40, verbose_name="Event title")
