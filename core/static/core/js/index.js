@@ -112,16 +112,19 @@ var upcoming_events = [
         'name': 'Submit something',
         'due': '3-10-2017',
         'to': 'Sam Kodi',
+        'description': 'Description for just something'
     },
     {
         'name': 'Kill Aayisha',
         'due': '5-11-2017',
         'to': 'Abhai Kollara',
+        'description': 'Yaaaaay, we get to kill Aayisha for once. :)'
     },
     {
         'name': 'Ressuruct Aayisha',
         'due': '5-12-2017',
         'to': 'Abin Simon',
+        'description': 'Well, I think we need her to complete the project. Let us get her back.'
     },
 ]
 
@@ -154,7 +157,7 @@ InitializeUser.prototype.populate_upcoming = function(){
     htmlstr = '';
     for( var i=0, len=this.events.length; i<len; i++ ){
         htmlstr +=
-            "<div class='card small event'>"+
+            "<div class='card small event' data=event-"+i+">"+
                 "<div class='card tiny date-card'>"+
                     this.events[i]['due']+
                 "</div>"+
@@ -167,6 +170,9 @@ InitializeUser.prototype.populate_upcoming = function(){
             "</div>"
     }
     $('#rcontent').html(htmlstr);
+
+    // Now set up the click handlers
+    $($('#event-popup').parent()).css('display', 'flex');
 }
 InitializeUser.prototype.click_handlers = function(){
     // User logout
