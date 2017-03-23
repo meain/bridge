@@ -216,6 +216,9 @@ Home = function(){
 }
 Home.prototype.get_data_from_server = function(){
     // get calls will replace this
+    $.get('localhost:8000/timetable', function(data){
+        console.log(data);
+    })
     this.timetable = timetable;
     this.subject_data = subject_data;
     this.track_data = track_data;
