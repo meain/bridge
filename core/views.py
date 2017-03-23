@@ -11,22 +11,18 @@ def index(request):
 
 def signin(request):
     data = request.context
-    # data = 'Supposed to return data for ' + str(user_id)
-    print data
-    # if Student.objects.filter(SID=str(user_id)).exists():
-    #     data = get_data_for_id(user_id)
-    # else:
-    #     sems = Class.objects.order_by().values_list('current_sem', flat=True).distinct()
-    #     branch = Class.objects.order_by().values_list('branch', flat=True).distinct()
-    #     batch = Class.objects.order_by().values_list('batch', flat=True).distinct()
-    #     data = {"sems" : sems,
-    #             "branches" : branch,
-    #             "batches" : batch
-    #             }
-    #     data = json.dumps(data)
-    # print
-    return HttpResponse(data)
+    pass
 
+
+def get_timetable_for_user(request):
+    timetable = {
+                'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+                'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+                'wednesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+                'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+                'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],}
+
+    return HttpResponse(timetable)
 
 def create_new_user(request):
     pass
