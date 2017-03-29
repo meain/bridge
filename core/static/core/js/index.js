@@ -154,15 +154,16 @@ InitializeUser.prototype.init = function(events){
     this.click_handlers();
 }
 InitializeUser.prototype.populate_upcoming = function(){
+    var self = this;
     htmlstr = '';
     for( var i=0, len=this.events.length; i<len; i++ ){
         htmlstr +=
-            "<div class='card small event' data=event-"+i+">"+
+            "<div class='card small event' data-event="+i+">"+
                 "<div class='card tiny date-card'>"+
                     this.events[i]['due']+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
-                    "<span class='span red name'>subject</span><span class='span white span-content'>"+ this.events[i]['name']+ "</span>"+
+                    "<span class='span green name'>subject</span><span class='span white span-content'>"+ this.events[i]['name']+ "</span>"+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
                     "<span class='span blue name'>submission</span><span class='span white span-content'>"+ this.events[i]['to']+ "</span>"+
@@ -172,7 +173,18 @@ InitializeUser.prototype.populate_upcoming = function(){
     $('#rcontent').html(htmlstr);
 
     // Now set up the click handlers
-    $($('#event-popup').parent()).css('display', 'flex');
+    event_cards = $('.event');
+    for(var i = 0, len = event_cards.length; i<len; i++){
+        $(event_cards[i]).click(function(){
+            event_data = self.events[$($(this)[0]).data('event')]
+            console.log(event_data);
+            console.log($('#event-popup').children())
+            $($('#event-popup').parent()).css('display', 'flex');
+        });
+    }
+    $($('#event-popup').parent()).click(function(){
+        $($('#event-popup').parent()).css('display', 'none');
+    });
 }
 InitializeUser.prototype.click_handlers = function(){
     // User logout
