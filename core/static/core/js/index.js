@@ -80,29 +80,29 @@ var track_data = [
 
 // Will contain all the data for all the subjects that a student has
 var subject_data = {
-    'maths': {
-        'subject': 'Mathematics',  // incase we have abbr, probably won't get to that
-        'teacher':'Adam Smith',
+    'MCS': {
+        'subject': 'Modern Control Systems',  // incase we have abbr, probably won't get to that
+        'teacher':'Jisha Joseph',
     },
-    'physics': {
-        'subject': 'Physics',
-        'teacher':'Delin Mathew',
+    'DSP': {
+        'subject': 'Digital Signal Processing',
+        'teacher':'Razia Rahim',
     },
-    'chemistry': {
-        'subject': 'Chemistry',
-        'teacher':'Alex Philip',
+    'DSP': {
+        'subject': 'Digital Signal Processing',
+        'teacher':'Razia Rahim',
     },
-    'computer science': {
-        'subject': 'Computer Science',
-        'teacher':'Hebin Hentry',
+    'OS': {
+        'subject': 'Operating Systems',
+        'teacher':'Damodaran V',
     },
-    'party': {
-        'subject': 'Partttyyy',
-        'teacher':'meain',
+    'OS': {
+        'subject': 'Operating Systems',
+        'teacher':'Damodaran V',
     },
-    'boohoo': {
-        'subject': 'BoooooHoooo',
-        'teacher':'Boo',
+    'CC': {
+        'subject': 'Compiler Construction',
+        'teacher':'Sheena Mathew',
     }
 }
 
