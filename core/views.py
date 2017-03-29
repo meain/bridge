@@ -10,15 +10,15 @@ def index(request):
 
 
 def get_timetable(request, user_id):
-    # timetable = {
-    #     'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    #     'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    #     'wednesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    #     'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    #     'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'], }
+    timetable = {
+        'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+        'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+        'wednesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+        'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+        'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'], }
 
-    user = Student.objects.get(UID=user_id)
-    timetable = user.current_class.get_tt()
+    # user = Student.objects.get(UID=user_id)
+    # timetable = user.current_class.get_tt()
     return HttpResponse(timetable)
 
 
