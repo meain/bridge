@@ -109,22 +109,18 @@ var subject_data = {
 
 var upcoming_events = [
     {
-        'name': 'Submit something',
-        'due': '3-10-2017',
-        'to': 'Sam Kodi',
-        'description': 'Description for just something'
+        'name': 'Project interim submission',
+        'due': '30-03-2017',
+        'to': 'Damodaran V',
+        'subject' : 'Mini Project'
+        'description': 'Interim submission of mini project'
     },
     {
-        'name': 'Kill Aayisha',
-        'due': '5-11-2017',
-        'to': 'Abhai Kollara',
-        'description': 'Yaaaaay, we get to kill Aayisha for once. :)'
-    },
-    {
-        'name': 'Ressuruct Aayisha',
-        'due': '5-12-2017',
-        'to': 'Abin Simon',
-        'description': 'Well, I think we need her to complete the project. Let us get her back.'
+        'name': 'SP Lab Record submission',
+        'due': '30-03-2017',
+        'to': 'Deepa Paul',
+        'subject' : 'SP-Laboratory'
+        'description': 'Fair record submission of Systems Programming Laboratory'
     },
 ]
 
