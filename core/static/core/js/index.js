@@ -267,7 +267,7 @@ Home.prototype.init = function(){
     if(this.timetable[dow] != undefined){
         this.create_base_template();
         this.populate_timetable_heder();
-        this.populate_subject_data(subject_data[this.timetable[dow][0]], this.track_data[0],0);
+        this.populate_subject_data(this.subject_data[this.timetable[dow][0]], this.track_data[0],0);
         // this.populate_subject_data();
         this.handlers();
     }
@@ -374,6 +374,33 @@ NotesView.prototype.create_base_template = function(){
             'Notes'+
         '</div>'+
         '<div id="notes-view-data">'+
+        '</div>'
+    $('#mcontent').html(htmlstr);
+}
+
+
+
+AttendenceView = function() {
+    this.name = 'attendenceView';
+}
+AttendenceView.prototype.get_data_from_server = function(){
+    // might be an issue on async handling
+}
+AttendenceView.prototype.init = function(){
+    this.get_data_from_server()
+    this.create_base_template()
+    this.populate_attendence()
+}
+AttendenceView.prototype.populate_attendence = function(){
+    htmlstr = 'Work in progress! Just attend all the classes for now.'
+    $('#notes-view-data').html(htmlstr);
+}
+AttendenceView.prototype.create_base_template = function(){
+    htmlstr =
+        '<div id="attendence-view-heading">'+
+            'Notes'+
+        '</div>'+
+        '<div id="attendence-view-data">'+
         '</div>'
     $('#mcontent').html(htmlstr);
 }
