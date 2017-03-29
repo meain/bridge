@@ -12,26 +12,32 @@ var timetable = {
 var notes_data = [
     {
         'date': '24-3-2014',
+        'subject': 'Modern Control Systems',
         'note': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
     },
     {
         'date': '21-3-2014',
+        'subject': 'Modern Control Systems',
         'note': '# Eeks \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
     },
     {
         'date': '22-3-2014',
+        'subject': 'Digital Signal Processing',
         'note': '# Image support \n\n` it is very very important ` \n\n![image](https://img.buzzfeed.com/buzzfeed-static/static/2015-04/21/16/enhanced/webdr05/enhanced-31550-1429646952-7.jpg)'
     },
     {
         'date': '25-3-2014',
+        'subject': 'Operating Systems',
         'note': '# Multilevel headings\n\n ## second level\n\n### third level\n\n#### forth level\n\n and more ...'
     },
     {
         'date': '26-3-2014',
+        'subject': 'Compiler Construction',
         'note': '# Hyperlinks too \n\n[Google](http://google.com)'
     },
     {
         'date': '28-3-2014',
+        'subject': 'Control Thory',
         'note': '# Full markdown support\n\n`even code snippet`\n\n```python\nprint "hai"```'
     },
 ]
@@ -159,7 +165,10 @@ InitializeUser.prototype.populate_upcoming = function(){
                     this.events[i]['due']+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
-                    "<span class='span green name'>subject</span><span class='span white span-content'>"+ this.events[i]['name']+ "</span>"+
+                    "<span class='span violet name'>title</span><span class='span white span-content'>"+ this.events[i]['name']+ "</span>"+
+                "</div>"+
+                "<div class='card tiny subject-card'>"+
+                    "<span class='span green name'>subject</span><span class='span white span-content'>"+ this.events[i]['subject']+ "</span>"+
                 "</div>"+
                 "<div class='card tiny subject-card'>"+
                     "<span class='span blue name'>submission</span><span class='span white span-content'>"+ this.events[i]['to']+ "</span>"+
@@ -176,9 +185,10 @@ InitializeUser.prototype.populate_upcoming = function(){
             // console.log(event_data);
             el_main = $('#event-popup').children()
             el_date = $($(el_main[1]).children()[1]).text(event_data['due'])
-            el_subject = $($(el_main[2]).children()[1]).text(event_data['subject'])
-            el_submission = $($(el_main[3]).children()[1]).text(event_data['to'])
-            el_desc = $($(el_main[4]).children()[3]).text(event_data['description'])
+            el_title = $($(el_main[2]).children()[1]).text(event_data['name'])
+            el_subject = $($(el_main[3]).children()[1]).text(event_data['subject'])
+            el_submission = $($(el_main[4]).children()[1]).text(event_data['to'])
+            el_desc = $($(el_main[5]).children()[3]).text(event_data['description'])
             // console.log(el_date, el_subject, el_submission, el_desc)
             $($('#event-popup').parent()).css('display', 'flex');
         });
@@ -222,6 +232,9 @@ InitializeUser.prototype.click_handlers = function(){
     });
     $('#attendece').click(function(){
         new AttendenceView().init()
+    });
+    $('#calender').click(function(){
+        new CalenderView().init()
     });
 }
 
@@ -340,6 +353,7 @@ Home.prototype.handlers = function(){
 
 NotesView = function() {
     this.name = 'notesView';
+    // filter with date and subject ( and even make requests based on that )
 }
 NotesView.prototype.get_data_from_server = function(){
     // might be an issue on async handling
@@ -354,9 +368,13 @@ NotesView.prototype.populate_notes = function(){
     htmlstr = ''
     for(note in this.notes_data){
         console.log(this.notes_data[note]);
-        htmlstr += '<div class="note-date">'+
+        htmlstr +=  "<br><br>"+
+                    "<span class='span red name'>date</span><span class='span white span-content'>"+
                         this.notes_data[note]['date']+
-                    '</div>'+
+                    "</span>&nbsp&nbsp&nbsp"+
+                    "<span class='span green name'>subject</span><span class='span white span-content'>"+
+                        this.notes_data[note]['subject']+
+                    "</span>"+
                     '<textarea class="notes-content" id="notes-content-' + note + '">'+
                         this.notes_data[note]['note']+
                     '</textarea>'
@@ -406,6 +424,33 @@ AttendenceView.prototype.create_base_template = function(){
             'Attendence'+
         '</div>'+
         '<div id="attendence-view-data">'+
+        '</div>'
+    $('#mcontent').html(htmlstr);
+}
+
+
+
+CalenderView = function() {
+    this.name = 'calenderView';
+}
+CalenderView.prototype.get_data_from_server = function(){
+    // might be an issue on async handling
+}
+CalenderView.prototype.init = function(){
+    this.get_data_from_server()
+    this.create_base_template()
+    this.populate_calender()
+}
+CalenderView.prototype.populate_calender = function(){
+    htmlstr = 'Work in progress!'
+    $('#calender-view-data').html(htmlstr);
+}
+CalenderView.prototype.create_base_template = function(){
+    htmlstr =
+        '<div id="calender-view-heading">'+
+            'Calender'+
+        '</div>'+
+        '<div id="calender-view-data">'+
         '</div>'
     $('#mcontent').html(htmlstr);
 }
