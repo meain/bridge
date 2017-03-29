@@ -219,6 +219,9 @@ InitializeUser.prototype.click_handlers = function(){
     $('#about').click(function(){
         new AboutView().init()
     });
+    $('#attendece').click(function(){
+        new AttendenceView().init()
+    });
 }
 
 
@@ -393,12 +396,12 @@ AttendenceView.prototype.init = function(){
 }
 AttendenceView.prototype.populate_attendence = function(){
     htmlstr = 'Work in progress! Just attend all the classes for now.'
-    $('#notes-view-data').html(htmlstr);
+    $('#attendence-view-data').html(htmlstr);
 }
 AttendenceView.prototype.create_base_template = function(){
     htmlstr =
         '<div id="attendence-view-heading">'+
-            'Notes'+
+            'Attendence'+
         '</div>'+
         '<div id="attendence-view-data">'+
         '</div>'
