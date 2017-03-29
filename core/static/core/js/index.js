@@ -112,14 +112,14 @@ var upcoming_events = [
         'name': 'Project interim submission',
         'due': '30-03-2017',
         'to': 'Damodaran V',
-        'subject' : 'Mini Project'
+        'subject' : 'Mini Project',
         'description': 'Interim submission of mini project'
     },
     {
         'name': 'SP Lab Record submission',
         'due': '30-03-2017',
         'to': 'Deepa Paul',
-        'subject' : 'SP-Laboratory'
+        'subject' : 'SP-Laboratory',
         'description': 'Fair record submission of Systems Programming Laboratory'
     },
 ]
@@ -173,8 +173,13 @@ InitializeUser.prototype.populate_upcoming = function(){
     for(var i = 0, len = event_cards.length; i<len; i++){
         $(event_cards[i]).click(function(){
             event_data = self.events[$($(this)[0]).data('event')]
-            console.log(event_data);
-            console.log($('#event-popup').children())
+            // console.log(event_data);
+            el_main = $('#event-popup').children()
+            el_date = $($(el_main[1]).children()[1]).text(event_data['due'])
+            el_subject = $($(el_main[2]).children()[1]).text(event_data['subject'])
+            el_submission = $($(el_main[3]).children()[1]).text(event_data['to'])
+            el_desc = $($(el_main[4]).children()[3]).text(event_data['description'])
+            // console.log(el_date, el_subject, el_submission, el_desc)
             $($('#event-popup').parent()).css('display', 'flex');
         });
     }
@@ -214,6 +219,9 @@ InitializeUser.prototype.click_handlers = function(){
     });
     $('#about').click(function(){
         new AboutView().init()
+    });
+    $('#attendece').click(function(){
+        new AttendenceView().init()
     });
 }
 
@@ -263,7 +271,7 @@ Home.prototype.init = function(){
     if(this.timetable[dow] != undefined){
         this.create_base_template();
         this.populate_timetable_heder();
-        this.populate_subject_data(subject_data[this.timetable[dow][0]], this.track_data[0],0);
+        this.populate_subject_data(this.subject_data[this.timetable[dow][0]], this.track_data[0],0);
         // this.populate_subject_data();
         this.handlers();
     }
@@ -370,6 +378,33 @@ NotesView.prototype.create_base_template = function(){
             'Notes'+
         '</div>'+
         '<div id="notes-view-data">'+
+        '</div>'
+    $('#mcontent').html(htmlstr);
+}
+
+
+
+AttendenceView = function() {
+    this.name = 'attendenceView';
+}
+AttendenceView.prototype.get_data_from_server = function(){
+    // might be an issue on async handling
+}
+AttendenceView.prototype.init = function(){
+    this.get_data_from_server()
+    this.create_base_template()
+    this.populate_attendence()
+}
+AttendenceView.prototype.populate_attendence = function(){
+    htmlstr = 'Work in progress! Just attend all the classes for now.'
+    $('#attendence-view-data').html(htmlstr);
+}
+AttendenceView.prototype.create_base_template = function(){
+    htmlstr =
+        '<div id="attendence-view-heading">'+
+            'Attendence'+
+        '</div>'+
+        '<div id="attendence-view-data">'+
         '</div>'
     $('#mcontent').html(htmlstr);
 }
