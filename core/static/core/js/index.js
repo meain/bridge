@@ -12,27 +12,27 @@ var timetable = {
 var notes_data = [
     {
         'date': '24-3-2014',
-        'note': 'Submit Assignment 1'
+        'note': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
     },
     {
         'date': '21-3-2014',
-        'note': "Submit records"
+        'note': '# Eeks \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
     },
     {
         'date': '22-3-2014',
-        'note': 'Submit everything'
+        'note': '# Image support \n\n` it is very very important ` \n\n![image](https://img.buzzfeed.com/buzzfeed-static/static/2015-04/21/16/enhanced/webdr05/enhanced-31550-1429646952-7.jpg)'
     },
     {
         'date': '25-3-2014',
-        'note': 'Re-submission'
+        'note': '# Multilevel headings\n\n ## second level\n\n### third level\n\n#### forth level\n\n and more ...'
     },
     {
         'date': '26-3-2014',
-        'note': 'Re-re-submission'
+        'note': '# Hyperlinks too \n\n[Google](http://google.com)'
     },
     {
         'date': '28-3-2014',
-        'note': 'Re-Re-Re-Submission'
+        'note': '# Full markdown support\n\n`even code snippet`\n\n```python\nprint "hai"```'
     },
 ]
 
@@ -41,7 +41,7 @@ var notes_data = [
 var track_data = [
     {
         'period': 0, //period number
-        'notes': 'random notes in period 0', //note data
+        'notes': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list',
         'attendece' : '', // bunked|free|attended
         'time': '9:00'
     },
@@ -263,6 +263,7 @@ Home.prototype.create_base_template = function(){
         '</div>'
     $('#mcontent').html(htmlstr);
     this.notes_editor = new SimpleMDE({ element: document.getElementById("notes-text") });
+    ne = this.notes_editor;  // Just to make it global for debug
 }
 Home.prototype.init = function(){
     this.get_data_from_server();
