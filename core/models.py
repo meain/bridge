@@ -92,8 +92,11 @@ class TaughtBy(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=40, verbose_name="Event title")
     due_date = models.DateField(verbose_name='Due date')
-    event_description = models.TextField(verbose_name='Description')
-    assigned_to = models.ForeignKey('Class', verbose_name='Assigned to')
+    description = models.TextField(verbose_name='Description', null=True)
+    teacher = models.ForeignKey('Teacher', null=True)
+    subject = models.ForeignKey('Subject', null=True)
+    assigned_to = models.ForeignKey('Class', verbose_name='Assigned to class', null=True, blank=True)
+    user = models.ForeignKey('Student', verbose_name='Assigned to student', null=True)
 
     def __str__(self):
         return self.title
@@ -102,4 +105,4 @@ class Event(models.Model):
 class Note(models.Model):
     title = models.CharField(max_length=40, verbose_name="Note title", null=True)
     note_text = models.TextField(verbose_name="Note text", null=True)
-    user = models.ForeignKey('Student', on_delete=models.CASCADE)
+    user = models.ForeignKey('Student', on_delete=models.CASCADE, null=True)

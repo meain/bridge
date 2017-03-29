@@ -32,7 +32,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 
 class EventsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'due_date', 'assigned_to')
+    list_display = ('title', 'due_date', 'assigned_to', 'user')
 
 myModels = [models.Student,
             models.Teacher,

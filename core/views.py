@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Student, Class
+from .models import Class, Student, Event, Teacher, Department
 
 
 def index(request):
@@ -54,8 +54,8 @@ def get_notes(request, user_id):
 
 def get_sub_data(request, user_id):
     subject_data = {
-        'maths': {
-            'subject': 'Mathematics',
+        'MCS': {
+            'subject': 'MCS',
             'teacher': 'Adam Smith',
         },
         'physics': {
@@ -84,28 +84,18 @@ def get_sub_data(request, user_id):
 
 
 def get_events(request, user_id):
-    events = [
-        {
-            'name': 'Submit something',
-            'due': '3-10-2017',
-            'to': 'Sam Kodi',
-            'description': 'Description for just something'
-        },
-        {
-            'name': 'Kill Aayisha',
-            'due': '5-11-2017',
-            'to': 'Abhai Kollara',
-            'description': 'Yaaaaay, we get to kill Aayisha for once. :)'
-        },
-        {
-            'name': 'Ressuruct Aayisha',
-            'due': '5-12-2017',
-            'to': 'Abin Simon',
-            'description': 'Well, I think we need her to complete the project. Let us get her back.'
-        },
-    ]
-
-    return HttpResponse(events)
+    user = Student.objects.get(SID=user_id)
+    elist = set(list(Event.objects.filter(assigned_to__class_name=user.current_class)) + list(Event.objects.filter(user__SID=user_id)))
+    return_list = []
+    for event in elist:
+        d = {}
+        d['name'] = event.title
+        d['due'] = str(event.due_date)
+        d['to'] = event.Teacher
+        d['subject'] = event.subject
+        d['description'] = event.description
+        return_list.append(d)
+    return HttpResponse(return_list)
 
 
 def get_track_data(request, user_id):
