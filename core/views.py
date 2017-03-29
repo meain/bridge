@@ -10,12 +10,15 @@ def index(request):
 
 
 def get_timetable(request, user_id):
-    timetable = {
-        'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'wednesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'], }
+    # timetable = {
+    #     'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+    #     'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+    #     'wednesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+    #     'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+    #     'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'], }
+
+    user = Student.objects.get(UID=user_id)
+    timetable = user.current_class.get_tt()
     return HttpResponse(timetable)
 
 
@@ -156,12 +159,10 @@ def create_new_user(request, user_id, Class):
 
 def get_data_for_id(user_id):
     user = Student.objects.get(SID=str(user_id))
-    timetable = user.Class.timetable
-    day_dict = {}
-    for i, day in zip(range(5), timetable.splitlines()):
-        day_dict[i] = day
-
 
 def signin(request):
     data = request.context
-    pass
+    uid = data['id']
+    if (user_exists):
+        exists=True
+

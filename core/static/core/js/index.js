@@ -2,37 +2,37 @@ var user_data = {}
 
 
 var timetable = {
-    'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    'wednessday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-    'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
+    'monday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
+    'tuesday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
+    'wednessday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
+    'thursday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
+    'friday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
 }
 
 var notes_data = [
     {
         'date': '24-3-2014',
-        'note': 'lot of garbage'
+        'note': 'Submit Assignment 1'
     },
     {
         'date': '21-3-2014',
-        'note': "random sutff for the heck of it, don't think I have time to use *lorem ipsum*"
+        'note': "Submit records"
     },
     {
         'date': '22-3-2014',
-        'note': '# somethingggggggggggggggggggggggg'
+        'note': 'Submit everything'
     },
     {
         'date': '25-3-2014',
-        'note': 'you bet it is soemtig not useful, just like you'
+        'note': 'Re-submission'
     },
     {
         'date': '26-3-2014',
-        'note': 'dummy text, we really need to script this once the backed is set up'
+        'note': 'Re-re-submission'
     },
     {
         'date': '28-3-2014',
-        'note': 'even more garbage, hahaa. crap, I hate my life'
+        'note': 'Re-Re-Re-Submission'
     },
 ]
 

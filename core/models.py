@@ -17,6 +17,7 @@ sem_choices = (
 
 class Student(models.Model):
     SID = models.CharField(max_length=120, primary_key=True)
+    # register_no = models.CharField(maxlength=20)
     stud_name = models.CharField(max_length=40, verbose_name="Name")
     current_class = models.ForeignKey('Class', on_delete=models.CASCADE, verbose_name="Class")
 
@@ -58,16 +59,37 @@ class Class(models.Model):
     batch = models.CharField(max_length=1)
     class_name = models.CharField(max_length=10, blank=True)
     timeTable = models.TextField()
+    subjects = models.ManyToManyField('Subject', verbose_name='Subjects', through='TaughtBy')
 
     def save(self, *args, **kwargs):
         self.class_name = str(self.branch) + " " + str(self.current_sem) + str(self.batch)
         super(Class, self).save(*args, **kwargs)
 
+    def get_tt(self):
+        tt_string = str(self.timeTable)
+        tt_string = tt_string.splitlines()
+        days = ['monday', 'tuesday', 'wednesday',
+                'thursday', 'friday']
+        tt_dict = {}
+        for i in range(5):
+            tt_dict[days[i]] = tt_string[i]
+
+        return tt_dict
+
     def __str__(self):
         return str(self.class_name)
 
+    class Meta:
+        verbose_name_plural = "Classes"
 
-class Events(models.Model):
+
+class TaughtBy(models.Model):
+    classes = models.ForeignKey('Class', on_delete=models.CASCADE)
+    subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
+    teachers = models.ForeignKey('Teacher', on_delete=models.CASCADE)
+
+
+class Event(models.Model):
     title = models.CharField(max_length=40, verbose_name="Event title")
     due_date = models.DateField(verbose_name='Due date')
     event_description = models.TextField(verbose_name='Description')
@@ -76,5 +98,6 @@ class Events(models.Model):
     def __str__(self):
         return self.title
 
-class Notes(models.Model):
+
+class Note(models.Model):
     pass
