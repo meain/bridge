@@ -160,9 +160,13 @@ def create_new_user(request, user_id, Class):
 def get_data_for_id(user_id):
     user = Student.objects.get(SID=str(user_id))
 
+
 def signin(request):
     data = request.context
     uid = data['id']
-    if (user_exists):
-        exists=True
-
+    if Student.objects.get(UID=uid).exists():
+        exists = True
+        ret_data = []
+    else:
+        exists = False
+        classes = [name.class_name for name in Class.objects.all()]
