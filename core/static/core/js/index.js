@@ -112,14 +112,14 @@ var upcoming_events = [
         'name': 'Project interim submission',
         'due': '30-03-2017',
         'to': 'Damodaran V',
-        'subject' : 'Mini Project'
+        'subject' : 'Mini Project',
         'description': 'Interim submission of mini project'
     },
     {
         'name': 'SP Lab Record submission',
         'due': '30-03-2017',
         'to': 'Deepa Paul',
-        'subject' : 'SP-Laboratory'
+        'subject' : 'SP-Laboratory',
         'description': 'Fair record submission of Systems Programming Laboratory'
     },
 ]
@@ -173,8 +173,13 @@ InitializeUser.prototype.populate_upcoming = function(){
     for(var i = 0, len = event_cards.length; i<len; i++){
         $(event_cards[i]).click(function(){
             event_data = self.events[$($(this)[0]).data('event')]
-            console.log(event_data);
-            console.log($('#event-popup').children())
+            // console.log(event_data);
+            el_main = $('#event-popup').children()
+            el_date = $($(el_main[1]).children()[1]).text(event_data['due'])
+            el_subject = $($(el_main[2]).children()[1]).text(event_data['subject'])
+            el_submission = $($(el_main[3]).children()[1]).text(event_data['to'])
+            el_desc = $($(el_main[4]).children()[3]).text(event_data['description'])
+            // console.log(el_date, el_subject, el_submission, el_desc)
             $($('#event-popup').parent()).css('display', 'flex');
         });
     }
