@@ -9,11 +9,6 @@ def index(request):
     return render(request, "core/index.html", None)
 
 
-def signin(request):
-    data = request.context
-    pass
-
-
 def get_timetable(request, user_id):
     timetable = {
         'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
@@ -153,8 +148,10 @@ def get_track_data(request, user_id):
     return HttpResponse(track_data)
 
 
-def create_new_user(request):
-    pass
+def create_new_user(request, user_id, Class):
+    c = Class.objects.get()
+    user = Student(UID=user_id)
+    user.save()
 
 
 def get_data_for_id(user_id):
@@ -163,3 +160,8 @@ def get_data_for_id(user_id):
     day_dict = {}
     for i, day in zip(range(5), timetable.splitlines()):
         day_dict[i] = day
+
+
+def signin(request):
+    data = request.context
+    pass
