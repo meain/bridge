@@ -1,4 +1,5 @@
 import json
+from datetime import datetime as date
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Class, Student, Event, Teacher, Department
@@ -10,15 +11,8 @@ def index(request):
 
 
 def get_timetable(request, user_id):
-    timetable = {
-        'monday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'tuesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'wednesday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'thursday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'],
-        'friday': ['maths', 'physics', 'chemistry', 'computer science', 'party', 'boohoo'], }
-
-    # user = Student.objects.get(UID=user_id)
-    # timetable = user.current_class.get_tt()
+    user = Student.objects.get(UID=user_id)
+    timetable = user.current_class.get_tt()
     return HttpResponse(timetable)
 
 
@@ -49,38 +43,24 @@ def get_notes(request, user_id):
             'note': 'even more garbage, hahaa. crap, I hate my life'
         },
     ]
+
     return HttpResponse(notes_data)
 
 
 def get_sub_data(request, user_id):
-    subject_data = {
-        'MCS': {
-            'subject': 'MCS',
-            'teacher': 'Adam Smith',
-        },
-        'physics': {
-            'subject': 'Physics',
-            'teacher': 'Delin Mathew',
-        },
-        'chemistry': {
-            'subject': 'Chemistry',
-            'teacher': 'Alex Philip',
-        },
-        'computer science': {
-            'subject': 'Computer Science',
-            'teacher': 'Hebin Hentry',
-        },
-        'party': {
-            'subject': 'Partttyyy',
-            'teacher': 'meain',
-        },
-        'boohoo': {
-            'subject': 'BoooooHoooo',
-            'teacher': 'Boo',
-        }
-    }
+    day = (date.today().strftime("%A")).lower()
+    user = Student.objects.get(SID=user_id)
+    daytable = user.current_class.get_tt()[day].split(',')
 
-    return HttpResponse(subject_data)
+    query = TaughtBy.objects.filter(classes__class_name=user.current_class)
+    ts_dict = {x.subject.subject_short_name: (x.teachers, x.subject_title) for x in query}
+
+    return_dict = {}
+    for sub_code in daytable:
+        return_dict[sub_code] = {'teacher': ts_dict[sub_code][0],
+                                 'subject': ts_dict[sub_code][1]}
+
+    return HttpResponse(return_dict)
 
 
 def get_events(request, user_id):
