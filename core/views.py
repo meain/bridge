@@ -152,21 +152,17 @@ def get_track_data(request, user_id):
 
 
 def create_new_user(request, user_id, Class):
-    c = Class.objects.get()
+    c = Class.objects.filter(class_name=Class)[0]
     user = Student(UID=user_id)
+    user.current_class = c
     user.save()
-
-
-def get_data_for_id(user_id):
-    user = Student.objects.get(SID=str(user_id))
 
 
 def signin(request):
     data = request.context
     uid = data['id']
     if Student.objects.get(UID=uid).exists():
-        exists = True
-        ret_data = []
+        return HttpResponse({'exists': True})
     else:
-        exists = False
         classes = [name.class_name for name in Class.objects.all()]
+        return HttpResponse({'exists': True, 'options': classes})
