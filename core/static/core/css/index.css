@@ -150,6 +150,7 @@ body{
 .event{
     float: left;
     width: calc(100% - 20px);
+    cursor: pointer;
 }
 .event:hover{
     /* background-color: rgba(41, 128, 185,0.25); */
@@ -228,6 +229,7 @@ body{
     border-bottom: 1px solid #fff;
     transition-property: border-bottom;
     transition-duration: 1s;
+    cursor: pointer;
 }
 .timetable-subject:hover{
     /* text-decoration: underline; */
