@@ -6,7 +6,7 @@ from .models import Class, Student, Event, Teacher, Department
 
 
 def index(request):
-    # Return the page at ai/index.html
+    # Return the page at core/index.html
     return render(request, "core/index.html", None)
 
 

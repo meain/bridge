@@ -245,10 +245,12 @@ Home = function(){
 }
 Home.prototype.get_data_from_server = function(){
     // get calls will replace this
-    console.log('obaining timetabel from the server');
-    $.get('http://localhost:8000/timetable/3409824309832408', function(data){
-        console.log(data);
-    })
+
+    // console.log('obaining timetabel from the server');
+    // $.get('http://localhost:8000/timetable/3409824309832408', function(data){
+    //     console.log(data);
+    // })
+
     this.timetable = timetable;
     this.subject_data = subject_data;
     this.track_data = track_data;
