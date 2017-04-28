@@ -562,7 +562,7 @@ AboutView.prototype.populate_about_content = function(){
             '<br>'+
             '<br>'+
             '🤔 Abhai Kollara 🤔<br>'+
-            "Well, this guy's second name is Kollara"+
+            "I asked him to submit and tagline and he didn't"+
             '<br>'+
             '<br>'+
             '✌️ Abin Simon ✌️<br>'+
