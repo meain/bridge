@@ -1,6 +1,53 @@
 var user_data = {}
 
 
+var subject_attendence = [
+    {
+        name: 'MCS',
+        attended: 15,
+        total: 22
+    },
+    {
+        name: 'DSP',
+        attended: 18,
+        total: 20
+    },
+    {
+        name: 'SIC',
+        attended: 15,
+        total: 27
+    },
+    {
+        name: 'OS',
+        attended: 5,
+        total: 20
+    },
+    {
+        name: 'CC',
+        attended: 15,
+        total: 15
+    },
+    {
+        name: 'PDG',
+        attended: 10,
+        total: 21
+    },
+]
+
+
+var cal_events = [
+            {
+                title: 'New Event',
+                start: '2017-05-01'
+            },
+            {
+                title: 'Some big event',
+                start: '2017-04-07',
+                end: '2017-04-10'
+            },
+        ]
+
+
 var timetable = {
     'monday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
     'tuesday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
@@ -377,6 +424,7 @@ NotesView.prototype.populate_notes = function(){
                     "<span class='span green name'>subject</span><span class='span white span-content'>"+
                         this.notes_data[note]['subject']+
                     "</span>"+
+                    "<br><br>"+
                     '<textarea class="notes-content" id="notes-content-' + note + '">'+
                         this.notes_data[note]['note']+
                     '</textarea>'
@@ -410,6 +458,7 @@ AttendenceView = function() {
 }
 AttendenceView.prototype.get_data_from_server = function(){
     // might be an issue on async handling
+    this.subject_attendence = subject_attendence
 }
 AttendenceView.prototype.init = function(){
     this.get_data_from_server()
@@ -417,16 +466,25 @@ AttendenceView.prototype.init = function(){
     this.populate_attendence()
 }
 AttendenceView.prototype.populate_attendence = function(){
-    htmlstr = 'Work in progress! Just attend all the classes for now.'
-    $('#attendence-view-data').html(htmlstr);
+    for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
+        var att_val = (this.subject_attendence[i].attended/this.subject_attendence[i].total)*100
+        $('#attendence-'+i+'>#att').easyPieChart({
+        }).data('easyPieChart').update(att_val);
+    }
 }
 AttendenceView.prototype.create_base_template = function(){
     htmlstr =
         '<div id="attendence-view-heading">'+
             'Attendence'+
         '</div>'+
-        '<div id="attendence-view-data">'+
-        '</div>'
+        '<div id="attendence-view-data">'
+    for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
+            htmlstr += '<div id="attendence-'+ i +'" class="attendence-pie">'+
+                '<div id="att"></div>'+
+                '<div id="att-name">'+this.subject_attendence[i].name+' ('+this.subject_attendence[i].attended+'/'+this.subject_attendence[i].total+')</div>'+
+            '</div>'
+    }
+    htmlstr += '</div>'
     $('#mcontent').html(htmlstr);
 }
 
@@ -437,6 +495,7 @@ CalenderView = function() {
 }
 CalenderView.prototype.get_data_from_server = function(){
     // might be an issue on async handling
+    this.cal_events = cal_events
 }
 CalenderView.prototype.init = function(){
     this.get_data_from_server()
@@ -444,8 +503,15 @@ CalenderView.prototype.init = function(){
     this.populate_calender()
 }
 CalenderView.prototype.populate_calender = function(){
-    htmlstr = 'Work in progress!'
-    $('#calender-view-data').html(htmlstr);
+    $('#calender-view-data').fullCalendar({
+        header: {
+            // not really happending, probably need paid version
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listWeek'
+        },
+        events: this.cal_events
+    });
 }
 CalenderView.prototype.create_base_template = function(){
     htmlstr =
