@@ -39,6 +39,7 @@ body{
     height: calc(100% - 80px);
     transition-property: width;
     transition-duration: 0.5s;
+    z-index: 100;
 }
 @media screen and (max-width: 1050px){
     /* Remove navigation */
@@ -343,6 +344,19 @@ body{
     float: left;
     width: 17px;
     display: none;
+}
+#upcoming-menu-button{
+    /* float: right; */
+    width: 18px;
+    display: none;
+    position: absolute;
+    top: 43px;
+    right: 20px;
+}
+@media screen and (max-width: 730px){
+    #upcoming-menu-button{
+        display: block;
+    }
 }
 @media screen and (max-width: 1050px){
     #hamburger-menu-button{

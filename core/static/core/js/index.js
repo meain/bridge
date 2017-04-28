@@ -626,3 +626,25 @@ $('div').not('.leftpane').click(function(){
         // $($('.midpane')[0]).css('width', 'calc(100vw - 45px)');
     }
 });
+
+$('#upcoming-menu-button').click(function(e){
+    e.stopPropagation();
+    nav = $($('.rightpane')[0]);
+    nav.css('position', 'absolute');
+    nav.css('display', 'block');
+    nav.css('width', '50%');
+    nav.css('right', '0');
+    // nav.css('visibility', 'visible');
+    // $($('.midpane')[0]).css('width', '50%');
+});
+
+$('div').not('.rightpane').click(function(){
+    cur_state = $('#upcoming-menu-button').css('display');  //Kinda hacky, eeks
+    if(cur_state == 'block'){
+        nav = $($('.rightpane')[0]);
+        nav.css('display', 'none');
+        nav.css('width', '20vw');
+        // nav.css('visibility', 'hidden');
+        // $($('.midpane')[0]).css('width', 'calc(100vw - 45px)');
+    }
+});
