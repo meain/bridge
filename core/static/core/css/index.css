@@ -454,6 +454,28 @@ body{
     overflow:auto;
     text-align: center;
 }
+@media screen and (max-width: 730px){
+    #notes-view-data{
+        padding:5px;
+        width:calc(100% - 10px);
+        padding-top: 0;
+    }
+    #attendence-view-data{
+        padding:5px;
+        width:calc(100% - 10px);
+        padding-top: 0;
+    }
+    #calender-view-data{
+        padding:5px;
+        width:calc(100% - 10px);
+        padding-top: 0;
+    }
+    #about-view-data{
+        padding:5px;
+        width:calc(100% - 10px);
+        padding-top: 0;
+    }
+}
 #team-image-container{
     text-align: center;
     margin-bottom: 20px
