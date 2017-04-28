@@ -51,11 +51,11 @@ body{
         display: none;
     }
     .rightpane{
-        width: 190px;
+        width: 230px;
     }
     .midpane{
         /* width: calc(100vw - 40px); */
-        width: calc(100vw - 280px);
+        width: calc(100vw - 320px);
     }
 }
 @media screen and (max-width: 730px){
