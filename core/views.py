@@ -18,31 +18,37 @@ def get_timetable(request, user_id):
 
 def get_notes(request, user_id):
     notes_data = [
-        {
-            'date': '24-3-2014',
-            'note': 'lot of garbage'
-        },
-        {
-            'date': '21-3-2014',
-            'note': "random sutff for the heck of it, don't think I have time to use *lorem ipsum*"
-        },
-        {
-            'date': '22-3-2014',
-            'note': '# Lorem Ipsum'
-        },
-        {
-            'date': '25-3-2014',
-            'note': 'you bet it is soemtig not useful, just like you'
-        },
-        {
-            'date': '26-3-2014',
-            'note': 'dummy text, we really need to script this once the backed is set up'
-        },
-        {
-            'date': '28-3-2014',
-            'note': 'even more garbage, hahaa. crap, I hate my life'
-        },
-    ]
+            {
+                'date': '24-3-2014',
+                'subject': 'Modern Control Systems',
+                'note': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
+                },
+            {
+                'date': '21-3-2014',
+                'subject': 'Modern Control Systems',
+                'note': '# Eeks \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
+                },
+            {
+                'date': '22-3-2014',
+                'subject': 'Digital Signal Processing',
+                'note': '# Image support \n\n` it is very very important ` \n\n![image](https://img.buzzfeed.com/buzzfeed-static/static/2015-04/21/16/enhanced/webdr05/enhanced-31550-1429646952-7.jpg)'
+                },
+            {
+                'date': '25-3-2014',
+                'subject': 'Operating Systems',
+                'note': '# Multilevel headings\n\n ## second level\n\n### third level\n\n#### forth level\n\n and more ...'
+                },
+            {
+                'date': '26-3-2014',
+                'subject': 'Compiler Construction',
+                'note': '# Hyperlinks too \n\n[Google](http://google.com)'
+                },
+            {
+                'date': '28-3-2014',
+                'subject': 'Control Thory',
+                'note': '# Full markdown support\n\n`even code snippet`\n\n```python\nprint "hai"```'
+                },
+            ]
 
     return HttpResponse(notes_data)
 
@@ -80,43 +86,43 @@ def get_events(request, user_id):
 
 def get_track_data(request, user_id):
     track_data = [
-        {
-            'period': 0,
-            'notes': 'random notes in period 0',
-            'attendece': '',
-            'time': '9:00'
-        },
-        {
-            'period': 1,
-            'notes': '',
-            'attendece': '',
-            'time': '10:00'
-        },
-        {
-            'period': 2,
-            'notes': '',
-            'attendece': '',
-            'time': '11:00'
-        },
-        {
-            'period': 3,
-            'notes': '',
-            'attendece': '',
-            'time': '13:00'
-        },
-        {
-            'period': 4,
-            'notes': '',
-            'attendece': '',
-            'time': '14:00'
-        },
-        {
-            'period': 5,
-            'notes': '',
-            'attendece': '',
-            'time': '15:00'
-        }
-    ]
+            {
+                'period': 0,
+                'notes': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list',
+                'attendece' : '',
+                'time': '9:00'
+                },
+            {
+                'period': 1,
+                'notes': '',
+                'attendece' : '',
+                'time': '10:00'
+                },
+            {
+                'period': 2,
+                'notes': '',
+                'attendece' : '',
+                'time': '11:00'
+                },
+            {
+                'period': 3,
+                'notes': '',
+                'attendece' : '',
+                'time': '13:00'
+                },
+            {
+                'period': 4,
+                'notes': '',
+                'attendece' : '',
+                'time': '14:00'
+                },
+            {
+                'period': 5,
+                'notes': '',
+                'attendece' : '',
+                'time': '15:00'
+                }
+            ]
 
     return HttpResponse(track_data)
 

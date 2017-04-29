@@ -1,3 +1,6 @@
+var server_address = 'http://localhost:8080'
+var fuid = 987654321
+
 var user_data = {}
 
 
@@ -290,17 +293,40 @@ InitializeUser.prototype.click_handlers = function(){
 Home = function(){
     this.class_name = 'home'
 }
-Home.prototype.get_data_from_server = function(){
-    // get calls will replace this
+Home.prototype.get_data_from_server = function(callback){
+    var self = this;
+    if (callback === undefined) { callback=function(){} }
 
-    // console.log('obaining timetabel from the server');
-    // $.get('http://localhost:8000/timetable/3409824309832408', function(data){
-    //     console.log(data);
-    // })
+    console.log('Querying data from server...')
+    $.get(server_address+'/track_data/'+fuid, function(data){
+        console.log(data);
+        self.timetable = timetable;
+        self.subject_data = subject_data;
+        self.track_data = track_data;
+        callback()
+    })
 
-    this.timetable = timetable;
-    this.subject_data = subject_data;
-    this.track_data = track_data;
+    // this.timetable = timetable;
+    // this.subject_data = subject_data;
+    // this.track_data = track_data;
+}
+Home.prototype.init = function(){
+    var self = this;
+    this.get_data_from_server(function(){
+        var day = new Date().getDay();
+        var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+        if(self.timetable[dow] != undefined){
+            self.create_base_template();
+            self.populate_timetable_heder();
+            self.populate_subject_data(this.subject_data[this.timetable[dow][0]], this.track_data[0],0);
+            // this.populate_subject_data();
+            self.handlers();
+        }
+        else{
+            text = "<div style='text-align:center; width:100%; height:100%; font-size:30px; padding-top: 200px;'>It's a " + dow + ". You are free today!<div>"
+            $('#mcontent').html(text);
+        }
+    })
 }
 Home.prototype.create_base_template = function(){
     htmlstr =
@@ -326,22 +352,6 @@ Home.prototype.create_base_template = function(){
     $('#mcontent').html(htmlstr);
     this.notes_editor = new SimpleMDE({ element: document.getElementById("notes-text") });
     ne = this.notes_editor;  // Just to make it global for debug
-}
-Home.prototype.init = function(){
-    this.get_data_from_server();
-    var day = new Date().getDay();
-    var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-    if(this.timetable[dow] != undefined){
-        this.create_base_template();
-        this.populate_timetable_heder();
-        this.populate_subject_data(this.subject_data[this.timetable[dow][0]], this.track_data[0],0);
-        // this.populate_subject_data();
-        this.handlers();
-    }
-    else{
-        text = "<div style='text-align:center; width:100%; height:100%; font-size:30px; padding-top: 200px;'>It's a " + dow + ". You are free today!<div>"
-        $('#mcontent').html(text);
-    }
 }
 // Populate the list of subjects
 Home.prototype.populate_timetable_heder = function(timetable){
