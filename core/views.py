@@ -20,6 +20,7 @@ def get_timetable_dummy(request, user_id):
             }
     return HttpResponse(json.dumps(timetable), content_type="application/json")
 
+
 def get_timetable(request, user_id):
     user = Student.objects.get(UID=user_id)
     timetable = user.current_class.get_tt()
@@ -195,7 +196,7 @@ def signin(request):
         return HttpResponse({'exists': True})
     else:
         classes = [name.class_name for name in Class.objects.all()]
-        return HttpResponse({'exists': True, 'options': classes})
+        return HttpResponse({'exists': False, 'options': classes})
 
 
 def get_cal_data_dummy(request, user_id):
