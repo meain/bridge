@@ -92,4 +92,3 @@ ENV/
 .DS_Store
 
 .zedstate
-db.sqlite3
