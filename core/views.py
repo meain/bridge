@@ -192,13 +192,13 @@ def create_new_user(request, user_id, Class):
 def signin(request):
     if request.method == "POST":
         data = json.loads(request.POST.get('data'))
-        print data
         sid = data['id']
         if Student.objects.filter(SID=sid).exists():
             return HttpResponse({'exists': True})
         else:
             classes = [name.class_name for name in Class.objects.all()]
-            return HttpResponse({'exists': False, 'options': classes})
+            data = json.dumps({'exists': False, 'options': classes})
+            return HttpResponse(json.dumps(data), content_type="application/json")
 
 
 def get_cal_data_dummy(request, user_id):
