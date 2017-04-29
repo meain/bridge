@@ -229,6 +229,21 @@ def get_cal_data_dummy(request, user_id):
     return_data['data'] = cal_events
     return HttpResponse(json.dumps(return_data), content_type="application/json")
 
+def get_subject_attendence(request, user_id):
+    user = Student.objects.get(SID=user_id)
+    attendence_data = user.get_attendence_data()
+    return attendence_data
+
+def update_attendence(request):
+    data = json.loads(request.POST.get('data'))
+    user_id = data['id']
+    attendence = json.dumps(data['attendence'])
+
+    user = Student.objects.get(SID=user_id)
+    user.attendence = attendence
+    user.save()
+
+
 def get_subject_attendence_dummy(request, user_id):
     subject_attendence = [
             {

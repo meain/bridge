@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+import json
 # Create your models here.
 sem_choices = (
     (1, 'S1'),
@@ -21,6 +21,10 @@ class Student(models.Model):
     stud_name = models.CharField(max_length=40, verbose_name="Name")
     current_class = models.ForeignKey('Class', on_delete=models.CASCADE, verbose_name="Class")
     attendence = models.TextField(null=True)
+
+    def get_attendence_data(self):
+        data = json.loads(self.attendence)
+        return data
 
     def __str__(self):
         return str(self.stud_name)
