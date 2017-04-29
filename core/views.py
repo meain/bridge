@@ -195,10 +195,10 @@ def signin(request):
         print data
         sid = data['id']
         if Student.objects.filter(SID=sid).exists():
-            return HttpResponse({'exists': True})
+            return HttpResponse(json.dumps({'exists': True}))
         else:
             classes = [name.class_name for name in Class.objects.all()]
-            return HttpResponse({'exists': False, 'options': classes})
+            return HttpResponse(json.dumps({'exists': False, 'options': classes}))
 
 
 def get_cal_data_dummy(request, user_id):
