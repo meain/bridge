@@ -348,12 +348,12 @@ body{
 }
 #hamburger-menu-button{
     float: left;
-    width: 17px;
+    /* width: 17px; */
     display: none;
 }
 #upcoming-menu-button{
     /* float: right; */
-    width: 18px;
+    /* width: 18px; */
     display: none;
     position: absolute;
     top: 43px;
