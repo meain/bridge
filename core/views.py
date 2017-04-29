@@ -194,7 +194,7 @@ def signin(request):
         data = json.loads(request.POST.get('data'))
         print data
         sid = data['id']
-        if Student.objects.get(SID=sid).exists():
+        if Student.objects.filter(SID=sid).exists():
             return HttpResponse({'exists': True})
         else:
             classes = [name.class_name for name in Class.objects.all()]
