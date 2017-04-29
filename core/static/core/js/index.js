@@ -468,12 +468,36 @@ function onSignIn(googleUser) {
     console.log(user_data);
     $.post(server_address+'/signin/', { data:JSON.stringify(user_data) } ,  function(data){
         // populate_user_profile(user_data);
+        data = JSON.parse(data)
         console.log(data)
-        initialize_user = new InitializeUser(user_data);
-        initialize_user.init();
-        home = new Home();
-        home.init();
-        $('#login-popup').css('display', 'none');
+        if(data['exists'] == true){
+            initialize_user = new InitializeUser(user_data);
+            initialize_user.init();
+            home = new Home();
+            home.init();
+            $('#login-popup').css('display', 'none');
+        }
+        else{
+            // Show class selector
+            classes = data['options']
+            htmlstr = ''
+            for(i=0,len=classes.length;i<len;i++){
+                htmlstr+='<div class="class-option" data-class='+classes[i].replace(' ','%')+'>'+classes[i]+'</div>'
+            }
+            $('#popup-class-list').html(htmlstr)
+            class_option_buttons = $('.class-option')
+            for( var i=0,len=class_option_buttons.length; i<len; i++ ){
+                $(class_option_buttons[i]).click(function(){
+                    user_class = $(this).data('class').replace('%',' ')
+                    console.log(user_class)
+                    $.get(server_address+'/create_user/', { 'user_id':JSON.stringify(user_data), 'class':user_class } ,  function(data){
+                        console.log('New user created')
+                    })
+                    })
+            }
+            $('#popup-welcome-message').text('Hello '+user_data['name']+' , welcome to Bridge!')
+            $($('#choose-class-popup').parent()).css('display', 'flex');
+        }
     })
 }
 

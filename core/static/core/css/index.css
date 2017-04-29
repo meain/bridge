@@ -493,3 +493,48 @@ body{
     padding-right: 15px;
     margin-top: 30px;
 }
+#choose-class-popup{
+    background-color: #ded;
+    width: 800px;
+    height: 500px;
+    color: #000;
+    z-index: 101;
+    text-align: center;
+}
+#popup-welcome-message{
+    margin-top: 20px;
+    padding: 10px;
+    padding-top: 12px;
+    font-size: 35px;
+}
+#popup-welcome-message-sub{
+    margin-top: 20px;
+    padding: 10px;
+    padding-top: 12px;
+    font-size: 20px;
+}
+#popup-class-list{
+    height: 300px;
+    overflow: auto;
+    padding: 20px;
+}
+.class-option{
+    background-color: rgba(41, 128, 185,0.5);
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    display: inline-block;
+    border-radius: 100px;
+    cursor: pointer;
+    margin: 20px;
+}
+#popup-choose-class-button{
+    padding: 10px;
+    padding-top: 12px;
+    background-color: rgba(44, 62, 80,1.0);
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    bottom: 10px;
+}

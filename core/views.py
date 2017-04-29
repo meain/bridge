@@ -182,8 +182,8 @@ def get_track_data(request, user_id):
     return HttpResponse(json.dumps(return_data), content_type="application/json")
 
 
-def create_new_user(request, user_id, Class):
-    c = Class.objects.filter(class_name=Class)[0]
+def create_new_user(request, user_id, user_class):
+    c = Class.objects.filter(class_name=user_class)[0]
     user = Student(SID=user_id)
     user.current_class = c
     user.save()
