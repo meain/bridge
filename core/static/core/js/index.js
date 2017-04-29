@@ -466,12 +466,15 @@ function onSignIn(googleUser) {
     user_data['email'] = profile.getEmail();
     user_data['photo'] = profile.getImageUrl();
     console.log(user_data);
-    // populate_user_profile(user_data);
-    initialize_user = new InitializeUser(user_data);
-    initialize_user.init();
-    home = new Home();
-    home.init();
-    $('#login-popup').css('display', 'none');
+    $.post(server_address+'/signin/', { data:JSON.stringify(user_data) } ,  function(data){
+        // populate_user_profile(user_data);
+        console.log(data)
+        initialize_user = new InitializeUser(user_data);
+        initialize_user.init();
+        home = new Home();
+        home.init();
+        $('#login-popup').css('display', 'none');
+    })
 }
 
 

@@ -190,13 +190,15 @@ def create_new_user(request, user_id, Class):
 
 
 def signin(request):
-    data = request.context
-    uid = data['id']
-    if Student.objects.get(UID=uid).exists():
-        return HttpResponse({'exists': True})
-    else:
-        classes = [name.class_name for name in Class.objects.all()]
-        return HttpResponse({'exists': False, 'options': classes})
+    if request.method == "POST":
+        data = json.loads(request.POST.get('data'))
+        print data
+        uid = data['id']
+        if Student.objects.get(UID=uid).exists():
+            return HttpResponse({'exists': True})
+        else:
+            classes = [name.class_name for name in Class.objects.all()]
+            return HttpResponse({'exists': False, 'options': classes})
 
 
 def get_cal_data_dummy(request, user_id):
