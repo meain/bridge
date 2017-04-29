@@ -229,7 +229,7 @@ def get_cal_data_dummy(request, user_id):
     return_data['data'] = cal_events
     return HttpResponse(json.dumps(return_data), content_type="application/json")
 
-def get_subject_attendence(request, user_id):
+def get_attendence(request, user_id):
     user = Student.objects.get(SID=user_id)
     attendence_data = user.get_attendence_data()
     return attendence_data

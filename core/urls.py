@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'events/(?P<user_id>[0-9]+)$', views.get_events_dummy, name='events'),
     url(r'track_data/(?P<user_id>[0-9]+)$', views.get_track_data, name='events'),
     url(r'calendar/(?P<user_id>[0-9]+)$', views.get_cal_data_dummy, name='events'),
-    url(r'subject_attendence/(?P<user_id>[0-9]+)$', views.get_subject_attendence_dummy, name='events'),
-    url(r'create_user/$', views.create_new_user, name='new_user')
+    url(r'subject_attendence/(?P<user_id>[0-9]+)$', views.get_attendence, name='events'),
+    url(r'create_user/$', views.create_new_user, name='new_user'),
+    url(r'update_attendence/$', views.update_attendence, name='new_user')
 ]
