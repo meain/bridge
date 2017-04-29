@@ -191,7 +191,7 @@ def create_new_user(request):
         attendence = {}
         subs = c.get_sub_data()
         for sub in subs:
-            attendence[sub] = 0
+            attendence[sub] = {'attended':0, 'total':0}
         attendence = json.dumps(attendence)
 
         user = Student(SID=user_id)

@@ -20,7 +20,7 @@ class Student(models.Model):
     # register_no = models.CharField(max_length=20, null=True)
     stud_name = models.CharField(max_length=40, verbose_name="Name")
     current_class = models.ForeignKey('Class', on_delete=models.CASCADE, verbose_name="Class")
-    attendence = models.TextField()
+    attendence = models.TextField(null=True)
 
     def __str__(self):
         return str(self.stud_name)
