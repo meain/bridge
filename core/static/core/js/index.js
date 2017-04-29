@@ -1,5 +1,5 @@
 var server_address = 'http://localhost:8080'
-var fuid = 987654321
+var fuid = 0
 
 var user_data = {}
 
@@ -475,6 +475,7 @@ function onSignIn(googleUser) {
             initialize_user.init();
             home = new Home();
             home.init();
+            fuid = user_data['id']
             $('#login-popup').css('display', 'none');
         }
         else{
@@ -490,8 +491,11 @@ function onSignIn(googleUser) {
                 $(class_option_buttons[i]).click(function(){
                     user_class = $(this).data('class').replace('%',' ')
                     console.log(user_class)
-                    $.get(server_address+'/create_user/', { 'user_id':JSON.stringify(user_data), 'class':user_class } ,  function(data){
+                    $.post(server_address+'/create_user/', { 'user_data':JSON.stringify(user_data), 'class':user_class } ,  function(data){
                         console.log('New user created')
+                        $($('#choose-class-popup').parent()).css('display', 'none');
+                        $('#login-popup').css('display', 'none');
+                        fuid = user_data['id']
                     })
                     })
             }
