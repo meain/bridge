@@ -22,7 +22,7 @@ def get_timetable_dummy(request, user_id):
 
 
 def get_timetable(request, user_id):
-    user = Student.objects.get(UID=user_id)
+    user = Student.objects.get(SID=user_id)
     timetable = user.current_class.get_tt()
     return HttpResponse(timetable)
 
@@ -184,7 +184,7 @@ def get_track_data(request, user_id):
 
 def create_new_user(request, user_id, Class):
     c = Class.objects.filter(class_name=Class)[0]
-    user = Student(UID=user_id)
+    user = Student(SID=user_id)
     user.current_class = c
     user.save()
 
