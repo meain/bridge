@@ -306,9 +306,39 @@ AttendenceView.prototype.init = function(){
     })
 }
 AttendenceView.prototype.populate_attendence = function(){
+    var percentColors = [
+        { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
+        { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
+        { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
     for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
         var att_val = (this.subject_attendence[i].attended/this.subject_attendence[i].total)*100
         $('#attendence-'+i+'>#att').easyPieChart({
+            barColor: function(pct){
+                pct = pct/100
+                for (var i = 1; i < percentColors.length - 1; i++) {
+                    if (pct < percentColors[i].pct) {
+                        break;
+                    }
+                }
+                var lower = percentColors[i - 1];
+                var upper = percentColors[i];
+                var range = upper.pct - lower.pct;
+                var rangePct = (pct - lower.pct) / range;
+                var pctLower = 1 - rangePct;
+                var pctUpper = rangePct;
+                var color = {
+                    r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+                    g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+                    b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+                };
+                rgb = 'rgba(' + [color.r, color.g, color.b, 1].join(',') + ')';
+                rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+                hexcol = (rgb && rgb.length === 4) ? "#" +
+                 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
+                 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
+                 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+                return hexcol
+            }
         }).data('easyPieChart').update(att_val);
     }
 }
