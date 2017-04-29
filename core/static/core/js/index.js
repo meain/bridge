@@ -331,12 +331,10 @@ AttendenceView.prototype.populate_attendence = function(){
                     g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
                     b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
                 };
-                rgb = 'rgba(' + [color.r, color.g, color.b, 1].join(',') + ')';
-                rgb = rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
-                hexcol = (rgb && rgb.length === 4) ? "#" +
-                 ("0" + parseInt(rgb[1],10).toString(16)).slice(-2) +
-                 ("0" + parseInt(rgb[2],10).toString(16)).slice(-2) +
-                 ("0" + parseInt(rgb[3],10).toString(16)).slice(-2) : '';
+                hexcol = "#" +
+                 ("0" + parseInt(color.r,10).toString(16)).slice(-2) +
+                 ("0" + parseInt(color.g,10).toString(16)).slice(-2) +
+                 ("0" + parseInt(color.b,10).toString(16)).slice(-2)
                 return hexcol
             }
         }).data('easyPieChart').update(att_val);
