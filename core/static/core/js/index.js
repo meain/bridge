@@ -4,206 +4,32 @@ var fuid = 987654321
 var user_data = {}
 
 
-var subject_attendence = [
-    {
-        name: 'MCS',
-        attended: 15,
-        total: 22
-    },
-    {
-        name: 'DSP',
-        attended: 18,
-        total: 20
-    },
-    {
-        name: 'SIC',
-        attended: 15,
-        total: 27
-    },
-    {
-        name: 'OS',
-        attended: 5,
-        total: 20
-    },
-    {
-        name: 'CC',
-        attended: 15,
-        total: 15
-    },
-    {
-        name: 'PDG',
-        attended: 10,
-        total: 21
-    },
-]
-
-
-var cal_events = [
-            {
-                title: 'New Event',
-                start: '2017-05-01'
-            },
-            {
-                title: 'Some big event',
-                start: '2017-04-07',
-                end: '2017-04-10'
-            },
-        ]
-
-
-var timetable = {
-    'monday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
-    'tuesday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
-    'wednessday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
-    'thursday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
-    'friday': ['MCS', 'DSP', 'DSP', 'OS', 'OS', 'CC'],
-}
-
-var notes_data = [
-    {
-        'date': '24-3-2014',
-        'subject': 'Modern Control Systems',
-        'note': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
-    },
-    {
-        'date': '21-3-2014',
-        'subject': 'Modern Control Systems',
-        'note': '# Eeks \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list'
-    },
-    {
-        'date': '22-3-2014',
-        'subject': 'Digital Signal Processing',
-        'note': '# Image support \n\n` it is very very important ` \n\n![image](https://img.buzzfeed.com/buzzfeed-static/static/2015-04/21/16/enhanced/webdr05/enhanced-31550-1429646952-7.jpg)'
-    },
-    {
-        'date': '25-3-2014',
-        'subject': 'Operating Systems',
-        'note': '# Multilevel headings\n\n ## second level\n\n### third level\n\n#### forth level\n\n and more ...'
-    },
-    {
-        'date': '26-3-2014',
-        'subject': 'Compiler Construction',
-        'note': '# Hyperlinks too \n\n[Google](http://google.com)'
-    },
-    {
-        'date': '28-3-2014',
-        'subject': 'Control Thory',
-        'note': '# Full markdown support\n\n`even code snippet`\n\n```python\nprint "hai"```'
-    },
-]
-
-
-//attendece and stuff
-var track_data = [
-    {
-        'period': 0, //period number
-        'notes': '# Control Theory \n\n` it is something important ` \n\n> e=mc^2\n\n* it\n* even\n* support\n* bulleted list',
-        'attendece' : '', // bunked|free|attended
-        'time': '9:00'
-    },
-    {
-        'period': 1, //period number
-        'notes': '', //note data
-        'attendece' : '', // bunked|free|attended
-        'time': '10:00'
-    },
-    {
-        'period': 2, //period number
-        'notes': '', //note data
-        'attendece' : '', // bunked|free|attended
-        'time': '11:00'
-    },
-    {
-        'period': 3, //period number
-        'notes': '', //note data
-        'attendece' : '', // bunked|free|attended
-        'time': '13:00'
-    },
-    {
-        'period': 4, //period number
-        'notes': '', //note data
-        'attendece' : '', // bunked|free|attended
-        'time': '14:00'
-    },
-    {
-        'period': 5, //period number
-        'notes': '', //note data
-        'attendece' : '', // bunked|free|attended
-        'time': '15:00'
-    }
-]
-
-
-// Will contain all the data for all the subjects that a student has
-var subject_data = {
-    'MCS': {
-        'subject': 'Modern Control Systems',  // incase we have abbr, probably won't get to that
-        'teacher':'Jisha Joseph',
-    },
-    'DSP': {
-        'subject': 'Digital Signal Processing',
-        'teacher':'Razia Rahim',
-    },
-    'DSP': {
-        'subject': 'Digital Signal Processing',
-        'teacher':'Razia Rahim',
-    },
-    'OS': {
-        'subject': 'Operating Systems',
-        'teacher':'Damodaran V',
-    },
-    'OS': {
-        'subject': 'Operating Systems',
-        'teacher':'Damodaran V',
-    },
-    'CC': {
-        'subject': 'Compiler Construction',
-        'teacher':'Sheena Mathew',
-    }
-}
-
-
-var upcoming_events = [
-    {
-        'name': 'Project interim submission',
-        'due': '30-03-2017',
-        'to': 'Damodaran V',
-        'subject' : 'Mini Project',
-        'description': 'Interim submission of mini project'
-    },
-    {
-        'name': 'SP Lab Record submission',
-        'due': '30-03-2017',
-        'to': 'Deepa Paul',
-        'subject' : 'SP-Laboratory',
-        'description': 'Fair record submission of Systems Programming Laboratory'
-    },
-]
-
-
-
-
 InitializeUser = function(user){
     this.class_name = 'initialize_user';
     this.user = user;
 }
-InitializeUser.prototype.get_data_from_server = function(){
-    // the get call will be used to replace here
-    this.events = upcoming_events;
+InitializeUser.prototype.get_data_from_server = function(callback){
+    var self = this;
+    if (callback === undefined) { callback=function(){} }
+    $.get(server_address+'/events/'+fuid, function(upcoming_events){
+        self.events = upcoming_events['data'];
+        callback()
+    })
 }
-// Add in user profile information
+InitializeUser.prototype.init = function(events){
+    var self = this
+    this.get_data_from_server(function(){
+        self.populate_user_profile();
+        self.populate_upcoming();
+        self.click_handlers();
+    })
+}
 InitializeUser.prototype.populate_user_profile = function(){
     $('#profile-name').html(this.user['name']);
     $('#profile-image').attr('src', this.user['photo']);
     $('#popup-profile-name').html(this.user['name']);
     $('#popup-profile-image').attr('src', this.user['photo']);
     $('#popup-profile-email').html(this.user['email']);
-}
-InitializeUser.prototype.init = function(events){
-    this.get_data_from_server();
-    this.populate_user_profile();
-    this.populate_upcoming();
-    this.click_handlers();
 }
 InitializeUser.prototype.populate_upcoming = function(){
     var self = this;
@@ -232,7 +58,6 @@ InitializeUser.prototype.populate_upcoming = function(){
     for(var i = 0, len = event_cards.length; i<len; i++){
         $(event_cards[i]).click(function(){
             event_data = self.events[$($(this)[0]).data('event')]
-            // console.log(event_data);
             el_main = $('#event-popup').children()
             el_date = $($(el_main[1]).children()[1]).text(event_data['due'])
             el_title = $($(el_main[2]).children()[1]).text(event_data['name'])
@@ -297,18 +122,16 @@ Home.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
 
-    console.log('Querying data from server...')
-    $.get(server_address+'/track_data/'+fuid, function(data){
-        console.log(data);
-        self.timetable = timetable;
-        self.subject_data = subject_data;
-        self.track_data = track_data;
-        callback()
+    $.get(server_address+'/track_data/'+fuid, function(track_data){
+        $.get(server_address+'/subject_data/'+fuid, function(subject_data){
+            $.get(server_address+'/timetable/'+fuid, function(timetable){
+                self.timetable = timetable;
+                self.subject_data = subject_data;
+                self.track_data = track_data['data'];
+                callback()
+            })
+        })
     })
-
-    // this.timetable = timetable;
-    // this.subject_data = subject_data;
-    // this.track_data = track_data;
 }
 Home.prototype.init = function(){
     var self = this;
@@ -319,7 +142,6 @@ Home.prototype.init = function(){
             self.create_base_template();
             self.populate_timetable_heder();
             self.populate_subject_data(this.subject_data[this.timetable[dow][0]], this.track_data[0],0);
-            // this.populate_subject_data();
             self.handlers();
         }
         else{
@@ -362,9 +184,7 @@ Home.prototype.populate_timetable_heder = function(timetable){
     htmlstr = ''
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-    console.log(this.timetable, dow)
     for( var i=0; i<=count; i++ ){
-        console.log(i)
         htmlstr+=
             "<div class='card tiny timetable-subject' data="+i+">"+
                 this.timetable[dow][i]+
@@ -414,19 +234,24 @@ NotesView = function() {
     this.name = 'notesView';
     // filter with date and subject ( and even make requests based on that )
 }
-NotesView.prototype.get_data_from_server = function(){
-    // might be an issue on async handling
-    this.notes_data = notes_data;
+NotesView.prototype.get_data_from_server = function(callback){
+    var self = this;
+    if (callback === undefined) { callback=function(){} }
+    $.get(server_address+'/notes/'+fuid, function(notes_data){
+        self.notes_data = notes_data['data'];
+        callback()
+    })
 }
 NotesView.prototype.init = function(){
-    this.get_data_from_server()
-    this.create_base_template()
-    this.populate_notes()
+    var self = this
+    this.get_data_from_server(function(){
+        self.create_base_template()
+        self.populate_notes()
+    })
 }
 NotesView.prototype.populate_notes = function(){
     htmlstr = ''
     for(note in this.notes_data){
-        console.log(this.notes_data[note]);
         htmlstr +=  "<br><br>"+
                     "<span class='span red name'>date</span><span class='span white span-content'>"+
                         this.notes_data[note]['date']+
@@ -443,7 +268,6 @@ NotesView.prototype.populate_notes = function(){
     editor_items_notes = $('.notes-content')
     for(var item=0, len=editor_items_notes.length; item<len; item++){
         elem = $('#notes-content-'+item)
-        console.log(elem[0])
         new SimpleMDE({
             element: elem[0],
             status: false,
@@ -466,14 +290,20 @@ NotesView.prototype.create_base_template = function(){
 AttendenceView = function() {
     this.name = 'attendenceView';
 }
-AttendenceView.prototype.get_data_from_server = function(){
-    // might be an issue on async handling
-    this.subject_attendence = subject_attendence
+AttendenceView.prototype.get_data_from_server = function(callback){
+    var self = this;
+    if (callback === undefined) { callback=function(){} }
+    $.get(server_address+'/subject_attendence/'+fuid, function(subject_attendence){
+        self.subject_attendence = subject_attendence['data']
+        callback()
+    })
 }
 AttendenceView.prototype.init = function(){
-    this.get_data_from_server()
-    this.create_base_template()
-    this.populate_attendence()
+    var self = this
+    this.get_data_from_server(function(){
+        self.create_base_template()
+        self.populate_attendence()
+    })
 }
 AttendenceView.prototype.populate_attendence = function(){
     for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
@@ -503,16 +333,23 @@ AttendenceView.prototype.create_base_template = function(){
 CalenderView = function() {
     this.name = 'calenderView';
 }
-CalenderView.prototype.get_data_from_server = function(){
-    // might be an issue on async handling
-    this.cal_events = cal_events
+CalenderView.prototype.get_data_from_server = function(callback){
+    var self = this;
+    if (callback === undefined) { callback=function(){} }
+    $.get(server_address+'/calendar/'+fuid, function(cal_events){
+        self.cal_events = cal_events['data']
+        callback()
+    })
 }
 CalenderView.prototype.init = function(){
-    this.get_data_from_server()
-    this.create_base_template()
-    this.populate_calender()
+    var self = this
+    this.get_data_from_server(function(){
+        self.create_base_template()
+        self.populate_calender()
+    })
 }
 CalenderView.prototype.populate_calender = function(){
+    console.log(this.cal_events)
     $('#calender-view-data').fullCalendar({
         header: {
             // not really happending, probably need paid version
@@ -540,12 +377,7 @@ CalenderView.prototype.create_base_template = function(){
 AboutView = function() {
     this.name = 'aboutView';
 }
-AboutView.prototype.get_data_from_server = function(){
-    // might be an issue on async handling
-    // this.notes_data = notes_data;
-}
 AboutView.prototype.init = function(){
-    this.get_data_from_server()
     this.create_base_template()
     this.populate_about_content()
 }
