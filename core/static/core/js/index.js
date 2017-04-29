@@ -313,6 +313,7 @@ AttendenceView.prototype.populate_attendence = function(){
     for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
         var att_val = (this.subject_attendence[i].attended/this.subject_attendence[i].total)*100
         $('#attendence-'+i+'>#att').easyPieChart({
+            size: 120,
             barColor: function(pct){
                 pct = pct/100
                 for (var i = 1; i < percentColors.length - 1; i++) {
@@ -350,6 +351,8 @@ AttendenceView.prototype.create_base_template = function(){
             htmlstr += '<div id="attendence-'+ i +'" class="attendence-pie">'+
                 '<div id="att"></div>'+
                 '<div id="att-name">'+this.subject_attendence[i].name+' ('+this.subject_attendence[i].attended+'/'+this.subject_attendence[i].total+')</div>'+
+                '<div id="att-att" data-subject="'+ this.subject_attendence[i].name  +'">+attended</div>'+
+                '<div id="att-bnk" data-subject="'+ this.subject_attendence[i].name  +'">+bunked</div>'+
             '</div>'
     }
     htmlstr += '</div>'
