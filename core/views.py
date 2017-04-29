@@ -186,10 +186,17 @@ def create_new_user(request):
     if request.method == "POST":
         user_id = json.loads(request.POST.get('user_data'))['id']
         _class = request.POST.get('class')
-
         c = Class.objects.filter(class_name=_class)[0]
+        #Initialize attendence
+        attendence = {}
+        subs = c.get_sub_data()
+        for sub in subs:
+            attendence[sub] = 0
+        attendence = json.dumps(attendence)
+
         user = Student(SID=user_id)
         user.current_class = c
+        user.attendence = attendence
         user.save()
         return HttpResponse(json.dumps({'exists': True}))
 
