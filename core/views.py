@@ -189,10 +189,10 @@ def create_new_user(request):
         c = Class.objects.filter(class_name=_class)[0]
         #Initialize attendence
         attendence = {}
-        subs = c.get_sub_data()
-        for sub in subs:
-            attendence[sub] = {'attended':0, 'total':0}
-        attendence = json.dumps(attendence)
+        # subs = c.get_sub_data()
+        # for sub in subs:
+        #     attendence[sub] = {'attended':0, 'total':0}
+        # attendence = json.dumps(attendence)
 
         user = Student(SID=user_id)
         user.current_class = c
