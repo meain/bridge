@@ -5,6 +5,13 @@ from django.http import HttpResponse
 from .models import Class, Student, Event, Teacher, Department
 
 
+period_time = {0: '9:00',
+               1: '10:00',
+               2: '11:00',
+               3: '13:00',
+               4: '14:00',
+               5: '15:00'}
+
 def index(request):
     # Return the page at core/index.html
     return render(request, "core/index.html", None)
@@ -40,7 +47,6 @@ def get_notes(request, user_id):
         notes.append(note)
 
     return notes
-
 
 def get_notes_dummy(request, user_id):
     notes_data = [
@@ -152,7 +158,39 @@ def get_events(request, user_id):
     return HttpResponse(return_list)
 
 
-def get_track_data(request, user_id):
+def get_track_data(request):
+    if request.method == "POST":
+        data = json.loads(request.POST.get('user_data'))
+        user_id = data['id']
+        date = data['date']
+        day = data['day']
+    user = Student.objects.get(SID=user_id)
+    day_tt = user.current_class.get_tt()[day].split(',')
+
+    def get_notes_for_period(period):
+        note = notes.objects.filter(user=user, date=date, period=period)[0]
+        return note
+
+    track_data = []
+    for i in range(6):
+        note = get_notes_for_period(i)
+        p = {}
+
+        p['period'] = i
+        if note.exists():
+            p['notes'] = note.data
+            p['subject'] = note.subject.subject_short_name
+        else:
+            p['notes'] = ''
+            p['subject'] = day_tt[i]
+
+        p['time'] = period_time[i]
+        track_data.append(p)
+
+    return track_data
+
+
+def get_track_data_dummy(request, user_id):
     track_data = [
             {
                 'period': 0,
