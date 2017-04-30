@@ -23,7 +23,10 @@ class Student(models.Model):
     attendence = models.TextField(null=True)
 
     def get_attendence_data(self):
-        data = json.loads(self.attendence)
+        if self.attendence is not None:
+            data = json.loads(self.attendence)
+        else:
+            data = {}
         return data
 
     def __str__(self):
