@@ -38,15 +38,15 @@ def get_notes(request, user_id):
     user = Student.objects.get(SID=user_id)
     notes = Note.objects.filter(user=user)
 
-    notes = []
+    notes_list = []
     for note in notes:
         n = {}
         n['date'] = note.date
         n['subject'] = note.subject.subject_title
         n['note'] = note.data
-        notes.append(note)
+        notes_list.append(n)
 
-    return HttpResponse(json.dumps(notes))
+    return HttpResponse(json.dumps(notes_list))
 
 def get_notes_dummy(request, user_id):
     notes_data = [
@@ -121,7 +121,6 @@ def get_sub_data(request, user_id):
             return_dict[sub_code] = {'teacher': ts_dict[sub_code][0],
                                      'subject': ts_dict[sub_code][1]}
 
-    print json.dumps(return_dict)
     return HttpResponse(json.dumps(return_dict))
 
 
@@ -214,8 +213,10 @@ def set_track_data(request):
         subject = Subject.objects.get(subject_short_name=day_tt[period])
         note = Note.objects.filter(user=user, period=period, date=date)
         if note.exists():
+            print "Mehhh"
             note.update(data=entry['notes'])
         else:
+            print "Booo"
             new_note = Note(user=user, period=period, date=date, data=entry['notes'])
             new_note.save()
     return HttpResponse(json.dumps({ 'status': 'OK' }))
