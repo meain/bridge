@@ -306,6 +306,7 @@ AttendenceView.prototype.init = function(){
     })
 }
 AttendenceView.prototype.populate_attendence = function(){
+    console.log(this.subject_attendence)
     var percentColors = [
         { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
         { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
@@ -469,6 +470,7 @@ function onSignIn(googleUser) {
     user_data['email'] = profile.getEmail();
     user_data['photo'] = profile.getImageUrl();
     console.log(user_data);
+    fuid = user_data['id']
     $.post(server_address+'/signin/', { data:JSON.stringify(user_data) } ,  function(data){
         // populate_user_profile(user_data);
         data = JSON.parse(data)
@@ -478,7 +480,6 @@ function onSignIn(googleUser) {
             initialize_user.init();
             home = new Home();
             home.init();
-            fuid = user_data['id']
             $('#login-popup').css('display', 'none');
         }
         else{
