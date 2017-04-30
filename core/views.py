@@ -209,9 +209,12 @@ def set_track_data(request):
     for entry in track_data:
         period = entry['period']
         subject = Subject.objects.filter(subject_short_name=day_tt[period])[0]
-        if notes is not '':
-            note = Note(user=user, data=track_data[notes], subject=subject, date=date)
-            note.save()
+        note = Note.objects.filter(user=user, period=period, date=date)
+        if note.exists():
+            note.update(data=entry['notes'])
+        else:
+            new_note = Note(user=user, period=period, date=date, data=entry['notes'])
+            new_note.save()
     return HttpResponse(json.dumps({ 'status': 'OK' }))
 
 def get_track_data_dummy(request, user_id):
