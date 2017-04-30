@@ -2,7 +2,7 @@ import json
 from datetime import datetime as date
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Class, Student, Event, Teacher, Department
+from .models import Class, Student, Event, Teacher, Department, Note, Subject
 
 
 period_time = {0: '9:00',
@@ -189,6 +189,24 @@ def get_track_data(request):
 
     return track_data
 
+
+def set_track_data(request):
+    if request.method == "POST":
+            data = json.loads(request.POST.get('user_data'))
+            user_id = data['id']
+            date = data['date']
+            track_data = data['track_data']
+
+    user = Student.objects.get(SID=user_id)
+    day_tt = user.current_class.get_tt()[day].split(',')
+    track_data = json.loads(track_data)
+
+    for entry in track_data:
+        period = track_data['period']
+        subject = Subject.filter(subject_short_name=day_tt[period])[0]
+        if notes is not '':
+            note = Note(user=user, data=track_data[notes], subject=subject, date)
+            note.save()
 
 def get_track_data_dummy(request, user_id):
     track_data = [
