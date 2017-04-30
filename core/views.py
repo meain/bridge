@@ -28,6 +28,21 @@ def get_timetable(request, user_id):
 
 
 def get_notes(request, user_id):
+    user = Student.objects.get(SID=user_id)
+    notes = Note.objects.filter(user=user)
+
+    notes = []
+    for note in notes:
+        n = {}
+        n['date'] = note.date
+        n['subject'] = note.subject.subject_title
+        n['note'] = note.data
+        notes.append(note)
+
+    return notes
+
+
+def get_notes_dummy(request, user_id):
     notes_data = [
             {
                 'date': '24-3-2014',

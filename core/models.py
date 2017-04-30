@@ -115,6 +115,8 @@ class Event(models.Model):
 
 
 class Note(models.Model):
-    title = models.CharField(max_length=40, verbose_name="Note title", null=True)
-    note_text = models.TextField(verbose_name="Note text", null=True)
     user = models.ForeignKey('Student', on_delete=models.CASCADE, null=True)
+    date = models.CharField(max_length=12, verbose_name='date', null=True)
+    period = models.SmallIntegerField(max_length=1, verbose_name='Period', null=True)
+    subject = models.ForeignKey('Subject', null=True)
+    data = models.TextField(null=True)
