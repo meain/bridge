@@ -168,8 +168,11 @@ def get_track_data(request, user_id):
     day_tt = user.current_class.get_tt()[day].split(',')
 
     def get_notes_for_period(period):
-        note = Note.objects.filter(user=user, date=date, period=period)[0]
-        return note
+        note = Note.objects.get(user=user, date=date, period=period)
+        if note.exists():
+            return note
+        else:
+            return None
 
     track_data = []
     for i in range(6):
@@ -177,7 +180,7 @@ def get_track_data(request, user_id):
         p = {}
 
         p['period'] = i
-        if note.exists():
+        if note is not None:
             p['notes'] = note.data
             p['subject'] = note.subject.subject_short_name
         else:
