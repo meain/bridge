@@ -226,7 +226,7 @@ Home.prototype.populate_subject_data = function(subject_data, period_data, perio
 }
 Home.prototype.post_track_data = function(){
     var self = this
-    console.log(this.track_data)
+    // console.log(this.track_data)
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
     //                                                              REMOVE THIS LATER                                                            //
@@ -335,7 +335,7 @@ AttendenceView.prototype.get_data_from_server = function(callback){
             self.subject_attendence = subject_attendence['data']
         }
         else{
-            console.log('string')
+            // console.log('string')
             self.subject_attendence = JSON.parse(subject_attendence['data'])
         }
         callback()
