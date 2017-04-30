@@ -136,6 +136,8 @@ Home.prototype.get_data_from_server = function(callback){
         $.get(server_address+'/subject_data/'+fuid, function(subject_data){
             $.get(server_address+'/timetable/'+fuid, function(timetable){
                 console.log(track_data)
+                console.log(timetable)
+                console.log(subject_data)
                 self.timetable = timetable;
                 self.subject_data = subject_data;
                 self.track_data = JSON.parse(track_data);
@@ -157,7 +159,9 @@ Home.prototype.init = function(){
         if(self.timetable[dow] != undefined){
             self.create_base_template();
             self.populate_timetable_heder();
-            self.populate_subject_data(self.subject_data[self.timetable[dow][0]], self.track_data[0],0);
+            // console.log('::subject_data  ', self.subject_data, self.timetable, dow)
+            // console.log((self.timetable[dow]).split(',')[0])
+            self.populate_subject_data(self.subject_data[(self.timetable[dow]).split(',')[0]], self.track_data[0],0);
             self.handlers();
         }
         else{
@@ -207,7 +211,7 @@ Home.prototype.populate_timetable_heder = function(timetable){
     for( var i=0; i<=count; i++ ){
         htmlstr+=
             "<div class='card tiny timetable-subject' data="+i+">"+
-                this.timetable[dow][i]+
+                (this.timetable[dow]).split(',')[i]+
             "</div>"
     }
     htmlstr =
@@ -260,7 +264,8 @@ Home.prototype.handlers = function(){
         //                                                              REMOVE THIS LATER                                                            //
         period_number = $(el).attr('data');
         $('#subject-data').attr('data', period_number);
-        self.populate_subject_data(self.subject_data[self.timetable[dow][period_number]], self.track_data[period_number], period_number);
+        console.log(':subject_data  ', self.subject_data)
+        self.populate_subject_data(self.subject_data[(self.timetable[dow]).split(',')[period_number]], self.track_data[period_number], period_number);
         self.post_track_data()
     });
 }

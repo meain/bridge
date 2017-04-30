@@ -31,7 +31,7 @@ def get_timetable_dummy(request, user_id):
 def get_timetable(request, user_id):
     user = Student.objects.get(SID=user_id)
     timetable = user.current_class.get_tt()
-    return HttpResponse(timetable)
+    return HttpResponse(json.dumps(timetable), content_type="application/json")
 
 
 def get_notes(request, user_id):
