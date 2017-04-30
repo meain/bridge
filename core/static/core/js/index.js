@@ -294,8 +294,13 @@ AttendenceView.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/subject_attendence/'+fuid, function(subject_attendence){
-        console.log(subject_attendence)
-        self.subject_attendence = JSON.parse(subject_attendence['data'])
+        if(subject_attendence['data'] instanceof Object){
+            self.subject_attendence = subject_attendence['data']
+        }
+        else{
+            console.log('string')
+            self.subject_attendence = JSON.parse(subject_attendence['data'])
+        }
         callback()
     })
 }
