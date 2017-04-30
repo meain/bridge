@@ -139,7 +139,7 @@ Home.prototype.get_data_from_server = function(callback){
                 console.log(timetable)
                 console.log(subject_data)
                 self.timetable = timetable;
-                self.subject_data = subject_data;
+                self.subject_data = JSON.parse(subject_data);
                 self.track_data = JSON.parse(track_data);
                 callback()
             })
