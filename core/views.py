@@ -107,7 +107,7 @@ def get_sub_data_dummy(request, user_id):
     return HttpResponse(json.dumps(subject_data), content_type="application/json")
 
 def get_sub_data(request, user_id):
-    day = (date.today().strftime("%A")).lower()
+    # day = (date.today().strftime("%A")).lower()
     day = 'monday'
     return_dict = {}
     if not (day == 'sunday' or day == 'saturday'):
@@ -115,7 +115,7 @@ def get_sub_data(request, user_id):
         daytable = user.current_class.get_tt()[day].split(',')
 
         query = TaughtBy.objects.filter(classes__class_name=user.current_class)
-        ts_dict = {x.subject.subject_short_name: (x.teachers, x.subject_title) for x in query}
+        ts_dict = {x.subject.subject_short_name: (x.teachers.teacher_name, x.subject.subject_title) for x in query}
 
         for sub_code in daytable:
             return_dict[sub_code] = {'teacher': ts_dict[sub_code][0],
