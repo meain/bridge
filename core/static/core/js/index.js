@@ -135,9 +135,10 @@ Home.prototype.get_data_from_server = function(callback){
     $.post(server_address+'/track_data/'+fuid,{ 'data': JSON.stringify(pass_data) }, function(track_data){
         $.get(server_address+'/subject_data/'+fuid, function(subject_data){
             $.get(server_address+'/timetable/'+fuid, function(timetable){
+                console.log(track_data)
                 self.timetable = timetable;
                 self.subject_data = subject_data;
-                self.track_data = track_data['data'];
+                self.track_data = JSON.parse(track_data);
                 callback()
             })
         })
@@ -151,10 +152,12 @@ Home.prototype.init = function(){
         //                                                              REMOVE THIS LATER                                                            //
         dow = 'monday'
         //                                                              REMOVE THIS LATER                                                            //
+        // console.log(self.subject_data, self.timetable, self.track_data)
+        console.log(self.track_data)
         if(self.timetable[dow] != undefined){
             self.create_base_template();
             self.populate_timetable_heder();
-            self.populate_subject_data(this.subject_data[this.timetable[dow][0]], this.track_data[0],0);
+            self.populate_subject_data(self.subject_data[self.timetable[dow][0]], self.track_data[0],0);
             self.handlers();
         }
         else{
@@ -221,6 +224,11 @@ Home.prototype.populate_subject_data = function(subject_data, period_data, perio
     this.notes_editor.value(period_data['notes']);
     $('#subject-data').attr('data', period_number);
 }
+Home.prototype.post_track_data = function(){
+    console.log(this.track_data)
+    // $.post(server_address+'/track_data/'+fuid,{ 'data': JSON.stringify(pass_data) }, function(track_data){
+    // })
+}
 Home.prototype.handlers = function(){
     var self = this;
     // Add in notes data to the variable
@@ -228,12 +236,13 @@ Home.prototype.handlers = function(){
         note = self.notes_editor.value();
         period_number = $('#subject-data').attr('data');
         // console.log('was supposed to save after this for period:' + period_number)
-        $.each(this.track_data, function(i, v) {    // probable to cause a bug
+        $.each(self.track_data, function(i, v) {    // probable to cause a bug
             if (v.period == period_number) {
                 self.track_data[i].notes = note;
                 return;
             }
         });
+        self.post_track_data()
     });
     $('.timetable-subject').click(function(){
         var el = this;
@@ -245,6 +254,7 @@ Home.prototype.handlers = function(){
         period_number = $(el).attr('data');
         $('#subject-data').attr('data', period_number);
         self.populate_subject_data(self.subject_data[self.timetable[dow][period_number]], self.track_data[period_number], period_number);
+        self.post_track_data()
     });
 }
 
