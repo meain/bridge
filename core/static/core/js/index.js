@@ -122,7 +122,17 @@ Home.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
 
-    $.get(server_address+'/track_data/'+fuid, function(track_data){
+    var day = new Date().getDay();
+    var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+    //                                                              REMOVE THIS LATER                                                            //
+    dow = 'monday'
+    //                                                              REMOVE THIS LATER                                                            //
+    var pass_data = {
+        'id': fuid,
+        'date': new Date().getDate(),
+        'day': dow
+    }
+    $.post(server_address+'/track_data/'+fuid,{ 'data': JSON.stringify(pass_data) }, function(track_data){
         $.get(server_address+'/subject_data/'+fuid, function(subject_data){
             $.get(server_address+'/timetable/'+fuid, function(timetable){
                 self.timetable = timetable;

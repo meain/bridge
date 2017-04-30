@@ -158,9 +158,9 @@ def get_events(request, user_id):
     return HttpResponse(return_list)
 
 
-def get_track_data(request):
+def get_track_data(request, user_id):
     if request.method == "POST":
-        data = json.loads(request.POST.get('user_data'))
+        data = json.loads(request.POST.get('data'))
         user_id = data['id']
         date = data['date']
         day = data['day']
@@ -168,7 +168,7 @@ def get_track_data(request):
     day_tt = user.current_class.get_tt()[day].split(',')
 
     def get_notes_for_period(period):
-        note = notes.objects.filter(user=user, date=date, period=period)[0]
+        note = Note.objects.filter(user=user, date=date, period=period)[0]
         return note
 
     track_data = []
@@ -205,7 +205,7 @@ def set_track_data(request):
         period = track_data['period']
         subject = Subject.filter(subject_short_name=day_tt[period])[0]
         if notes is not '':
-            note = Note(user=user, data=track_data[notes], subject=subject, date)
+            note = Note(user=user, data=track_data[notes], subject=subject, date=date)
             note.save()
 
 def get_track_data_dummy(request, user_id):
