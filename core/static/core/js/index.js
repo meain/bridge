@@ -145,7 +145,8 @@ Home.prototype.init = function(){
             self.handlers();
         }
         else{
-            text = "<div style='text-align:center; width:100%; height:100%; font-size:30px; padding-top: 200px;'>It's a " + dow + ". You are free today!<div>"
+            text = "<div style='text-align:center; width:100%; font-size:30px; padding-top: 200px;'>It's a " + dow + ". You are free today!<div>"+
+                '<i class="fa fa-hand-peace-o" aria-hidden="true" style="padding-top:30px;font-size:100px"></i>'
             $('#mcontent').html(text);
         }
     })
