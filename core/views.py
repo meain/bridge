@@ -196,7 +196,12 @@ def set_track_data(request):
     if request.method == "POST":
             user_id = request.POST.get('id')
             date = request.POST.get('date')
-            track_data = json.loads(request.POST.get('track_data'))
+            day = request.POST.get('day')
+            track_data = request.POST.get('track_data')[1:][:-1]
+            # a wild bodge appeared
+            track_data = [e+'}' for e in track_data.split('},') if e]
+            track_data[-1] = track_data[-1][:-1]
+            track_data = [json.loads(e) for e in track_data]
 
     user = Student.objects.get(SID=user_id)
     day_tt = user.current_class.get_tt()[day].split(',')

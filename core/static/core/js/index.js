@@ -227,7 +227,12 @@ Home.prototype.populate_subject_data = function(subject_data, period_data, perio
 Home.prototype.post_track_data = function(){
     var self = this
     console.log(this.track_data)
-    $.post(server_address+'/set_track_data/',{ 'track_data': JSON.stringify(self.track_data), 'id':fuid, 'date': new Date().getDate() }, function(track_data){
+    var day = new Date().getDay();
+    var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+    //                                                              REMOVE THIS LATER                                                            //
+    dow = 'monday'
+    //                                                              REMOVE THIS LATER                                                            //
+    $.post(server_address+'/set_track_data/',{ 'track_data': JSON.stringify(self.track_data), 'id':fuid, 'date': day, 'day': dow }, function(track_data){
         console.log('Updated track_data to server')
     })
 }
