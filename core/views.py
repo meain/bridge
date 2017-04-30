@@ -237,13 +237,14 @@ def get_attendence(request, user_id):
     return HttpResponse(json.dumps(return_data), content_type="application/json")
 
 def update_attendence(request):
-    data = json.loads(request.POST.get('data'))
-    user_id = data['id']
-    attendence = json.dumps(data['attendence'])
+    if request.method == "POST":
+        data = json.loads(request.POST.get('data'))
+        user_id = data['id']
+        attendence = json.dumps(data['attendence'])
 
-    user = Student.objects.get(SID=user_id)
-    user.attendence = attendence
-    user.save()
+        user = Student.objects.get(SID=user_id)
+        user.attendence = attendence
+        user.save()
 
 
 def get_subject_attendence_dummy(request, user_id):
