@@ -186,10 +186,17 @@ def create_new_user(request):
     if request.method == "POST":
         user_id = json.loads(request.POST.get('user_data'))['id']
         _class = request.POST.get('class')
-
         c = Class.objects.filter(class_name=_class)[0]
+        #Initialize attendence
+        attendence = {}
+        subs = c.get_subs()
+        for sub in subs:
+            attendence[sub] = {'attended': 0, 'total': 0}
+        attendence = json.dumps(attendence)
+
         user = Student(SID=user_id)
         user.current_class = c
+        user.attendence = attendence
         user.save()
         return HttpResponse(json.dumps({'exists': True}))
 
@@ -221,6 +228,39 @@ def get_cal_data_dummy(request, user_id):
     return_data = {}
     return_data['data'] = cal_events
     return HttpResponse(json.dumps(return_data), content_type="application/json")
+
+def get_attendence(request, user_id):
+    user = Student.objects.get(SID=user_id)
+    attendence_data = user.get_attendence_data()
+
+    print attendence_data
+    if len(attendence_data) is 0:
+        # quick patch ( issue only if new user already created)
+        daytable = user.current_class.get_tt()
+        subs = {}
+        for key in daytable:
+            daysubs = daytable[key].split(',')
+            for item in daysubs:
+                # if item not in subs:  ( its a dict, lol )
+                subs[item] = {'total':0, 'attended':0 }
+        attendence_data = subs
+
+    return_data = {}
+    return_data['data'] = attendence_data
+    return HttpResponse(json.dumps(return_data), content_type="application/json")
+
+def update_attendence(request):
+    if request.method == "POST":
+        data =  json.loads(request.POST.get('data'))
+        user_id = data['id']
+        attendence = json.dumps(data['attendance'])
+
+        user = Student.objects.get(SID=user_id)
+        user.attendence = attendence
+        user.save()
+    return_data = { 'status':'OK' }
+    return HttpResponse(json.dumps(return_data), content_type="application/json")
+
 
 def get_subject_attendence_dummy(request, user_id):
     subject_attendence = [

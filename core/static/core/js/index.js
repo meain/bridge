@@ -294,7 +294,8 @@ AttendenceView.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/subject_attendence/'+fuid, function(subject_attendence){
-        self.subject_attendence = subject_attendence['data']
+        console.log(subject_attendence)
+        self.subject_attendence = JSON.parse(subject_attendence['data'])
         callback()
     })
 }
@@ -303,16 +304,19 @@ AttendenceView.prototype.init = function(){
     this.get_data_from_server(function(){
         self.create_base_template()
         self.populate_attendence()
+        self.init_click_handlers()
     })
 }
 AttendenceView.prototype.populate_attendence = function(){
+    // console.log(this.subject_attendence)
     var percentColors = [
         { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
         { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
         { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
-    for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
-        var att_val = (this.subject_attendence[i].attended/this.subject_attendence[i].total)*100
-        $('#attendence-'+i+'>#att').easyPieChart({
+    // for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
+    for( item in this.subject_attendence ){
+        var att_val = (this.subject_attendence[item].attended/this.subject_attendence[item].total)*100
+        $('#attendence-'+item+'>.att').easyPieChart({
             size: 120,
             barColor: function(pct){
                 pct = pct/100
@@ -347,16 +351,49 @@ AttendenceView.prototype.create_base_template = function(){
             'Attendence'+
         '</div>'+
         '<div id="attendence-view-data">'
-    for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
-            htmlstr += '<div id="attendence-'+ i +'" class="attendence-pie card small">'+
-                '<div id="att"></div>'+
-                '<div id="att-name">'+this.subject_attendence[i].name+' ('+this.subject_attendence[i].attended+'/'+this.subject_attendence[i].total+')</div>'+
-                '<div id="att-att" data-subject="'+ this.subject_attendence[i].name  +'">+attended</div>'+
-                '<div id="att-bnk" data-subject="'+ this.subject_attendence[i].name  +'">+bunked</div>'+
-            '</div>'
+    for(item in this.subject_attendence){
+        htmlstr += '<div id="attendence-'+ item +'" class="attendence-pie card small">'+
+            '<div class="att" data-subject="'+ item +'"></div>'+
+            '<div class="att-name" data-subject="'+ item +'">'+item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')</div>'+
+            '<div class="att-att" data-subject="'+ item  +'">+attended</div>'+
+            '<div class="att-bnk" data-subject="'+ item  +'">+bunked</div>'+
+        '</div>'
     }
     htmlstr += '</div>'
     $('#mcontent').html(htmlstr);
+}
+AttendenceView.prototype.update_attendence = function(){
+    for( item in this.subject_attendence ){
+        att_el = $('.att-name[data-subject='+ item +']')[0]
+        $(att_el).text(item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')')
+        att_pie = $('.att[data-subject='+ item +']')[0]
+        var att_val = (this.subject_attendence[item].attended/this.subject_attendence[item].total)*100
+        $(att_pie).easyPieChart({}).data('easyPieChart').update(att_val)
+        if( this.subject_attendence[item].total == 1 )  // Don't know what exactly is happending but it was not updating
+            $(att_pie).easyPieChart({}).data('easyPieChart').update(att_val)
+    }
+    post_data = {
+        'id': fuid,
+        'attendance': JSON.stringify(this.subject_attendence)
+    }
+    post_data = JSON.stringify(post_data)
+    $.post(server_address+'/update_attendence/', {'data':post_data} ,  function(data){
+        console.log('Attendance updated in server')
+    })
+    }
+AttendenceView.prototype.init_click_handlers = function(){
+    var self = this
+    $('.att-att').click(function(){
+        sub = $(this).data('subject')
+        self.subject_attendence[sub].attended += 1
+        self.subject_attendence[sub].total += 1
+        self.update_attendence()
+    })
+    $('.att-bnk').click(function(){
+        sub = $(this).data('subject')
+        self.subject_attendence[sub].total += 1
+        self.update_attendence()
+    })
 }
 
 
@@ -380,7 +417,7 @@ CalenderView.prototype.init = function(){
     })
 }
 CalenderView.prototype.populate_calender = function(){
-    console.log(this.cal_events)
+    // console.log(this.cal_events)
     $('#calender-view-data').fullCalendar({
         header: {
             // not really happending, probably need paid version
@@ -469,16 +506,16 @@ function onSignIn(googleUser) {
     user_data['email'] = profile.getEmail();
     user_data['photo'] = profile.getImageUrl();
     console.log(user_data);
+    fuid = user_data['id']
     $.post(server_address+'/signin/', { data:JSON.stringify(user_data) } ,  function(data){
         // populate_user_profile(user_data);
         data = JSON.parse(data)
-        console.log(data)
+        // console.log(data)
         if(data['exists'] == true){
             initialize_user = new InitializeUser(user_data);
             initialize_user.init();
             home = new Home();
             home.init();
-            fuid = user_data['id']
             $('#login-popup').css('display', 'none');
         }
         else{
@@ -493,7 +530,7 @@ function onSignIn(googleUser) {
             for( var i=0,len=class_option_buttons.length; i<len; i++ ){
                 $(class_option_buttons[i]).click(function(){
                     user_class = $(this).data('class').replace('%',' ')
-                    console.log(user_class)
+                    // console.log(user_class)
                     $.post(server_address+'/create_user/', { 'user_data':JSON.stringify(user_data), 'class':user_class } ,  function(data){
                         console.log('New user created')
                         $($('#choose-class-popup').parent()).css('display', 'none');
@@ -503,6 +540,10 @@ function onSignIn(googleUser) {
                     })
             }
             $('#popup-welcome-message').text('Hello '+user_data['name']+' , welcome to Bridge!')
+            initialize_user = new InitializeUser(user_data);
+            initialize_user.init();
+            home = new Home();
+            home.init();
             $($('#choose-class-popup').parent()).css('display', 'flex');
         }
     })

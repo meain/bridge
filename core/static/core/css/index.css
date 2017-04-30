@@ -436,7 +436,7 @@ body{
     display: inline-block;
     padding-bottom: 20px;
 }
-#att-att{
+.att-att{
     background-color: rgba(39, 174, 96,0.75);
     color: #fff;
     display: inline-block;
@@ -446,10 +446,10 @@ body{
     cursor: pointer;
     border-radius: 100px;
 }
-#att-att:hover{
+.att-att:hover{
     background-color: rgba(39, 174, 96,0.5);
 }
-#att-bnk{
+.att-bnk{
     background-color: rgba(211, 84, 0,0.75);
     color: #fff;
     display: inline-block;
@@ -459,7 +459,7 @@ body{
     cursor: pointer;
     border-radius: 100px;
 }
-#att-bnk:hover{
+.att-bnk:hover{
     background-color: rgba(211, 84, 0,0.5);
 }
 #about-view-heading{

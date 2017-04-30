@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
-
+import json
 # Create your models here.
 sem_choices = (
     (1, 'S1'),
@@ -20,6 +20,14 @@ class Student(models.Model):
     # register_no = models.CharField(max_length=20, null=True)
     stud_name = models.CharField(max_length=40, verbose_name="Name")
     current_class = models.ForeignKey('Class', on_delete=models.CASCADE, verbose_name="Class")
+    attendence = models.TextField(null=True)
+
+    def get_attendence_data(self):
+        if self.attendence is not None and len(self.attendence) > 5:
+            data = json.loads(self.attendence)
+        else:
+            data = {}
+        return data
 
     def __str__(self):
         return str(self.stud_name)
@@ -64,6 +72,10 @@ class Class(models.Model):
     def save(self, *args, **kwargs):
         self.class_name = str(self.branch) + " " + str(self.current_sem) + str(self.batch)
         super(Class, self).save(*args, **kwargs)
+
+    def get_subs(self):
+        subs = [subject.subject_short_name for subject in self.subjects.all()]
+        return subs
 
     def get_tt(self):
         tt_string = str(self.timeTable)
