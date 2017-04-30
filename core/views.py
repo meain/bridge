@@ -194,8 +194,8 @@ def get_track_data(request):
 
 def set_track_data(request):
     if request.method == "POST":
-            user_id = data['id']
-            date = data['date']
+            user_id = request.POST.get('id')
+            date = request.POST.get('date')
             track_data = json.loads(request.POST.get('track_data'))
 
     user = Student.objects.get(SID=user_id)
