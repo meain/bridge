@@ -367,7 +367,6 @@ AttendenceView.prototype.update_attendence = function(){
         $(att_el).text(item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')')
         att_pie = $('.att[data-subject='+ item +']')[0]
         var att_val = (this.subject_attendence[item].attended/this.subject_attendence[item].total)*100
-        console.log(att_val)
         $(att_pie).easyPieChart({}).data('easyPieChart').update(att_val)
         if( this.subject_attendence[item].total == 1 )  // Don't know what exactly is happending but it was not updating
             $(att_pie).easyPieChart({}).data('easyPieChart').update(att_val)
@@ -376,8 +375,6 @@ AttendenceView.prototype.update_attendence = function(){
         'id': fuid,
         'attendance': this.subject_attendence
     }
-    // post_data = JSON.stringify(post_data)
-    console.log(post_data)
     $.post(server_address+'/update_attendence/', post_data ,  function(data){
         console.log('Attendance updated in server')
     })
@@ -541,6 +538,10 @@ function onSignIn(googleUser) {
                     })
             }
             $('#popup-welcome-message').text('Hello '+user_data['name']+' , welcome to Bridge!')
+            initialize_user = new InitializeUser(user_data);
+            initialize_user.init();
+            home = new Home();
+            home.init();
             $($('#choose-class-popup').parent()).css('display', 'flex');
         }
     })
