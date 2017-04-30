@@ -303,10 +303,11 @@ AttendenceView.prototype.init = function(){
     this.get_data_from_server(function(){
         self.create_base_template()
         self.populate_attendence()
+        self.init_click_handlers()
     })
 }
 AttendenceView.prototype.populate_attendence = function(){
-    console.log(this.subject_attendence)
+    // console.log(this.subject_attendence)
     var percentColors = [
         { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
         { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
@@ -351,14 +352,46 @@ AttendenceView.prototype.create_base_template = function(){
         '<div id="attendence-view-data">'
     for(item in this.subject_attendence){
         htmlstr += '<div id="attendence-'+ item +'" class="attendence-pie card small">'+
-            '<div class="att"></div>'+
-            '<div class="att-name">'+item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')</div>'+
+            '<div class="att" data-subject="'+ item +'"></div>'+
+            '<div class="att-name" data-subject="'+ item +'">'+item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')</div>'+
             '<div class="att-att" data-subject="'+ item  +'">+attended</div>'+
             '<div class="att-bnk" data-subject="'+ item  +'">+bunked</div>'+
         '</div>'
     }
     htmlstr += '</div>'
     $('#mcontent').html(htmlstr);
+}
+AttendenceView.prototype.update_attendence = function(){
+    for( item in this.subject_attendence ){
+        att_el = $('.att-name[data-subject='+ item +']')[0]
+        $(att_el).text(item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')')
+        att_pie = $('.att[data-subject='+ item +']')[0]
+        var att_val = (this.subject_attendence[item].attended/this.subject_attendence[item].total)*100
+        $(att_pie).easyPieChart({}).data('easyPieChart').update(att_val)
+    }
+    post_data = {
+        'id': fuid,
+        'attendance': this.subject_attendence
+    }
+    // post_data = JSON.stringify(post_data)
+    console.log(post_data)
+    $.post(server_address+'/update_attendence/', post_data ,  function(data){
+        console.log('Attendance updated in server')
+    })
+    }
+AttendenceView.prototype.init_click_handlers = function(){
+    var self = this
+    $('.att-att').click(function(){
+        sub = $(this).data('subject')
+        self.subject_attendence[sub].attended += 1
+        self.subject_attendence[sub].total += 1
+        self.update_attendence()
+    })
+    $('.att-bnk').click(function(){
+        sub = $(this).data('subject')
+        self.subject_attendence[sub].total += 1
+        self.update_attendence()
+    })
 }
 
 
@@ -382,7 +415,7 @@ CalenderView.prototype.init = function(){
     })
 }
 CalenderView.prototype.populate_calender = function(){
-    console.log(this.cal_events)
+    // console.log(this.cal_events)
     $('#calender-view-data').fullCalendar({
         header: {
             // not really happending, probably need paid version
@@ -475,7 +508,7 @@ function onSignIn(googleUser) {
     $.post(server_address+'/signin/', { data:JSON.stringify(user_data) } ,  function(data){
         // populate_user_profile(user_data);
         data = JSON.parse(data)
-        console.log(data)
+        // console.log(data)
         if(data['exists'] == true){
             initialize_user = new InitializeUser(user_data);
             initialize_user.init();
@@ -495,7 +528,7 @@ function onSignIn(googleUser) {
             for( var i=0,len=class_option_buttons.length; i<len; i++ ){
                 $(class_option_buttons[i]).click(function(){
                     user_class = $(this).data('class').replace('%',' ')
-                    console.log(user_class)
+                    // console.log(user_class)
                     $.post(server_address+'/create_user/', { 'user_data':JSON.stringify(user_data), 'class':user_class } ,  function(data){
                         console.log('New user created')
                         $($('#choose-class-popup').parent()).css('display', 'none');

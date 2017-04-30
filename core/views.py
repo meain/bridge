@@ -234,14 +234,14 @@ def get_attendence(request, user_id):
     attendence_data = user.get_attendence_data()
 
     if len(attendence_data) is 0:
-        # quick patch
+        # quick patch ( issue only if new user already created)
         daytable = user.current_class.get_tt()
         subs = {}
         for key in daytable:
             daysubs = daytable[key].split(',')
             for item in daysubs:
-                if item not in subs:
-                    subs[item] = {'total':0, 'attended':0 }
+                # if item not in subs:  ( its a dict, lol )
+                subs[item] = {'total':0, 'attended':0 }
         attendence_data = subs
 
     return_data = {}
@@ -250,9 +250,9 @@ def get_attendence(request, user_id):
 
 def update_attendence(request):
     if request.method == "POST":
-        data = json.loads(request.POST.get('data'))
-        user_id = data['id']
-        attendence = json.dumps(data['attendence'])
+        print request.POST
+        user_id = json.dumps(request.POST.get( 'id' ))
+        attendence = json.dumps(request.POST.get( 'attendence' ))
 
         user = Student.objects.get(SID=user_id)
         user.attendence = attendence
