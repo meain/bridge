@@ -121,8 +121,8 @@ def get_sub_data(request, user_id):
             return_dict[sub_code] = {'teacher': ts_dict[sub_code][0],
                                      'subject': ts_dict[sub_code][1]}
 
-    print return_dict
-    return HttpResponse(return_dict)
+    print json.dumps(return_dict)
+    return HttpResponse(json.dumps(return_dict))
 
 
 def get_events_dummy(request, user_id):
