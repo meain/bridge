@@ -158,7 +158,7 @@ def get_events(request, user_id):
     return HttpResponse(return_list)
 
 
-def get_track_data(request, user_id):
+def get_track_data(request):
     if request.method == "POST":
         data = json.loads(request.POST.get('data'))
         user_id = data['id']
