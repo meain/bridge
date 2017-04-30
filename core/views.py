@@ -46,7 +46,7 @@ def get_notes(request, user_id):
         n['note'] = note.data
         notes.append(note)
 
-    return notes
+    return HttpResponse(json.dumps(notes))
 
 def get_notes_dummy(request, user_id):
     notes_data = [
@@ -168,9 +168,8 @@ def get_track_data(request, user_id):
     day_tt = user.current_class.get_tt()[day].split(',')
 
     def get_notes_for_period(period):
-        note = Note.objects.get(user=user, date=date, period=period)
-        if note.exists():
-            return note
+        if Note.objects.filter(user=user, date=date, period=period).exists():
+            return Note.objects.get(user=user, date=date, period=period)
         else:
             return None
 
@@ -190,7 +189,7 @@ def get_track_data(request, user_id):
         p['time'] = period_time[i]
         track_data.append(p)
 
-    return track_data
+    return HttpResponse(json.dumps(track_data))
 
 
 def set_track_data(request):
