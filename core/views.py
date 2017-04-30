@@ -194,10 +194,9 @@ def get_track_data(request):
 
 def set_track_data(request):
     if request.method == "POST":
-            data = json.loads(request.POST.get('user_data'))
             user_id = data['id']
             date = data['date']
-            track_data = data['track_data']
+            track_data = json.loads(request.POST.get('track_data'))
 
     user = Student.objects.get(SID=user_id)
     day_tt = user.current_class.get_tt()[day].split(',')
@@ -209,6 +208,7 @@ def set_track_data(request):
         if notes is not '':
             note = Note(user=user, data=track_data[notes], subject=subject, date=date)
             note.save()
+    return HttpResponse(json.dumps({ 'status': 'OK' }))
 
 def get_track_data_dummy(request, user_id):
     track_data = [

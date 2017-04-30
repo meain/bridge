@@ -132,7 +132,7 @@ Home.prototype.get_data_from_server = function(callback){
         'date': new Date().getDate(),
         'day': dow
     }
-    $.post(server_address+'/track_data/'+fuid,{ 'data': JSON.stringify(pass_data) }, function(track_data){
+    $.post(server_address+'/track_data/', { 'data': JSON.stringify(pass_data) }, function(track_data){
         $.get(server_address+'/subject_data/'+fuid, function(subject_data){
             $.get(server_address+'/timetable/'+fuid, function(timetable){
                 console.log(track_data)
@@ -225,9 +225,11 @@ Home.prototype.populate_subject_data = function(subject_data, period_data, perio
     $('#subject-data').attr('data', period_number);
 }
 Home.prototype.post_track_data = function(){
+    var self = this
     console.log(this.track_data)
-    // $.post(server_address+'/track_data/'+fuid,{ 'data': JSON.stringify(pass_data) }, function(track_data){
-    // })
+    $.post(server_address+'/set_track_data/',{ 'track_data': JSON.stringify(self.track_data), 'id':fuid, 'date': new Date().getDate() }, function(track_data){
+        console.log('Updated track_data to server')
+    })
 }
 Home.prototype.handlers = function(){
     var self = this;
