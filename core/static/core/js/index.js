@@ -348,7 +348,7 @@ AttendenceView.prototype.create_base_template = function(){
         '</div>'+
         '<div id="attendence-view-data">'
     for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
-            htmlstr += '<div id="attendence-'+ i +'" class="attendence-pie">'+
+            htmlstr += '<div id="attendence-'+ i +'" class="attendence-pie card small">'+
                 '<div id="att"></div>'+
                 '<div id="att-name">'+this.subject_attendence[i].name+' ('+this.subject_attendence[i].attended+'/'+this.subject_attendence[i].total+')</div>'+
                 '<div id="att-att" data-subject="'+ this.subject_attendence[i].name  +'">+attended</div>'+
