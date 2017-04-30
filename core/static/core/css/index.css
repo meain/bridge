@@ -245,6 +245,7 @@ body{
 .timetable-subject:hover{
     /* text-decoration: underline; */
     border-bottom: 1px solid #000;
+    color: red;
 }
 #login-popup{
     position: absolute;
