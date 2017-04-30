@@ -311,9 +311,10 @@ AttendenceView.prototype.populate_attendence = function(){
         { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
         { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
         { pct: 1.0, color: { r: 0x00, g: 0xff, b: 0 } } ];
-    for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
-        var att_val = (this.subject_attendence[i].attended/this.subject_attendence[i].total)*100
-        $('#attendence-'+i+'>#att').easyPieChart({
+    // for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
+    for( item in this.subject_attendence ){
+        var att_val = (this.subject_attendence[item].attended/this.subject_attendence[item].total)*100
+        $('#attendence-'+item+'>.att').easyPieChart({
             size: 120,
             barColor: function(pct){
                 pct = pct/100
@@ -348,13 +349,13 @@ AttendenceView.prototype.create_base_template = function(){
             'Attendence'+
         '</div>'+
         '<div id="attendence-view-data">'
-    for( var i=0,len=this.subject_attendence.length ; i<len ; i++ ){
-            htmlstr += '<div id="attendence-'+ i +'" class="attendence-pie card small">'+
-                '<div id="att"></div>'+
-                '<div id="att-name">'+this.subject_attendence[i].name+' ('+this.subject_attendence[i].attended+'/'+this.subject_attendence[i].total+')</div>'+
-                '<div id="att-att" data-subject="'+ this.subject_attendence[i].name  +'">+attended</div>'+
-                '<div id="att-bnk" data-subject="'+ this.subject_attendence[i].name  +'">+bunked</div>'+
-            '</div>'
+    for(item in this.subject_attendence){
+        htmlstr += '<div id="attendence-'+ item +'" class="attendence-pie card small">'+
+            '<div class="att"></div>'+
+            '<div class="att-name">'+item+' ('+this.subject_attendence[item].attended+'/'+this.subject_attendence[item].total+')</div>'+
+            '<div class="att-att" data-subject="'+ item  +'">+attended</div>'+
+            '<div class="att-bnk" data-subject="'+ item  +'">+bunked</div>'+
+        '</div>'
     }
     htmlstr += '</div>'
     $('#mcontent').html(htmlstr);

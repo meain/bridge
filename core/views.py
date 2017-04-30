@@ -232,6 +232,18 @@ def get_cal_data_dummy(request, user_id):
 def get_attendence(request, user_id):
     user = Student.objects.get(SID=user_id)
     attendence_data = user.get_attendence_data()
+
+    if len(attendence_data) is 0:
+        # quick patch
+        daytable = user.current_class.get_tt()
+        subs = {}
+        for key in daytable:
+            daysubs = daytable[key].split(',')
+            for item in daysubs:
+                if item not in subs:
+                    subs[item] = {'total':0, 'attended':0 }
+        attendence_data = subs
+
     return_data = {}
     return_data['data'] = attendence_data
     return HttpResponse(json.dumps(return_data), content_type="application/json")
