@@ -205,11 +205,10 @@ def set_track_data(request):
 
     user = Student.objects.get(SID=user_id)
     day_tt = user.current_class.get_tt()[day].split(',')
-    track_data = json.loads(track_data)
 
     for entry in track_data:
-        period = track_data['period']
-        subject = Subject.filter(subject_short_name=day_tt[period])[0]
+        period = entry['period']
+        subject = Subject.objects.filter(subject_short_name=day_tt[period])[0]
         if notes is not '':
             note = Note(user=user, data=track_data[notes], subject=subject, date=date)
             note.save()
