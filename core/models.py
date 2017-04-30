@@ -23,7 +23,7 @@ class Student(models.Model):
     attendence = models.TextField(null=True)
 
     def get_attendence_data(self):
-        if self.attendence is not None:
+        if self.attendence is not None and len(self.attendence) > 5:
             data = json.loads(self.attendence)
         else:
             data = {}
