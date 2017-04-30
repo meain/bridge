@@ -208,7 +208,7 @@ def set_track_data(request):
 
     for entry in track_data:
         period = entry['period']
-        subject = Subject.objects.filter(subject_short_name=day_tt[period])[0]
+        subject = Subject.objects.get(subject_short_name=day_tt[period])
         note = Note.objects.filter(user=user, period=period, date=date)
         if note.exists():
             note.update(data=entry['notes'])
