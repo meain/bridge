@@ -2,7 +2,7 @@ import json
 from datetime import datetime as date
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Class, Student, Event, Teacher, Department, Note, Subject
+from .models import Class, Student, Event, Teacher, Department, Note, Subject, TaughtBy
 
 
 period_time = {0: '9:00',
@@ -108,6 +108,7 @@ def get_sub_data_dummy(request, user_id):
 
 def get_sub_data(request, user_id):
     day = (date.today().strftime("%A")).lower()
+    day = 'monday'
     return_dict = {}
     if not (day == 'sunday' or day == 'saturday'):
         user = Student.objects.get(SID=user_id)
