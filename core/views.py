@@ -217,7 +217,7 @@ def set_track_data(request):
             note.update(data=entry['notes'])
         else:
             print "Booo"
-            new_note = Note(user=user, period=period, date=date, data=entry['notes'])
+            new_note = Note(user=user, period=period, date=date, data=entry['notes'], subject=subject)
             new_note.save()
     return HttpResponse(json.dumps({ 'status': 'OK' }))
 
