@@ -93,3 +93,4 @@ ENV/
 
 .zedstate
 db.sqlite3
+tags
