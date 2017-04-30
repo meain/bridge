@@ -138,6 +138,9 @@ Home.prototype.init = function(){
     this.get_data_from_server(function(){
         var day = new Date().getDay();
         var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+        //                                                              REMOVE THIS LATER                                                            //
+        dow = 'monday'
+        //                                                              REMOVE THIS LATER                                                            //
         if(self.timetable[dow] != undefined){
             self.create_base_template();
             self.populate_timetable_heder();
@@ -185,6 +188,9 @@ Home.prototype.populate_timetable_heder = function(timetable){
     htmlstr = ''
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+    //                                                              REMOVE THIS LATER                                                            //
+    dow = 'monday'
+    //                                                              REMOVE THIS LATER                                                            //
     for( var i=0; i<=count; i++ ){
         htmlstr+=
             "<div class='card tiny timetable-subject' data="+i+">"+
@@ -223,6 +229,9 @@ Home.prototype.handlers = function(){
         var el = this;
         var day = new Date().getDay();
         var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+        //                                                              REMOVE THIS LATER                                                            //
+        dow = 'monday'
+        //                                                              REMOVE THIS LATER                                                            //
         period_number = $(el).attr('data');
         $('#subject-data').attr('data', period_number);
         self.populate_subject_data(self.subject_data[self.timetable[dow][period_number]], self.track_data[period_number], period_number);
