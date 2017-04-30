@@ -294,7 +294,8 @@ AttendenceView.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/subject_attendence/'+fuid, function(subject_attendence){
-        self.subject_attendence = subject_attendence['data']
+        console.log(subject_attendence)
+        self.subject_attendence = JSON.parse(subject_attendence['data'])
         callback()
     })
 }
@@ -373,9 +374,10 @@ AttendenceView.prototype.update_attendence = function(){
     }
     post_data = {
         'id': fuid,
-        'attendance': this.subject_attendence
+        'attendance': JSON.stringify(this.subject_attendence)
     }
-    $.post(server_address+'/update_attendence/', post_data ,  function(data){
+    post_data = JSON.stringify(post_data)
+    $.post(server_address+'/update_attendence/', {'data':post_data} ,  function(data){
         console.log('Attendance updated in server')
     })
     }

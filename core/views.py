@@ -233,6 +233,7 @@ def get_attendence(request, user_id):
     user = Student.objects.get(SID=user_id)
     attendence_data = user.get_attendence_data()
 
+    print attendence_data
     if len(attendence_data) is 0:
         # quick patch ( issue only if new user already created)
         daytable = user.current_class.get_tt()
@@ -250,10 +251,11 @@ def get_attendence(request, user_id):
 
 def update_attendence(request):
     if request.method == "POST":
-        user_id = json.dumps(request.POST.get( 'id' ))
-        attendence = json.dumps(request.POST.get( 'attendence' ))
+        data =  json.loads(request.POST.get('data'))
+        user_id = data['id']
+        attendence = json.dumps(data['attendance'])
 
-        user = Student.objects.get(SID=user_id[1:][:-1])
+        user = Student.objects.get(SID=user_id)
         user.attendence = attendence
         user.save()
     return_data = { 'status':'OK' }
