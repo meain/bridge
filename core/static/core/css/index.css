@@ -31,6 +31,7 @@ body{
     transition-property: width, visibility;
     transition-duration: 0.5s;
     z-index: 100;
+    overflow: auto;
 }
 .midpane{
     width: calc(60vw - 120px);
@@ -430,10 +431,36 @@ body{
     overflow:auto;
 }
 .attendence-pie{
-    width: 50%;
+    width: 46%;
     text-align: center;
     display: inline-block;
     padding-bottom: 20px;
+}
+#att-att{
+    background-color: rgba(39, 174, 96,0.75);
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    width: 100px;
+    cursor: pointer;
+    border-radius: 100px;
+}
+#att-att:hover{
+    background-color: rgba(39, 174, 96,0.5);
+}
+#att-bnk{
+    background-color: rgba(211, 84, 0,0.75);
+    color: #fff;
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    width: 100px;
+    cursor: pointer;
+    border-radius: 100px;
+}
+#att-bnk:hover{
+    background-color: rgba(211, 84, 0,0.5);
 }
 #about-view-heading{
     text-align: center;
