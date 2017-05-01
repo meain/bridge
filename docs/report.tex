@@ -15,7 +15,7 @@
 {0em}
 {\bfseries}
 
-\titleformat{\subsubsection}[runin]
+\titleformat{\subsubsection}
 {\Large}
 {}
 {0em}
@@ -243,7 +243,7 @@ The platform with its ability to take down notes for the classes they are attend
 
 \newpage
 
-\section{System study}
+\section{System analysis}
 \hspace{1em}
 
 \subsection{Existing system}
@@ -256,8 +256,11 @@ Apart from these all the system we have currently are mostly teacher centric whi
 
 \Large
 Here are some disadvantages of existing system:
-\begin{itemize}\item Time consuming\item Not easily accessible
-\item Teacher centric\item Less student friendly
+\begin{itemize}
+\item Time consuming
+\item Not easily accessible
+\item Teacher centric
+\item Less student friendly
 \item Laborious
 \end{itemize}
 
@@ -272,7 +275,11 @@ With our solution we are aiming to provide a simple and intuitive interface for 
 Once the user get registered through their google sign in (which makes the signin and verification process efficient and easy ). The user will be provided with a popup menu in which they could select their respective division head and to which course they are enrolled to.after the completion of sign in process, we will have a wide range of options which include attendance tracking system, notes adding, which could include lecture videos, images and much more feature which make learning easier, it tend to have an added feature of upcoming events which help to clear the backlogs and make the work as timid and as clean as possible\\
 
 \begin{itemize}
-\item This system is developed in such a way that even a naive user can also operate the system easily.\item This system is also secure as the database is managed only bythe administrator of the system.\item It has an error free verification mechanism\item Easy way of accessing records and tracking attendance
+\item This system is developed in such a way that even a naive user can also operate the system easily.
+\item This system is also secure as the database is managed only by
+the administrator of the system.
+\item It has an error free verification mechanism
+\item Easy way of accessing records and tracking attendance
 \end{itemize}
 
 
@@ -283,9 +290,23 @@ Once the user get registered through their google sign in (which makes the signi
 
 \subsection{Software Requirements Specification}
 \vspace{1em}
-\subsection{System Objectives}
+%\subsection{System Objectives}
+%\vspace{1em}
+\subsection{Hardware and Software requirements}
 \vspace{1em}
-\subsection{Hardware and Software tool requirements}
+\subsubsection{Hardware specification}
+\vspace{1em}
+\begin{itemize}
+\item RAM: Recommended 512MB or above
+\item Storage: 10 GB or above\item Connectivity: Low latency internet with high bandwidth
+\end{itemize}
+\subsubsection{Software specification}
+\begin{itemize}
+\item OS: Windows, OSX, or Linux ( or any unix system )
+\item Env: Python 2.x
+\item Database: MySQL
+\item Web browser ( preferable Chrome or Firefox )
+\end{itemize}
 \vspace{1em}
 
 \vspace{1em}
@@ -300,6 +321,37 @@ Once the user get registered through their google sign in (which makes the signi
 \subsection{Database Design}
 \vspace{1em}
 \subsection{Modular Design}
+
+\subsubsection{Login}
+This module handles the user authentication and login.
+The component is dependent on Google login for its authentication, as we leverage Google signin module to make the tradition of the user into our app much more easier and faster.
+
+Initially when the user logs into the application is when we create an account for them and register them. When the user logs into the application, we get the user to login to their Google account and we can use the Google API top get the user details like user-id, name, email, profile-image etc. This makes it easer for the user as do not have to manually add in their name or profile image. Only thing they will have to manually set is which class they are studying in.
+
+Now from the next time the user logs in, we will directly log them into their account ready to go.
+
+\subsubsection{Landing Page}
+The landing page is the most important and most viewed part of the whole application. It encompasses details a user would probably need at that time like upcoming events, which data about the class that is currently going on. It also lets them take down notes which they can later view using the notes module.
+
+For each subject of the day we provide the name of the teacher, time of the class, etc which helps the student to plan for their class.
+The place provided to jot down notes for the subject also helps them to take down notes during the classes which will be really useful for them for later reference.
+
+\subsubsection{Notes}
+Notes module is aimed at providing an interface for the student( user ) to view all the notes they have taken in the class and go through them.
+It is a very useful and powerful utility at the end of a semester as it will let them view all the notes they have in one place and go through them quickly and efficiently.
+
+You can also use the notes view to filter your notes based on the date or the subject which is a really simple but powerful way to summarize a whole semester.
+
+\subsubsection{Attendance}
+One another very important module is the Attendance module which lets the student track their attendance for each subject they have. The student on attending or net attending a specific subject class can update their attendance using the attendance module. All the user data is saved in real-time with the backed and they will be able to check their any time.
+
+The per subject nature of the attendance module also helps them to know which subjects they have missed the most and concentrate on them individually.
+
+\subsubsection{Calendar}
+The Calendar module is used to view the overview of all the events. It shows you all the events and submissions you have for the future. While the upcoming events module only shows you the close and upcoming events, in the calendar module we can see all the upcoming events in the future.
+
+It has a normal calender like intercase with events listed under the specific dates which makes it much more intuitive and easy.
+
 \vspace{1em}
 \subsection{Input/Output Design}
 \vspace{1em}
