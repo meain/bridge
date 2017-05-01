@@ -447,7 +447,14 @@ CalenderView.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/calendar/'+fuid, function(cal_events){
-        self.cal_events = cal_events['data']
+        self.cal_events = JSON.parse(cal_events)
+        for(item in self.cal_events){
+            i = {
+                'title': self.cal_events[item]['description']+'('+self.cal_events[item]['to']+')',
+                'start': self.cal_events[item]['due']
+                },
+            self.cal_events[item] = i
+        }
         callback()
     })
 }

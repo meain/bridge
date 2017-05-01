@@ -298,6 +298,23 @@ def signin(request):
             return HttpResponse(json.dumps(data), content_type="application/json")
 
 
+def get_cal_data(request, user_id):
+    user = Student.objects.get(SID=user_id)
+    elist = Event.objects.filter(assigned_to=user.current_class)
+    # elist = set(list(Event.objects.filter(assigned_to__class_name=user.current_class)) + list(Event.objects.filter(user__SID=user_id)))
+    print elist
+    return_list = []
+    for event in elist:
+        d = {}
+        d['name'] = event.title
+        d['due'] = str(event.due_date)
+        d['to'] = event.teacher.teacher_name
+        d['subject'] = event.subject.subject_title
+        d['description'] = event.description
+        return_list.append(d)
+    print return_list
+    return HttpResponse(json.dumps(return_list))
+
 def get_cal_data_dummy(request, user_id):
     cal_events = [
             {
