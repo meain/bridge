@@ -13,7 +13,6 @@ InitializeUser.prototype.get_data_from_server = function(callback){
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/events/'+fuid, function(upcoming_events){
         self.events = JSON.parse(upcoming_events)
-        console.log(upcoming_events)
         callback()
     })
 }
@@ -65,7 +64,6 @@ InitializeUser.prototype.populate_upcoming = function(){
             el_subject = $($(el_main[3]).children()[1]).text(event_data['subject'])
             el_submission = $($(el_main[4]).children()[1]).text(event_data['to'])
             el_desc = $($(el_main[5]).children()[3]).text(event_data['description'])
-            // console.log(el_date, el_subject, el_submission, el_desc)
             $($('#event-popup').parent()).css('display', 'flex');
         });
     }
@@ -134,9 +132,6 @@ Home.prototype.get_data_from_server = function(callback){
     $.post(server_address+'/track_data/', { 'data': JSON.stringify(pass_data) }, function(track_data){
         $.get(server_address+'/subject_data/'+fuid, function(subject_data){
             $.get(server_address+'/timetable/'+fuid, function(timetable){
-                console.log(track_data)
-                console.log(timetable)
-                console.log(subject_data)
                 self.timetable = timetable;
                 self.subject_data = JSON.parse(subject_data);
                 self.track_data = JSON.parse(track_data);
@@ -150,13 +145,9 @@ Home.prototype.init = function(){
     this.get_data_from_server(function(){
         var day = new Date().getDay();
         var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-        // console.log(self.subject_data, self.timetable, self.track_data)
-        console.log(self.track_data)
         if(self.timetable[dow] != undefined){
             self.create_base_template();
             self.populate_timetable_heder();
-            // console.log('::subject_data  ', self.subject_data, self.timetable, dow)
-            // console.log((self.timetable[dow]).split(',')[0])
             self.populate_subject_data(self.subject_data[(self.timetable[dow]).split(',')[0]], self.track_data[0],0);
             self.handlers();
         }
@@ -223,7 +214,6 @@ Home.prototype.populate_subject_data = function(subject_data, period_data, perio
 }
 Home.prototype.post_track_data = function(){
     var self = this
-    // console.log(this.track_data)
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
     cur_date = String(day)+'-'+ String(new Date().getMonth()+1) + '-' + String(new Date().getFullYear())
@@ -237,7 +227,6 @@ Home.prototype.handlers = function(){
     this.notes_editor.codemirror.on("change", function(){
         note = self.notes_editor.value();
         period_number = $('#subject-data').attr('data');
-        // console.log('was supposed to save after this for period:' + period_number)
         $.each(self.track_data, function(i, v) {    // probable to cause a bug
             if (v.period == period_number) {
                 self.track_data[i].notes = note;
@@ -252,7 +241,6 @@ Home.prototype.handlers = function(){
         var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
         period_number = $(el).attr('data');
         $('#subject-data').attr('data', period_number);
-        console.log(':subject_data  ', self.subject_data)
         self.populate_subject_data(self.subject_data[(self.timetable[dow]).split(',')[period_number]], self.track_data[period_number], period_number);
         self.post_track_data()
     });
@@ -282,7 +270,6 @@ NotesView.prototype.init = function(){
 NotesView.prototype.populate_notes = function(){
     htmlstr = ''
     for(note in this.notes_data){
-        // console.log(this.notes_data[note]['note'].length)
         s = ''
         if(this.notes_data[note]['note'].length < 1){
         s = 'display:none'}
@@ -335,7 +322,6 @@ AttendenceView.prototype.get_data_from_server = function(callback){
             self.subject_attendence = subject_attendence['data']
         }
         else{
-            // console.log('string')
             self.subject_attendence = JSON.parse(subject_attendence['data'])
         }
         callback()
@@ -350,7 +336,6 @@ AttendenceView.prototype.init = function(){
     })
 }
 AttendenceView.prototype.populate_attendence = function(){
-    // console.log(this.subject_attendence)
     var percentColors = [
         { pct: 0.0, color: { r: 0xff, g: 0x00, b: 0 } },
         { pct: 0.5, color: { r: 0xff, g: 0xff, b: 0 } },
@@ -466,7 +451,6 @@ CalenderView.prototype.init = function(){
     })
 }
 CalenderView.prototype.populate_calender = function(){
-    // console.log(this.cal_events)
     $('#calender-view-data').fullCalendar({
         header: {
             // not really happending, probably need paid version
@@ -559,7 +543,6 @@ function onSignIn(googleUser) {
     $.post(server_address+'/signin/', { data:JSON.stringify(user_data) } ,  function(data){
         // populate_user_profile(user_data);
         data = JSON.parse(data)
-        // console.log(data)
         if(data['exists'] == true){
             initialize_user = new InitializeUser(user_data);
             initialize_user.init();
@@ -579,7 +562,6 @@ function onSignIn(googleUser) {
             for( var i=0,len=class_option_buttons.length; i<len; i++ ){
                 $(class_option_buttons[i]).click(function(){
                     user_class = $(this).data('class').replace('%',' ')
-                    // console.log(user_class)
                     $.post(server_address+'/create_user/', { 'user_data':JSON.stringify(user_data), 'class':user_class } ,  function(data){
                         console.log('New user created')
                         $($('#choose-class-popup').parent()).css('display', 'none');

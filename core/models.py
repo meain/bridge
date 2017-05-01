@@ -17,7 +17,6 @@ sem_choices = (
 
 class Student(models.Model):
     SID = models.CharField(max_length=120, primary_key=True)
-    # register_no = models.CharField(max_length=20, null=True)
     stud_name = models.CharField(max_length=40, verbose_name="Name")
     current_class = models.ForeignKey('Class', on_delete=models.CASCADE, verbose_name="Class")
     attendence = models.TextField(null=True)
@@ -108,7 +107,6 @@ class Event(models.Model):
     teacher = models.ForeignKey('Teacher', null=True)
     subject = models.ForeignKey('Subject', null=True)
     assigned_to = models.ForeignKey('Class', verbose_name='Assigned to class', null=True, blank=True)
-    # user = models.ForeignKey('Student', verbose_name='Assigned to student', null=True)
 
     def __str__(self):
         return self.title
