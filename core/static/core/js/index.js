@@ -13,6 +13,8 @@ InitializeUser.prototype.get_data_from_server = function(callback){
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/events/'+fuid, function(upcoming_events){
         self.events = upcoming_events['data'];
+        console.log('...')
+        console.log(upcoming_events)
         callback()
     })
 }
