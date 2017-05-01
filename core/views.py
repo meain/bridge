@@ -3,7 +3,7 @@ from datetime import datetime as date
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Class, Student, Event, Teacher, Department, Note, Subject, TaughtBy
-
+from datetime import datetime
 
 period_time = {0: '9:00',
                1: '10:00',
@@ -147,7 +147,7 @@ def get_events_dummy(request, user_id):
 
 def get_events(request, user_id):
     user = Student.objects.get(SID=user_id)
-    elist = Event.objects.filter(assigned_to=user.current_class)
+    elist = Event.objects.filter(assigned_to=user.current_class, due_date__gte=datetime.now())
     # elist = set(list(Event.objects.filter(assigned_to__class_name=user.current_class)) + list(Event.objects.filter(user__SID=user_id)))
     print elist
     return_list = []
