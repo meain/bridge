@@ -95,5 +95,4 @@ ENV/
 db.sqlite3
 tags
 *.aux
-*.pdf
 *.synctex.gz
