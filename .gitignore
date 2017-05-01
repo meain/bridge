@@ -94,3 +94,6 @@ ENV/
 .zedstate
 db.sqlite3
 tags
+*.aux
+*.pdf
+*.synctex.gz
