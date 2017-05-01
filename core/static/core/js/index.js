@@ -124,9 +124,10 @@ Home.prototype.get_data_from_server = function(callback){
 
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
+    cur_date = String(day)+'-'+ String(new Date().getMonth()+1) + '-' + String(new Date().getFullYear())
     var pass_data = {
         'id': fuid,
-        'date': new Date().getDate(),
+        'date': cur_date,
         'day': dow
     }
     $.post(server_address+'/track_data/', { 'data': JSON.stringify(pass_data) }, function(track_data){
