@@ -2,6 +2,13 @@
 
 \usepackage{titlesec}
 \usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \titleformat{\section}
 {\huge}
@@ -218,8 +225,8 @@ Abhai Kollara
 \end{minipage}
 
 \newpage
-\tableofcontents
-\newpage
+%% \tableofcontents
+%% \newpage
 
 \section{Abstract}
 \vspace{1em}
@@ -266,7 +273,7 @@ The platform with its ability to take down notes for the classes they are attend
 \newpage
 
 
-\newpage
+%% \newpage
 
 \section{System analysis}
 \hspace{1em}
@@ -313,8 +320,8 @@ the administrator of the system.
 \section{System study}
 \vspace{1em}
 
-\subsection{Software Requirements Specification}
-\vspace{1em}
+%\subsection{Software Requirements Specification}
+%\vspace{1em}
 %\subsection{System Objectives}
 %\vspace{1em}
 \subsection{Hardware and Software requirements}
@@ -344,8 +351,19 @@ the administrator of the system.
 
 \subsection{Data Flow Diagrams}
 \vspace{1em}
-\subsection{Database Design}
-\vspace{1em}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{DFD1.png}
+  \caption{DFD project}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{DFD2.png}
+  \caption{DFD}
+\end{figure}
+
+%\subsection{Database Design}
+%\vspace{1em}
 \subsection{Modular Design}
 
 \subsubsection{Login}
@@ -379,8 +397,8 @@ The Calendar module is used to view the overview of all the events. It shows you
 It has a normal calender like intercase with events listed under the specific dates which makes it much more intuitive and easy.
 
 \vspace{1em}
-\subsection{Input/Output Design}
-\vspace{1em}
+%\subsection{Input/Output Design}
+%\vspace{1em}
 
 
 \newpage
@@ -390,8 +408,512 @@ It has a normal calender like intercase with events listed under the specific da
 
 \subsection{Sample code}
 \vspace{1em}
+
+\lstset{frame=tb,
+  language=Python,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4
+}
+
+\subsubsection{Sample view handlers}
+A view handler is a methood which is a specification in django which handles a http request and makes the response.
+\vspace{1em}
+
+\begin{lstlisting}
+def signin(request):
+    if request.method == "POST":
+        data = json.loads(request.POST.get('data'))
+        sid = data['id']
+        if Student.objects.filter(SID=sid).exists():
+            return HttpResponse(json.dumps({'exists': True}))
+        else:
+            classes = [name.class_name for name in Class.objects.all()]
+            data = json.dumps({'exists': False, 'options': classes})
+            return HttpResponse(json.dumps(data), content_type="application/json")
+
+def get_attendence(request, user_id):
+    user = Student.objects.get(SID=user_id)
+    attendence_data = user.get_attendence_data()
+
+    print attendence_data
+    if len(attendence_data) is 0:
+        # quick patch ( issue only if new user already created)
+        daytable = user.current_class.get_tt()
+        subs = {}
+        for key in daytable:
+            daysubs = daytable[key].split(',')
+            for item in daysubs:
+                # if item not in subs:  ( its a dict, lol )
+                subs[item] = {'total':0, 'attended':0 }
+        attendence_data = subs
+
+    return_data = {}
+    return_data['data'] = attendence_data
+    return HttpResponse(json.dumps(return_data), content_type="application/json")
+
+def update_attendence(request):
+    if request.method == "POST":
+        data =  json.loads(request.POST.get('data'))
+        user_id = data['id']
+        attendence = json.dumps(data['attendance'])
+
+        user = Student.objects.get(SID=user_id)
+        user.attendence = attendence
+        user.save()
+    return_data = { 'status':'OK' }
+    return HttpResponse(json.dumps(return_data), content_type="application/json")
+
+\end{lstlisting}
+
+\subsubsection{Url defenitions}
+These define the endpoints fot the backend api
+\vspace{1em}
+\begin{lstlisting}
+from django.conf.urls import url
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name="index"),      # initial request for page
+    url(r'^signin/$', views.signin, name='signin'),
+    url(r'^create_user/(?P<user_id>[0-9]+)/(?P<user_class>([a-z])+)$', views.create_new_user, name='new_user'),
+    url(r'^timetable/(?P<user_id>[0-9]+)$', views.get_timetable, name='timetable'),
+    url(r'^notes/(?P<user_id>[0-9]+)$', views.get_notes, name='notes'),
+    url(r'^subject_data/(?P<user_id>[0-9]+)$', views.get_sub_data, name='subject_data'),
+    url(r'^events/(?P<user_id>[0-9]+)$', views.get_events_dummy, name='events'),
+    url(r'^track_data/$', views.get_track_data, name='events'),
+    url(r'^calendar/(?P<user_id>[0-9]+)$', views.get_cal_data_dummy, name='events'),
+    url(r'^subject_attendence/(?P<user_id>[0-9]+)$', views.get_attendence, name='get_attendence'),
+    url(r'^create_user/$', views.create_new_user, name='new_user'),
+    url(r'^update_attendence/$', views.update_attendence, name='update_attendence'),
+    url(r'^set_track_data/$', views.set_track_data, name='set_track_data'),
+]
+\end{lstlisting}
+
+
+\subsubsection{Model defenitions}
+These contains the database models for the project
+\vspace{1em}
+
+\begin{lstlisting}
+ class Subject(models.Model):
+    subject_code = models.CharField(verbose_name="Subject Code", max_length=6, primary_key=True)
+    subject_title = models.CharField(max_length=60, verbose_name="Subject Title")
+    subject_short_name = models.CharField(max_length=3, verbose_name="Abbriviation")
+    subject_dep = models.ForeignKey('Department', on_delete=models.CASCADE, verbose_name="Branch")
+    subject_sem = models.SmallIntegerField(choices=sem_choices, null=True)
+
+    def __str__(self):
+        return self.subject_title
+
+
+class Teacher(models.Model):
+    teacher_name = models.CharField(max_length=40)
+    dept = models.ForeignKey('Department', on_delete=models.CASCADE)
+    subjects = models.ManyToManyField('Subject', verbose_name="Subjects")
+
+    def __str__(self):
+        return self.teacher_name
+
+
+class Class(models.Model):
+    current_sem = models.PositiveSmallIntegerField(choices=sem_choices)
+    branch = models.ForeignKey('Department', on_delete=models.CASCADE)
+    batch = models.CharField(max_length=1)
+    class_name = models.CharField(max_length=10, blank=True)
+    timeTable = models.TextField()
+    subjects = models.ManyToManyField('Subject', verbose_name='Subjects', through='TaughtBy')
+
+    def save(self, *args, **kwargs):
+        self.class_name = str(self.branch) + " " + str(self.current_sem) + str(self.batch)
+        super(Class, self).save(*args, **kwargs)
+
+    def get_subs(self):
+        subs = [subject.subject_short_name for subject in self.subjects.all()]
+        return subs
+
+    def get_tt(self):
+        tt_string = str(self.timeTable)
+        tt_string = tt_string.splitlines()
+        days = ['monday', 'tuesday', 'wednesday',
+                'thursday', 'friday']
+        tt_dict = {}
+        for i in range(5):
+            tt_dict[days[i]] = tt_string[i]
+
+        return tt_dict
+
+    def __str__(self):
+        return str(self.class_name)
+
+    class Meta:
+        verbose_name_plural = "Classes"
+\end{lstlisting}
+
+\lstset{frame=tb,
+  language=HTML,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4
+}
+
+\subsubsection{Base html template}
+A basic html template for a page
+\vspace{1em}
+\begin{lstlisting}
+<div class='fullpage'>
+    <div class='leftpane pane'>
+        <div class='card small heading' id='lheading'>
+            Navigation
+        </div>
+        <div class='navel' id='home'>
+            <i class="fa fa-home" aria-hidden="true"></i><br>
+            Home
+        </div>
+        <div class='navel' id='notes'>
+            <i class="fa fa-sticky-note" aria-hidden="true"></i><br>
+            Notes
+        </div>
+        <div class='navel' id='attendece'>
+            <i class="fa fa-child" aria-hidden="true"></i><br>
+            Attendence
+        </div>
+        <div class='navel' id='calender'>
+            <i class="fa fa-calendar" aria-hidden="true"></i><br>
+            Calender
+        </div>
+        <div class='navel' id='about'>
+            <i class="fa fa-info-circle" aria-hidden="true"></i><br>
+            About
+        </div>
+    </div>
+    <div class='midpane pane'>
+        <div id='mheading'>
+            <i class="fa fa-bars" aria-hidden="true" id="hamburger-menu-button"></i>
+            <img id="profile-image" src="" alt="profile">
+            <div id='profile-name'></div>
+            <i class="fa fa-asterisk" aria-hidden="true" id="upcoming-menu-button"></i>
+        </div>
+        <div id='mcontent'>
+        </div>
+    </div>
+    <div class='rightpane pane'>
+        <div class='card small heading' id='rheading'>
+            Upcoming
+        </div>
+        <div class='content' id='rcontent'>
+        </div>
+    </div>
+</div>
+\end{lstlisting}
+
+
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\lstset{frame=tb,
+  language=Javascript,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4
+}
+
+\subsubsection{Sample module in js}
+Our js file in a modular design and the below show is the code to initialize a user account.
+\vspace{1em}
+
+\begin{lstlisting}
+InitializeUser = function(user){
+    this.class_name = 'initialize_user';
+    this.user = user;
+}
+InitializeUser.prototype.get_data_from_server = function(callback){
+    var self = this;
+    if (callback === undefined) { callback=function(){} }
+    $.get(server_address+'/events/'+fuid, function(upcoming_events){
+        self.events = upcoming_events['data'];
+        callback()
+    })
+}
+InitializeUser.prototype.init = function(events){
+    var self = this
+    this.get_data_from_server(function(){
+        self.populate_user_profile();
+        self.populate_upcoming();
+        self.click_handlers();
+    })
+}
+InitializeUser.prototype.populate_user_profile = function(){
+    $('#profile-name').html(this.user['name']);
+    $('#profile-image').attr('src', this.user['photo']);
+    $('#popup-profile-name').html(this.user['name']);
+    $('#popup-profile-image').attr('src', this.user['photo']);
+    $('#popup-profile-email').html(this.user['email']);
+}
+InitializeUser.prototype.populate_upcoming = function(){
+    var self = this;
+    htmlstr = '';
+    for( var i=0, len=this.events.length; i<len; i++ ){
+        htmlstr +=
+            "<div class='card small event' data-event="+i+">"+
+                "<div class='card tiny date-card'>"+
+                    this.events[i]['due']+
+                "</div>"+
+                "<div class='card tiny subject-card'>"+
+                    "<span class='span violet name'>title</span><span class='span white span-content'>"+ this.events[i]['name']+ "</span>"+
+                "</div>"+
+                "<div class='card tiny subject-card'>"+
+                    "<span class='span green name'>subject</span><span class='span white span-content'>"+ this.events[i]['subject']+ "</span>"+
+                "</div>"+
+                "<div class='card tiny subject-card'>"+
+                    "<span class='span blue name'>submission</span><span class='span white span-content'>"+ this.events[i]['to']+ "</span>"+
+                "</div>"+
+            "</div>"
+    }
+    $('#rcontent').html(htmlstr);
+
+    // Now set up the click handlers
+    event_cards = $('.event');
+    for(var i = 0, len = event_cards.length; i<len; i++){
+        $(event_cards[i]).click(function(){
+            event_data = self.events[$($(this)[0]).data('event')]
+            el_main = $('#event-popup').children()
+            el_date = $($(el_main[1]).children()[1]).text(event_data['due'])
+            el_title = $($(el_main[2]).children()[1]).text(event_data['name'])
+            el_subject = $($(el_main[3]).children()[1]).text(event_data['subject'])
+            el_submission = $($(el_main[4]).children()[1]).text(event_data['to'])
+            el_desc = $($(el_main[5]).children()[3]).text(event_data['description'])
+            // console.log(el_date, el_subject, el_submission, el_desc)
+            $($('#event-popup').parent()).css('display', 'flex');
+        });
+    }
+    $($('#event-popup').parent()).click(function(){
+        $($('#event-popup').parent()).css('display', 'none');
+    });
+}
+InitializeUser.prototype.click_handlers = function(){
+    // User logout
+    $('#popup-profile-signout-button').click(function(){
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+        $('#login-popup').css('display', 'flex');
+        $($('#signout-popup').parent()).css('display', 'none');
+    });
+    // Handle sinout popup remove click
+    $($('#signout-popup').parent()).click(function(){
+        $($('#signout-popup').parent()).css('display', 'none');
+    });
+    $('#signout-popup').click(function(e){
+        e.stopPropagation();
+    });
+    // Open up the signout popup
+    $('#profile-image').click(function(){
+        $($('#signout-popup').parent()).css('display', 'flex');
+    });
+
+
+    //other handles (menu items)
+    $('#home').click(function(){
+        new Home().init()
+    });
+    $('#notes').click(function(){
+        new NotesView().init()
+    });
+    $('#about').click(function(){
+        new AboutView().init()
+    });
+    $('#attendece').click(function(){
+        new AttendenceView().init()
+    });
+    $('#calender').click(function(){
+        new CalenderView().init()
+    });
+}
+\end{lstlisting}
+
+\subsubsection{Sample CSS file}
+In here we define the styling for the elements
+\vspace{1em}
+
+\begin{lstlisting}
+.fullpage{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.pane{
+    padding: 10px;
+    margin: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    float:left;
+    border-radius: 1px;
+    box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.75);
+    background-color: #fff;
+}
+.leftpane{
+    width: 20vw;
+    height: calc(100% - 80px);
+    transition-property: width, visibility;
+    transition-duration: 0.5s;
+    z-index: 100;
+    overflow: auto;
+}
+.midpane{
+    width: calc(60vw - 120px);
+    height: calc(100% - 80px);
+    transition-property: width;
+    transition-duration: 0.5s;
+    overflow: hidden;
+}
+.rightpane{
+    width: 20vw;
+    height: calc(100% - 80px);
+    transition-property: width;
+    transition-duration: 0.5s;
+    z-index: 100;
+    overflow: auto;
+}
+@media screen and (max-width: 1050px){
+    /* Remove navigation */
+    .leftpane{
+        display: none;
+    }
+    .rightpane{
+        width: 230px;
+    }
+    .midpane{
+        /* width: calc(100vw - 40px); */
+        width: calc(100vw - 320px);
+    }
+}
+\end{lstlisting}
+
+
+\newpage
+
 \subsection{Screenshots}
 \vspace{1em}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{landingpage.png}
+  \caption{Landing page}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{notesmd.png}
+  \caption{Write notes in markdown}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{notescompiled.png}
+  \caption{Compiled the written notes to actual contet in place}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{noteswithimages.png}
+  \caption{You can even have notes with images and links}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{eventinfo.png}
+  \caption{Detailed information about upcoming events}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{attendance.png}
+  \caption{View and update attendace}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{calendar.png}
+  \caption{Calendar entries for events}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{aboutpage.png}
+  \caption{About page}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{signoutpopup.png}
+  \caption{Popup to sign out of the system}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{loginpopup.png}
+  \caption{Interface for loggin into the app}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{newuserpopup.png}
+  \caption{Interface if the user is a new one so that he can choose a class}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{mobilelanding.png}
+  \caption{Landing page on mobile}
+\end{figure}
+
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{mobilenav.png}
+  \caption{Navigation pane on mobile}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{mobileupcoming.png}
+  \caption{Upcoming event display on mobile}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{mobilecalendar.png}
+  \caption{Calendar display on mobile}
+\end{figure}
 
 
 \newpage
@@ -424,12 +946,12 @@ The practice of component interface testing can be used to check the handling of
 
 \newpage
 
-\section{Future Scope}
-\vspace{1em}
-The  system in the future expects to be more inevery way. Automate more components and also create new components for both teachers and students alike.
+%% \section{Future Scope}
+%% \vspace{1em}
+%% The  system in the future expects to be more inevery way. Automate more components and also create new components for both teachers and students alike.
 
 
-\newpage
+%% \newpage
 
 \section{Conclusion}
 \vspace{1em}
@@ -440,6 +962,16 @@ A conscious effort has been made while creating and developing the software pack
 
 \section{Reference}
 \vspace{1em}
+\begin{itemize}
+\item Learn python the hard way (https://learnpythonthehardway.org/)
+\item Django official docs (https://docs.djangoproject.com/en/1.11/)
+\item Django Girls Tutorial (https://tutorial.djangogirls.org/en/index.html)
+\item W3 Schools (https://www.w3schools.com/)
+\item Tutorials point (https://www.tutorialspoint.com/)
+\item Stack Overflow (http://stackoverflow.com/)
+\item Udacity (https://in.udacity.com/)
+\item Coursera (https://www.coursera.org/)
+\end{itemize}
 
 
 \newpage
