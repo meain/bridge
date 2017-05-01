@@ -282,8 +282,11 @@ NotesView.prototype.populate_notes = function(){
     htmlstr = ''
     for(note in this.notes_data){
         // console.log(this.notes_data[note]['note'].length)
-        if(this.notes_data[note]['note'].length > 0){
+        s = ''
+        if(this.notes_data[note]['note'].length < 1){
+        s = 'display:none'}
             htmlstr +=  "<br><br>"+
+                        "<div style='"+s+"'>"+
                         "<span class='span red name'>date</span><span class='span white span-content'>"+
                             this.notes_data[note]['date']+
                         "</span>&nbsp&nbsp&nbsp"+
@@ -293,8 +296,9 @@ NotesView.prototype.populate_notes = function(){
                         "<br><br>"+
                         '<textarea class="notes-content" id="notes-content-' + note + '">'+
                             this.notes_data[note]['note']+
-                        '</textarea>'
-        }
+                        '</textarea>'+
+                        '</div>'
+        // }
     }
     $('#notes-view-data').html(htmlstr);
     editor_items_notes = $('.notes-content')
