@@ -108,7 +108,7 @@ class Event(models.Model):
     teacher = models.ForeignKey('Teacher', null=True)
     subject = models.ForeignKey('Subject', null=True)
     assigned_to = models.ForeignKey('Class', verbose_name='Assigned to class', null=True, blank=True)
-    user = models.ForeignKey('Student', verbose_name='Assigned to student', null=True)
+    # user = models.ForeignKey('Student', verbose_name='Assigned to student', null=True)
 
     def __str__(self):
         return self.title
