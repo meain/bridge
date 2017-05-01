@@ -124,9 +124,6 @@ Home.prototype.get_data_from_server = function(callback){
 
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-    //                                                              REMOVE THIS LATER                                                            //
-    dow = 'monday'
-    //                                                              REMOVE THIS LATER                                                            //
     var pass_data = {
         'id': fuid,
         'date': new Date().getDate(),
@@ -151,9 +148,6 @@ Home.prototype.init = function(){
     this.get_data_from_server(function(){
         var day = new Date().getDay();
         var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-        //                                                              REMOVE THIS LATER                                                            //
-        dow = 'monday'
-        //                                                              REMOVE THIS LATER                                                            //
         // console.log(self.subject_data, self.timetable, self.track_data)
         console.log(self.track_data)
         if(self.timetable[dow] != undefined){
@@ -205,9 +199,6 @@ Home.prototype.populate_timetable_heder = function(timetable){
     htmlstr = ''
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-    //                                                              REMOVE THIS LATER                                                            //
-    dow = 'monday'
-    //                                                              REMOVE THIS LATER                                                            //
     for( var i=0; i<=count; i++ ){
         htmlstr+=
             "<div class='card tiny timetable-subject' data="+i+">"+
@@ -233,10 +224,8 @@ Home.prototype.post_track_data = function(){
     // console.log(this.track_data)
     var day = new Date().getDay();
     var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-    //                                                              REMOVE THIS LATER                                                            //
-    dow = 'monday'
-    //                                                              REMOVE THIS LATER                                                            //
-    $.post(server_address+'/set_track_data/',{ 'track_data': JSON.stringify(self.track_data), 'id':fuid, 'date': day, 'day': dow }, function(track_data){
+    cur_date = String(day)+'-'+ String(new Date().getMonth()+1) + '-' + String(new Date().getFullYear())
+    $.post(server_address+'/set_track_data/',{ 'track_data': JSON.stringify(self.track_data), 'id':fuid, 'date': cur_date, 'day': dow }, function(track_data){
         console.log('Updated track_data to server')
     })
 }
@@ -259,9 +248,6 @@ Home.prototype.handlers = function(){
         var el = this;
         var day = new Date().getDay();
         var dow = ['sunday', 'monday', 'tuesday', 'wednessday', 'thursday', 'friday', 'saturday'][day]
-        //                                                              REMOVE THIS LATER                                                            //
-        dow = 'monday'
-        //                                                              REMOVE THIS LATER                                                            //
         period_number = $(el).attr('data');
         $('#subject-data').attr('data', period_number);
         console.log(':subject_data  ', self.subject_data)
