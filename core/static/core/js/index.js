@@ -567,14 +567,14 @@ function onSignIn(googleUser) {
                         $($('#choose-class-popup').parent()).css('display', 'none');
                         $('#login-popup').css('display', 'none');
                         fuid = user_data['id']
+                        initialize_user = new InitializeUser(user_data);
+                        initialize_user.init();
+                        home = new Home();
+                        home.init();
                     })
                     })
             }
             $('#popup-welcome-message').text('Hello '+user_data['name']+' , welcome to Bridge!')
-            initialize_user = new InitializeUser(user_data);
-            initialize_user.init();
-            home = new Home();
-            home.init();
             $($('#choose-class-popup').parent()).css('display', 'flex');
         }
     })
