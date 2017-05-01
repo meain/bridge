@@ -266,7 +266,7 @@ NotesView.prototype.get_data_from_server = function(callback){
     var self = this;
     if (callback === undefined) { callback=function(){} }
     $.get(server_address+'/notes/'+fuid, function(notes_data){
-        self.notes_data = notes_data['data'];
+        self.notes_data = JSON.parse(notes_data);
         callback()
     })
 }
@@ -280,17 +280,20 @@ NotesView.prototype.init = function(){
 NotesView.prototype.populate_notes = function(){
     htmlstr = ''
     for(note in this.notes_data){
-        htmlstr +=  "<br><br>"+
-                    "<span class='span red name'>date</span><span class='span white span-content'>"+
-                        this.notes_data[note]['date']+
-                    "</span>&nbsp&nbsp&nbsp"+
-                    "<span class='span green name'>subject</span><span class='span white span-content'>"+
-                        this.notes_data[note]['subject']+
-                    "</span>"+
-                    "<br><br>"+
-                    '<textarea class="notes-content" id="notes-content-' + note + '">'+
-                        this.notes_data[note]['note']+
-                    '</textarea>'
+        // console.log(this.notes_data[note]['note'].length)
+        if(this.notes_data[note]['note'].length > 0){
+            htmlstr +=  "<br><br>"+
+                        "<span class='span red name'>date</span><span class='span white span-content'>"+
+                            this.notes_data[note]['date']+
+                        "</span>&nbsp&nbsp&nbsp"+
+                        "<span class='span green name'>subject</span><span class='span white span-content'>"+
+                            this.notes_data[note]['subject']+
+                        "</span>"+
+                        "<br><br>"+
+                        '<textarea class="notes-content" id="notes-content-' + note + '">'+
+                            this.notes_data[note]['note']+
+                        '</textarea>'
+        }
     }
     $('#notes-view-data').html(htmlstr);
     editor_items_notes = $('.notes-content')
