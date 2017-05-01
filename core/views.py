@@ -157,7 +157,7 @@ def get_events(request, user_id):
         d['subject'] = event.subject
         d['description'] = event.description
         return_list.append(d)
-    return HttpResponse(return_list)
+    return HttpResponse(json.dumps(return_list))
 
 
 def get_track_data(request):
@@ -213,10 +213,8 @@ def set_track_data(request):
         subject = Subject.objects.get(subject_short_name=day_tt[period])
         note = Note.objects.filter(user=user, period=period, date=date)
         if note.exists():
-            print "Mehhh"
             note.update(data=entry['notes'])
         else:
-            print "Booo"
             new_note = Note(user=user, period=period, date=date, data=entry['notes'], subject=subject)
             new_note.save()
     return HttpResponse(json.dumps({ 'status': 'OK' }))
