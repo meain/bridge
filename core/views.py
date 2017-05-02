@@ -37,8 +37,8 @@ def get_notes(request, user_id):
     return HttpResponse(json.dumps(notes_list))
 
 def get_sub_data(request, user_id):
-    # day = (date.today().strftime("%A")).lower()
-    day = 'monday'
+    day = (date.today().strftime("%A")).lower()
+    # day = 'monday'
     return_dict = {}
     if not (day == 'sunday' or day == 'saturday'):
         user = Student.objects.get(SID=user_id)
