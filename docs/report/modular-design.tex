@@ -1,0 +1,31 @@
+\section{Modular Design}
+
+\subsection{Login}
+This module handles the user authentication and login.
+The component is dependent on Google login for its authentication, as we leverage Google signin module to make the tradition of the user into our app much more easier and faster.
+
+Initially when the user logs into the application is when we create an account for them and register them. When the user logs into the application, we get the user to login to their Google account and we can use the Google API top get the user details like user-id, name, email, profile-image etc. This makes it easer for the user as do not have to manually add in their name or profile image. Only thing they will have to manually set is which class they are studying in.
+
+Now from the next time the user logs in, we will directly log them into their account ready to go.
+
+\subsection{Landing Page}
+The landing page is the most important and most viewed part of the whole application. It encompasses details a user would probably need at that time like upcoming events, which data about the class that is currently going on. It also lets them take down notes which they can later view using the notes module.
+
+For each subject of the day we provide the name of the teacher, time of the class, etc which helps the student to plan for their class.
+The place provided to jot down notes for the subject also helps them to take down notes during the classes which will be really useful for them for later reference.
+
+\subsection{Notes}
+Notes module is aimed at providing an interface for the student( user ) to view all the notes they have taken in the class and go through them.
+It is a very useful and powerful utility at the end of a semester as it will let them view all the notes they have in one place and go through them quickly and efficiently.
+
+You can also use the notes view to filter your notes based on the date or the subject which is a really simple but powerful way to summarize a whole semester.
+
+\subsection{Attendance}
+One another very important module is the Attendance module which lets the student track their attendance for each subject they have. The student on attending or net attending a specific subject class can update their attendance using the attendance module. All the user data is saved in real-time with the backed and they will be able to check their any time.
+
+The per subject nature of the attendance module also helps them to know which subjects they have missed the most and concentrate on them individually.
+
+\subsection{Calendar}
+The Calendar module is used to view the overview of all the events. It shows you all the events and submissions you have for the future. While the upcoming events module only shows you the close and upcoming events, in the calendar module we can see all the upcoming events in the future.
+
+It has a normal calender like intercase with events listed under the specific dates which makes it much more intuitive and easy.

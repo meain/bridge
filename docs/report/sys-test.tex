@@ -1,0 +1,24 @@
+\chapter{System Testing}
+
+The aim of the system testing process was to determine all defects in our project. The program was subjected to a set of test inputs and various observations were made and based on these observations it will be decided whether the program behaves as expected or not.
+
+Our Project went through four levels of testing
+\begin{itemize}
+\item Unit testing
+\item Integration testing
+\item System testing
+\item Component Interface Testing
+\end{itemize}
+
+\section{Unit testing}
+Unit testing is undertaken when a module has been created and successfully reviewed. In order to test a single module we need to provide a complete en- vironment i.e. besides the module we would require. The procedures which belong to other modules that the module under test calls non local data structures that module access a procedure to call the functions of the mod- ule under test with appropriate parameters. Unit testing was done on each and every module that is described under module wise description.
+
+\section{Integration testing}
+In this type of testing we test various integration of the project module by providing the input. The primary objective is to test the module interfaces in order to ensure that no errors are occurring when one module invokes the other module.
+
+\section{System testing}
+System testing, or end-to-end testing, tests a completely integrated system to verify that it meets its requirements. For example, a system test might involve testing a logon interface, then creating and editing an entry, plus sending or printing results, followed by summary processing or deletion (or archiving) of entries, then logoff.In addition, the software testing should ensure that the program, as well as working as expected, does not also destroy or partially corrupt its operating environment or cause other processes within that environment to become inoperative (this includes not corrupting shared memory, not consuming or locking up excessive resources and leaving any parallel processes unharmed by its presence).
+
+\section{Component interface testing}
+The practice of component interface testing can be used to check the handling of data passed between various units, or subsystem components, beyond full integration testing between those units. The data being passed can be con- sidered as ”message packets” and the range or data types can be checked, for data generated from one unit, and tested for validity before being passed into another unit. One option for interface testing is to keep a separate log file of data items being passed, often with a timestamp logged to allow analysis of thousands of cases of data passed between units for days or weeks. Tests can include checking the handling of some extreme data values while other interface variables are passed as normal values. Unusual data values in an interface can help explain unexpected performance in the next unit. Com- ponent interface testing is a variation of black box testing, with the focus on the data values beyond just the related actions of a subsystem component.
+
