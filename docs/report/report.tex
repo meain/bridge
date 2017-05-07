@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{report}
+\documentclass[12pt,b5paper]{report}
 \usepackage[margin=1in]{geometry}
 \usepackage[pdftex]{graphicx} %for embedding images
 \usepackage{url} %for proper url entries
@@ -9,10 +9,29 @@
 \usepackage[utf8]{inputenc}
 \usepackage{float}
 
+\usepackage{pst-node}% http://ctan.org/pkg/pstricks
+\usepackage{xcolor}% http://ctan.org/pkg/xcolor
+\usepackage{eso-pic}% http://ctan.org/pkg/eso-pic
+\usepackage{lipsum}% http://ctan.org/pkg/lipsum
+
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newcommand\HRule{\rule{\textwidth}{1pt}}
+
+\usepackage{titlesec}
+
+% remove this to get back to the old chapter style
+\titleformat{\chapter}[block]
+  {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge\vspace{1em}}
+\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+
 %\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
 
 \begin{document}
 \renewcommand\bibname{References} %Renames "Bibliography" to "References" on ref page
+
+% remove page numbering
+\pagenumbering{gobble}
 
 %include other pages
 \input{./cover.tex}

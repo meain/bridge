@@ -1,1 +1,126 @@
 \section{Software Requirement Specification}
+
+\subsection{Introduction}
+
+\subsubsection{Purpose}
+The purpose of this document is to present a detailed description of the Web Publishing System. It will explain the purpose and features of the system, the interfaces of the system, what the system will do, the constraints under which it must operate and how the system will react to external stimuli.
+
+\subsubsection{Intended Audience and Reading Suggestions}
+This document is intended for the understanding of complete functionalities that will be provided by the software. Therefore it may be used by anyone who wishes to further develop this software or anyone who intends to understand the full capabilities of the system.
+
+\subsubsection{Scope of the Project}
+The software system will be a Student Self Monitoring System intended for the use by students of a college. It is designed so as to help students keep track of their academic activities in college. We include attendance tracking, tasks tracking, notes feature etc for increasing the productivity of students. The attendence tracking mechanism is an extremely useful tool. The notes features allow students to save notes for each period of a day. The feature also supports markdown text which allows the student to go beyond plaintext for their notes.
+
+It is also intended to to minimize the difficulties of communication between students and college authorites which would otherwise have to be performed manually by phone calls or class representatives. More specifically the system allows teachers to notify the students about upcoming tasks/events increasing the efficiency of communication.
+
+The system also contains a relational database containing Students, Teacher, Departments, Classes, Subjects, Notes, Events.
+
+\subsubsection{References}
+IEEE. IEEE Std 830-1998 IEEE Recommended Practice for Software Requirements Specifications. IEEE Computer Society, 1998.
+
+Django Official Documentation
+
+\subsubsection{Overview of Document}
+The next chapter, the Overall Description section, of this document gives an overview of the functionality of the product. It describes the informal requirements and is used to establish a context for the technical requirements specification in the next chapter.
+
+The third chapter, Requirements Specification section, of this document is written primarily for the developers and describes in technical terms the details of the functionality of the product. 
+
+Both sections of the document describe the same software product in its entirety, but are intended for different audiences and thus use different language.
+
+\subsection{Overall Description}
+
+\subsubsection{Product Perspective}
+The software is designed to be a stand-alone web application that is designed to provide a different approach to current learning management systems like Moodle.
+
+\subsubsection{Product Functions}
+The primary functions of the software are:
+\begin{itemize}
+\item Let the students store notes of every period
+\item Let the students store and track their attendence of every period
+\item Let teachers/admins create and assign events to classes
+\item Let students view upcoming classes
+\end{itemize}
+
+\subsubsection{User Classes}
+The Student Self Monitoring System has two main actors, the user (Student) and the admin (Teachers/other authorities). The role of the admin is to provide the system with sufficient data about each classes, subjects, departments and teachers involved. The admin has near complete access to the database. It is also the role of the admin(teacher) to add upcoming events/tasks to the software system.
+
+\subsubsection{Operating Environment}
+The software is designed to be platform independent and to work on any major web browser that supports Javascript. The software is also designed resposively so as to run on mobile web browsers.
+
+\subsubsection{Design and Implementation Constraints}
+The major design constraint was to implement the software to run on mobile platforms. The UI should be designed responsively to accomodate mobile view
+
+\subsubsection{Assumptions and Dependencies}
+The software requires a server that supports running Django 1.11 on Python 2.7
+
+\subsection{External Interface Requirements}
+
+\subsubsection{User Interface}
+The UI must be responsive and must view correctly on mobile views. The UI is intended to be platform independent ie it should be the same irrespective of the OS and web browser. A material design is applied thorought the application
+
+\subsubsection{Hardware Interfaces}
+From client side, devices with at least 512 MB of RAM is recommended along with a low latency high bandwidth internet connectivity. This is applicable for both desktop and mobile systems.
+
+\subsubsection{Software Interfaces}
+The software communicates with a MySQL database through the Django interface. Basic built-in python libraries are assumed available. 
+
+The software also accesses the Google sign-in API for secure login.
+
+\subsection{System Features}
+
+This section outlines the use cases for each of the actors seperately; the user and the admin.
+
+\subsubsection{Admin Use Case}
+
+\begin{itemize}
+
+\item The admin must be able to add/remove data to/from the following entities : 
+
+\begin{itemize}
+\item Departments
+\item Teachers
+\item Subjects
+\item Classes
+\end{itemize}
+
+\item The admin must also be able to specify the relation between teacher, subject and classes.
+
+\item The admin must be able to add new events to the upcoming event list for the users to view
+
+\end{itemize}
+
+\subsubsection{User Use Case}
+
+\begin{itemize}
+
+\item Login – User must be able to login using Google Accounts
+\item User must be allowed to pick a class of his choice
+\item Attendance Tracking
+
+\begin{itemize}
+\item The user must be able to view the current attendance
+\item The user must be update the attendace on a daily basis
+\end{itemize}
+
+\item Notes
+
+\begin{itemize}
+\item User must be able to save notes for every period in a day
+\item Markdown text should be supported
+\item Images should be supported
+\item User must be able to view all the notes saved as of yet
+\end{itemize}
+
+\item Upcoming Events
+
+\begin{itemize}
+\item User must be able to view upcoming events that are added by admins
+\item User must have a calender view of upcoming events
+\end{itemize}
+
+\end{itemize}
+
+\subsection{Other Non-Functional Requirements}
+
+\subsubsection{Safety Requirements}
+Logins must be completely secure and only admins must be allowed to access administrator interfaces.

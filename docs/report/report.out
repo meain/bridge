@@ -4,30 +4,38 @@
 \BOOKMARK [1][-]{section.2.2}{Proposed system}{chapter.2}% 4
 \BOOKMARK [0][-]{chapter.3}{System Study}{}% 5
 \BOOKMARK [1][-]{section.3.1}{Software Requirement Specification}{chapter.3}% 6
-\BOOKMARK [1][-]{section.3.2}{Hardware and Software Requirements}{chapter.3}% 7
-\BOOKMARK [2][-]{subsection.3.2.1}{Hardware specification}{section.3.2}% 8
-\BOOKMARK [2][-]{subsection.3.2.2}{Software specification}{section.3.2}% 9
-\BOOKMARK [0][-]{chapter.4}{System Design}{}% 10
-\BOOKMARK [1][-]{section.4.1}{Data Flow Diagrams}{chapter.4}% 11
-\BOOKMARK [1][-]{section.4.2}{Modular Design}{chapter.4}% 12
-\BOOKMARK [2][-]{subsection.4.2.1}{Login}{section.4.2}% 13
-\BOOKMARK [2][-]{subsection.4.2.2}{Landing Page}{section.4.2}% 14
-\BOOKMARK [2][-]{subsection.4.2.3}{Notes}{section.4.2}% 15
-\BOOKMARK [2][-]{subsection.4.2.4}{Attendance}{section.4.2}% 16
-\BOOKMARK [2][-]{subsection.4.2.5}{Calendar}{section.4.2}% 17
-\BOOKMARK [0][-]{chapter.5}{System Implementation}{}% 18
-\BOOKMARK [1][-]{section.5.1}{Sample Code}{chapter.5}% 19
-\BOOKMARK [2][-]{subsection.5.1.1}{Sample view handlers}{section.5.1}% 20
-\BOOKMARK [2][-]{subsection.5.1.2}{Url defenitions}{section.5.1}% 21
-\BOOKMARK [2][-]{subsection.5.1.3}{Model defenitions}{section.5.1}% 22
-\BOOKMARK [2][-]{subsection.5.1.4}{Base html template}{section.5.1}% 23
-\BOOKMARK [2][-]{subsection.5.1.5}{Sample module in js}{section.5.1}% 24
-\BOOKMARK [2][-]{subsection.5.1.6}{Sample CSS file}{section.5.1}% 25
-\BOOKMARK [1][-]{section.5.2}{Screenshots}{chapter.5}% 26
-\BOOKMARK [0][-]{chapter.6}{System Testing}{}% 27
-\BOOKMARK [1][-]{section.6.1}{Unit testing}{chapter.6}% 28
-\BOOKMARK [1][-]{section.6.2}{Integration testing}{chapter.6}% 29
-\BOOKMARK [1][-]{section.6.3}{System testing}{chapter.6}% 30
-\BOOKMARK [1][-]{section.6.4}{Component interface testing}{chapter.6}% 31
-\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 32
-\BOOKMARK [0][-]{section*.9}{References}{}% 33
+\BOOKMARK [2][-]{subsection.3.1.1}{Introduction}{section.3.1}% 7
+\BOOKMARK [2][-]{subsection.3.1.2}{Overall Description}{section.3.1}% 8
+\BOOKMARK [2][-]{subsection.3.1.3}{External Interface Requirements}{section.3.1}% 9
+\BOOKMARK [2][-]{subsection.3.1.4}{System Features}{section.3.1}% 10
+\BOOKMARK [2][-]{subsection.3.1.5}{Other Non-Functional Requirements}{section.3.1}% 11
+\BOOKMARK [1][-]{section.3.2}{Hardware and Software Requirements}{chapter.3}% 12
+\BOOKMARK [2][-]{subsection.3.2.1}{Hardware specification}{section.3.2}% 13
+\BOOKMARK [2][-]{subsection.3.2.2}{Software specification}{section.3.2}% 14
+\BOOKMARK [0][-]{chapter.4}{System Design}{}% 15
+\BOOKMARK [1][-]{section.4.1}{Data Flow Diagrams}{chapter.4}% 16
+\BOOKMARK [1][-]{section.4.2}{Modular Design}{chapter.4}% 17
+\BOOKMARK [2][-]{subsection.4.2.1}{Login}{section.4.2}% 18
+\BOOKMARK [2][-]{subsection.4.2.2}{Landing Page}{section.4.2}% 19
+\BOOKMARK [2][-]{subsection.4.2.3}{Notes}{section.4.2}% 20
+\BOOKMARK [2][-]{subsection.4.2.4}{Attendance}{section.4.2}% 21
+\BOOKMARK [2][-]{subsection.4.2.5}{Calendar}{section.4.2}% 22
+\BOOKMARK [1][-]{section.4.3}{Input Output design}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.3.1}{Input design}{section.4.3}% 24
+\BOOKMARK [2][-]{subsection.4.3.2}{Output design}{section.4.3}% 25
+\BOOKMARK [0][-]{chapter.5}{System Implementation}{}% 26
+\BOOKMARK [1][-]{section.5.1}{Sample Code}{chapter.5}% 27
+\BOOKMARK [2][-]{subsection.5.1.1}{Sample view handlers}{section.5.1}% 28
+\BOOKMARK [2][-]{subsection.5.1.2}{Url defenitions}{section.5.1}% 29
+\BOOKMARK [2][-]{subsection.5.1.3}{Model defenitions}{section.5.1}% 30
+\BOOKMARK [2][-]{subsection.5.1.4}{Base html template}{section.5.1}% 31
+\BOOKMARK [2][-]{subsection.5.1.5}{Sample module in js}{section.5.1}% 32
+\BOOKMARK [2][-]{subsection.5.1.6}{Sample CSS file}{section.5.1}% 33
+\BOOKMARK [1][-]{section.5.2}{Screenshots}{chapter.5}% 34
+\BOOKMARK [0][-]{chapter.6}{System Testing}{}% 35
+\BOOKMARK [1][-]{section.6.1}{Unit testing}{chapter.6}% 36
+\BOOKMARK [1][-]{section.6.2}{Integration testing}{chapter.6}% 37
+\BOOKMARK [1][-]{section.6.3}{System testing}{chapter.6}% 38
+\BOOKMARK [1][-]{section.6.4}{Component interface testing}{chapter.6}% 39
+\BOOKMARK [0][-]{chapter.7}{Conclusion}{}% 40
+\BOOKMARK [0][-]{section*.3}{References}{}% 41
