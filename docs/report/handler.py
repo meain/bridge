@@ -3,11 +3,15 @@ def signin(request):
         data = json.loads(request.POST.get('data'))
         sid = data['id']
         if Student.objects.filter(SID=sid).exists():
-            return HttpResponse(json.dumps({'exists': True}))
+            return HttpResponse(json.dumps({'exists':\
+                    True}))
         else:
-            classes = [name.class_name for name in Class.objects.all()]
-            data = json.dumps({'exists': False, 'options': classes})
-            return HttpResponse(json.dumps(data), content_type="application/json")
+            classes = [name.class_name for name in \
+                    Class.objects.all()]
+            data = json.dumps({'exists': False, \
+                    'options': classes})
+            return HttpResponse(json.dumps(data), \
+                    content_type="application/json")
 
 def get_attendence(request, user_id):
     user = Student.objects.get(SID=user_id)
@@ -15,7 +19,8 @@ def get_attendence(request, user_id):
 
     print attendence_data
     if len(attendence_data) is 0:
-        # quick patch ( issue only if new user already created)
+        # quick patch ( issue only if new user already
+                # created)
         daytable = user.current_class.get_tt()
         subs = {}
         for key in daytable:
@@ -27,7 +32,8 @@ def get_attendence(request, user_id):
 
     return_data = {}
     return_data['data'] = attendence_data
-    return HttpResponse(json.dumps(return_data), content_type="application/json")
+    return HttpResponse(json.dumps(return_data), \
+            content_type="application/json")
 
 def update_attendence(request):
     if request.method == "POST":
@@ -39,4 +45,5 @@ def update_attendence(request):
         user.attendence = attendence
         user.save()
     return_data = { 'status':'OK' }
-    return HttpResponse(json.dumps(return_data), content_type="application/json")
+    return HttpResponse(json.dumps(return_data), \
+            content_type="application/json")

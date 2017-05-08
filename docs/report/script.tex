@@ -105,10 +105,12 @@
     \PY{k}{this}\PY{p}{.}\PY{n+nx}{class\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}initialize\PYZus{}user\PYZsq{}}\PY{p}{;}
     \PY{k}{this}\PY{p}{.}\PY{n+nx}{user} \PY{o}{=} \PY{n+nx}{user}\PY{p}{;}
 \PY{p}{\PYZcb{}}
-\PY{n+nx}{InitializeUser}\PY{p}{.}\PY{n+nx}{prototype}\PY{p}{.}\PY{n+nx}{get\PYZus{}data\PYZus{}from\PYZus{}server} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{callback}\PY{p}{)}\PY{p}{\PYZob{}}
+\PY{n+nx}{InitializeUser}\PY{p}{.}\PY{n+nx}{prototype}\PY{p}{.}\PY{n+nx}{get\PYZus{}data\PYZus{}from\PYZus{}server} \PY{o}{=}
+    \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{callback}\PY{p}{)}\PY{p}{\PYZob{}}
     \PY{k+kd}{var} \PY{n+nx}{self} \PY{o}{=} \PY{k}{this}\PY{p}{;}
     \PY{k}{if} \PY{p}{(}\PY{n+nx}{callback} \PY{o}{===} \PY{k+kc}{undefined}\PY{p}{)} \PY{p}{\PYZob{}} \PY{n+nx}{callback}\PY{o}{=}\PY{k+kd}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}} \PY{p}{\PYZcb{}}
-    \PY{n+nx}{\PYZdl{}}\PY{p}{.}\PY{n+nx}{get}\PY{p}{(}\PY{n+nx}{server\PYZus{}address}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}/events/\PYZsq{}}\PY{o}{+}\PY{n+nx}{fuid}\PY{p}{,} \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{upcoming\PYZus{}events}\PY{p}{)}\PY{p}{\PYZob{}}
+    \PY{n+nx}{\PYZdl{}}\PY{p}{.}\PY{n+nx}{get}\PY{p}{(}\PY{n+nx}{server\PYZus{}address}\PY{o}{+}\PY{l+s+s1}{\PYZsq{}/events/\PYZsq{}}\PY{o}{+}\PY{n+nx}{fuid}\PY{p}{,}
+        \PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{upcoming\PYZus{}events}\PY{p}{)}\PY{p}{\PYZob{}}
         \PY{n+nx}{self}\PY{p}{.}\PY{n+nx}{events} \PY{o}{=} \PY{n+nx}{upcoming\PYZus{}events}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}data\PYZsq{}}\PY{p}{]}\PY{p}{;}
         \PY{n+nx}{callback}\PY{p}{(}\PY{p}{)}
     \PY{p}{\PYZcb{}}\PY{p}{)}
@@ -138,13 +140,19 @@
                     \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}due\PYZsq{}}\PY{p}{]}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}/div\PYZgt{}\PYZdq{}}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}div class=\PYZsq{}card tiny subject\PYZhy{}card\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+}
-                    \PY{l+s+s2}{\PYZdq{}\PYZlt{}span class=\PYZsq{}span violet name\PYZsq{}\PYZgt{}title\PYZlt{}/span\PYZgt{}\PYZlt{}span class=\PYZsq{}span white span\PYZhy{}content\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+} \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}name\PYZsq{}}\PY{p}{]}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZdq{}}\PY{o}{+}
+                    \PY{l+s+s2}{\PYZdq{}\PYZlt{}span class=\PYZsq{}span violet name\PYZsq{}\PYZgt{}title\PYZdq{}}\PY{o}{+}
+            \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZlt{}span class=\PYZsq{}span white span\PYZhy{}content\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+}
+            \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}name\PYZsq{}}\PY{p}{]}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZdq{}}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}/div\PYZgt{}\PYZdq{}}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}div class=\PYZsq{}card tiny subject\PYZhy{}card\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+}
-                    \PY{l+s+s2}{\PYZdq{}\PYZlt{}span class=\PYZsq{}span green name\PYZsq{}\PYZgt{}subject\PYZlt{}/span\PYZgt{}\PYZlt{}span class=\PYZsq{}span white span\PYZhy{}content\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+} \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}subject\PYZsq{}}\PY{p}{]}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZdq{}}\PY{o}{+}
+                    \PY{l+s+s2}{\PYZdq{}\PYZlt{}span class=\PYZsq{}span green name\PYZsq{}\PYZgt{}subject\PYZsq{}\PYZdq{}}\PY{o}{+}
+            \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZlt{}span class=\PYZsq{}span white span\PYZhy{}content\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+}
+            \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}subject\PYZsq{}}\PY{p}{]}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZdq{}}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}/div\PYZgt{}\PYZdq{}}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}div class=\PYZsq{}card tiny subject\PYZhy{}card\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+}
-                    \PY{l+s+s2}{\PYZdq{}\PYZlt{}span class=\PYZsq{}span blue name\PYZsq{}\PYZgt{}submission\PYZlt{}/span\PYZgt{}\PYZlt{}span class=\PYZsq{}span white span\PYZhy{}content\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+} \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}to\PYZsq{}}\PY{p}{]}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZdq{}}\PY{o}{+}
+            \PY{l+s+s2}{\PYZdq{}\PYZlt{}span class=\PYZsq{}span blue name\PYZsq{}\PYZgt{}submission\PYZdq{}}\PY{o}{+}
+        \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZlt{}span class=\PYZsq{}span white span\PYZhy{}content\PYZsq{}\PYZgt{}\PYZdq{}}\PY{o}{+}
+            \PY{k}{this}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}to\PYZsq{}}\PY{p}{]}\PY{o}{+} \PY{l+s+s2}{\PYZdq{}\PYZlt{}/span\PYZgt{}\PYZdq{}}\PY{o}{+}
                 \PY{l+s+s2}{\PYZdq{}\PYZlt{}/div\PYZgt{}\PYZdq{}}\PY{o}{+}
             \PY{l+s+s2}{\PYZdq{}\PYZlt{}/div\PYZgt{}\PYZdq{}}
     \PY{p}{\PYZcb{}}
@@ -154,19 +162,26 @@
     \PY{n+nx}{event\PYZus{}cards} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}.event\PYZsq{}}\PY{p}{)}\PY{p}{;}
     \PY{k}{for}\PY{p}{(}\PY{k+kd}{var} \PY{n+nx}{i} \PY{o}{=} \PY{l+m+mi}{0}\PY{p}{,} \PY{n+nx}{len} \PY{o}{=} \PY{n+nx}{event\PYZus{}cards}\PY{p}{.}\PY{n+nx}{length}\PY{p}{;} \PY{n+nx}{i}\PY{o}{\PYZlt{}}\PY{n+nx}{len}\PY{p}{;} \PY{n+nx}{i}\PY{o}{++}\PY{p}{)}\PY{p}{\PYZob{}}
         \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{event\PYZus{}cards}\PY{p}{[}\PY{n+nx}{i}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{click}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
-            \PY{n+nx}{event\PYZus{}data} \PY{o}{=} \PY{n+nx}{self}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{k}{this}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}event\PYZsq{}}\PY{p}{)}\PY{p}{]}
+            \PY{n+nx}{event\PYZus{}data} \PY{o}{=} \PY{n+nx}{self}\PY{p}{.}\PY{n+nx}{events}\PY{p}{[}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{k}{this}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{data}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}event\PYZsq{}}\PY{p}{)}\PY{p}{]}
             \PY{n+nx}{el\PYZus{}main} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}event\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}
-            \PY{n+nx}{el\PYZus{}date} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}due\PYZsq{}}\PY{p}{]}\PY{p}{)}
-            \PY{n+nx}{el\PYZus{}title} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}name\PYZsq{}}\PY{p}{]}\PY{p}{)}
-            \PY{n+nx}{el\PYZus{}subject} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}subject\PYZsq{}}\PY{p}{]}\PY{p}{)}
-            \PY{n+nx}{el\PYZus{}submission} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}to\PYZsq{}}\PY{p}{]}\PY{p}{)}
-            \PY{n+nx}{el\PYZus{}desc} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}description\PYZsq{}}\PY{p}{]}\PY{p}{)}
-            \PY{c+c1}{// console.log(el\PYZus{}date, el\PYZus{}subject, el\PYZus{}submission, el\PYZus{}desc)}
-            \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}event\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}flex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+            \PY{n+nx}{el\PYZus{}date} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}due\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n+nx}{el\PYZus{}title} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}name\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n+nx}{el\PYZus{}subject} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}subject\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n+nx}{el\PYZus{}submission} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}to\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n+nx}{el\PYZus{}desc} \PY{o}{=} \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{el\PYZus{}main}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}\PY{p}{.}\PY{n+nx}{children}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{text}\PY{p}{(}\PY{n+nx}{event\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}description\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}event\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                \PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}flex\PYZsq{}}\PY{p}{)}\PY{p}{;}
         \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}
     \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}event\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{click}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
-        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}event\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}none\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}event\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}none\PYZsq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
 \PY{p}{\PYZcb{}}
 \PY{n+nx}{InitializeUser}\PY{p}{.}\PY{n+nx}{prototype}\PY{p}{.}\PY{n+nx}{click\PYZus{}handlers} \PY{o}{=} \PY{k+kd}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
@@ -177,18 +192,21 @@
             \PY{n+nx}{console}\PY{p}{.}\PY{n+nx}{log}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}User signed out.\PYZsq{}}\PY{p}{)}\PY{p}{;}
         \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
         \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}login\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}flex\PYZsq{}}\PY{p}{)}\PY{p}{;}
-        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}none\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}none\PYZsq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
     \PY{c+c1}{// Handle sinout popup remove click}
     \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{click}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
-        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}none\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}none\PYZsq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
     \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{click}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{n+nx}{e}\PY{p}{)}\PY{p}{\PYZob{}}
         \PY{n+nx}{e}\PY{p}{.}\PY{n+nx}{stopPropagation}\PY{p}{(}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
     \PY{c+c1}{// Open up the signout popup}
     \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}profile\PYZhy{}image\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{click}\PY{p}{(}\PY{k+kd}{function}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZob{}}
-        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}flex\PYZsq{}}\PY{p}{)}\PY{p}{;}
+        \PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{n+nx}{\PYZdl{}}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}\PYZsh{}signout\PYZhy{}popup\PYZsq{}}\PY{p}{)}\PY{p}{.}\PY{n+nx}{parent}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            \PY{p}{.}\PY{n+nx}{css}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}display\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}flex\PYZsq{}}\PY{p}{)}\PY{p}{;}
     \PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{;}
 
 

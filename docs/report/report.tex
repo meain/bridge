@@ -4,6 +4,8 @@
 \usepackage{url} %for proper url entries
 \usepackage[bookmarks, colorlinks=false, pdfborder={0 0 0}, pdftitle={<pdf title here>}, pdfauthor={<author's name here>}, pdfsubject={<subject here>}, pdfkeywords={<keywords here>}]{hyperref} %for creating links in the pdf version and other additional pdf attributes, no effect on the printed document
 
+\usepackage{fancyhdr}
+
 \usepackage{fancyvrb}
 \usepackage{color}
 \usepackage[utf8]{inputenc}
@@ -20,10 +22,13 @@
 
 \usepackage{titlesec}
 
+% break lines in code
+\usepackage{spverbatim}
+
 % remove this to get back to the old chapter style
-\titleformat{\chapter}[block]
-  {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge\vspace{1em}}
-\titlespacing*{\chapter}{0pt}{-19pt}{0pt}
+% \titleformat{\chapter}[block]
+%   {\normalfont\huge\bfseries}{\thechapter.}{1em}{\Huge\vspace{1em}}
+% \titlespacing*{\chapter}{0pt}{-19pt}{0pt}
 
 %\usepackage[final]{pdfpages} %for embedding another pdf, remove if not required
 
@@ -39,14 +44,21 @@
 \input{./certificate.tex}
 \newpage
 \input{./acknoledgement.tex}
-\newpage
-\input{./decleration.tex}
+% \newpage
+% \input{./decleration.tex}
 \newpage
 \input{./abstract.tex}
 
 \pagenumbering{roman} %numbering before main content starts
 \tableofcontents
 \listoffigures
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Bridge}
+\lhead{}
+\rfoot{Page \thepage}
+\lfoot{Department of Computer Science and Engineering}
 
 \newpage
 \pagenumbering{arabic} %reset numbering to normal for the main content
@@ -57,6 +69,7 @@
 \input{./sys-design.tex}
 \input{./sys-impl.tex}
 \input{./sys-test.tex}
+\input{./future.tex}
 \input{./conclusion.tex}
 \input{./ref.tex}
 

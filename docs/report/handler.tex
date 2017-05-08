@@ -106,11 +106,15 @@
         \PY{n}{data} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{request}\PY{o}{.}\PY{n}{POST}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
         \PY{n}{sid} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
         \PY{k}{if} \PY{n}{Student}\PY{o}{.}\PY{n}{objects}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{SID}\PY{o}{=}\PY{n}{sid}\PY{p}{)}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{p}{)}\PY{p}{:}
-            \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exists}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{True}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exists}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PYZbs{}
+                    \PY{n+nb+bp}{True}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
         \PY{k}{else}\PY{p}{:}
-            \PY{n}{classes} \PY{o}{=} \PY{p}{[}\PY{n}{name}\PY{o}{.}\PY{n}{class\PYZus{}name} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PY{n}{Class}\PY{o}{.}\PY{n}{objects}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{]}
-            \PY{n}{data} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exists}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{False}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{options}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{classes}\PY{p}{\PYZcb{}}\PY{p}{)}
-            \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{content\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+            \PY{n}{classes} \PY{o}{=} \PY{p}{[}\PY{n}{name}\PY{o}{.}\PY{n}{class\PYZus{}name} \PY{k}{for} \PY{n}{name} \PY{o+ow}{in} \PYZbs{}
+                    \PY{n}{Class}\PY{o}{.}\PY{n}{objects}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+            \PY{n}{data} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{exists}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb+bp}{False}\PY{p}{,} \PYZbs{}
+                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{options}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{classes}\PY{p}{\PYZcb{}}\PY{p}{)}
+            \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PYZbs{}
+                    \PY{n}{content\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 
 \PY{k}{def} \PY{n+nf}{get\PYZus{}attendence}\PY{p}{(}\PY{n}{request}\PY{p}{,} \PY{n}{user\PYZus{}id}\PY{p}{)}\PY{p}{:}
     \PY{n}{user} \PY{o}{=} \PY{n}{Student}\PY{o}{.}\PY{n}{objects}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{SID}\PY{o}{=}\PY{n}{user\PYZus{}id}\PY{p}{)}
@@ -118,7 +122,8 @@
 
     \PY{k}{print} \PY{n}{attendence\PYZus{}data}
     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{attendence\PYZus{}data}\PY{p}{)} \PY{o+ow}{is} \PY{l+m+mi}{0}\PY{p}{:}
-        \PY{c+c1}{\PYZsh{} quick patch ( issue only if new user already created)}
+        \PY{c+c1}{\PYZsh{} quick patch ( issue only if new user already}
+                \PY{c+c1}{\PYZsh{} created)}
         \PY{n}{daytable} \PY{o}{=} \PY{n}{user}\PY{o}{.}\PY{n}{current\PYZus{}class}\PY{o}{.}\PY{n}{get\PYZus{}tt}\PY{p}{(}\PY{p}{)}
         \PY{n}{subs} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
         \PY{k}{for} \PY{n}{key} \PY{o+ow}{in} \PY{n}{daytable}\PY{p}{:}
@@ -130,7 +135,8 @@
 
     \PY{n}{return\PYZus{}data} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
     \PY{n}{return\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{attendence\PYZus{}data}
-    \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{return\PYZus{}data}\PY{p}{)}\PY{p}{,} \PY{n}{content\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{return\PYZus{}data}\PY{p}{)}\PY{p}{,} \PYZbs{}
+            \PY{n}{content\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 
 \PY{k}{def} \PY{n+nf}{update\PYZus{}attendence}\PY{p}{(}\PY{n}{request}\PY{p}{)}\PY{p}{:}
     \PY{k}{if} \PY{n}{request}\PY{o}{.}\PY{n}{method} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{POST}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}
@@ -142,5 +148,6 @@
         \PY{n}{user}\PY{o}{.}\PY{n}{attendence} \PY{o}{=} \PY{n}{attendence}
         \PY{n}{user}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{p}{)}
     \PY{n}{return\PYZus{}data} \PY{o}{=} \PY{p}{\PYZob{}} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{status}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{OK}\PY{l+s+s1}{\PYZsq{}} \PY{p}{\PYZcb{}}
-    \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{return\PYZus{}data}\PY{p}{)}\PY{p}{,} \PY{n}{content\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{k}{return} \PY{n}{HttpResponse}\PY{p}{(}\PY{n}{json}\PY{o}{.}\PY{n}{dumps}\PY{p}{(}\PY{n}{return\PYZus{}data}\PY{p}{)}\PY{p}{,} \PYZbs{}
+            \PY{n}{content\PYZus{}type}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{application/json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 \end{Verbatim}

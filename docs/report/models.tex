@@ -102,11 +102,17 @@
 
 \begin{Verbatim}[commandchars=\\\{\}]
  \PY{k}{class} \PY{n+nc}{Subject}\PY{p}{(}\PY{n}{models}\PY{o}{.}\PY{n}{Model}\PY{p}{)}\PY{p}{:}
-    \PY{n}{subject\PYZus{}code} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subject Code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,} \PY{n}{primary\PYZus{}key}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
-    \PY{n}{subject\PYZus{}title} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subject Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-    \PY{n}{subject\PYZus{}short\PYZus{}name} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Abbriviation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-    \PY{n}{subject\PYZus{}dep} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ForeignKey}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Department}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on\PYZus{}delete}\PY{o}{=}\PY{n}{models}\PY{o}{.}\PY{n}{CASCADE}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Branch}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
-    \PY{n}{subject\PYZus{}sem} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{SmallIntegerField}\PY{p}{(}\PY{n}{choices}\PY{o}{=}\PY{n}{sem\PYZus{}choices}\PY{p}{,} \PY{n}{null}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+    \PY{n}{subject\PYZus{}code} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PYZbs{}
+            \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subject Code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,}\PYZbs{}
+            \PY{n}{primary\PYZus{}key}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+    \PY{n}{subject\PYZus{}title} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PYZbs{}
+            \PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{60}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subject Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{n}{subject\PYZus{}short\PYZus{}name} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PYZbs{}
+            \PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Abbriviation}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{n}{subject\PYZus{}dep} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ForeignKey}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Department}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PYZbs{}
+            \PY{n}{on\PYZus{}delete}\PY{o}{=}\PY{n}{models}\PY{o}{.}\PY{n}{CASCADE}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Branch}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{n}{subject\PYZus{}sem} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{SmallIntegerField}\PY{p}{(}\PYZbs{}
+            \PY{n}{choices}\PY{o}{=}\PY{n}{sem\PYZus{}choices}\PY{p}{,} \PY{n}{null}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
 
     \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
         \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{subject\PYZus{}title}
@@ -114,27 +120,34 @@
 
 \PY{k}{class} \PY{n+nc}{Teacher}\PY{p}{(}\PY{n}{models}\PY{o}{.}\PY{n}{Model}\PY{p}{)}\PY{p}{:}
     \PY{n}{teacher\PYZus{}name} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{40}\PY{p}{)}
-    \PY{n}{dept} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ForeignKey}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Department}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on\PYZus{}delete}\PY{o}{=}\PY{n}{models}\PY{o}{.}\PY{n}{CASCADE}\PY{p}{)}
-    \PY{n}{subjects} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ManyToManyField}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subjects}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+    \PY{n}{dept} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ForeignKey}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Department}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{on\PYZus{}delete}\PY{o}{=}\PY{n}{models}\PY{o}{.}\PY{n}{CASCADE}\PY{p}{)}
+    \PY{n}{subjects} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ManyToManyField}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Subjects}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
 
     \PY{k}{def} \PY{n+nf+fm}{\PYZus{}\PYZus{}str\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
         \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{teacher\PYZus{}name}
 
 
 \PY{k}{class} \PY{n+nc}{Class}\PY{p}{(}\PY{n}{models}\PY{o}{.}\PY{n}{Model}\PY{p}{)}\PY{p}{:}
-    \PY{n}{current\PYZus{}sem} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{PositiveSmallIntegerField}\PY{p}{(}\PY{n}{choices}\PY{o}{=}\PY{n}{sem\PYZus{}choices}\PY{p}{)}
-    \PY{n}{branch} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ForeignKey}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Department}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{on\PYZus{}delete}\PY{o}{=}\PY{n}{models}\PY{o}{.}\PY{n}{CASCADE}\PY{p}{)}
+    \PY{n}{current\PYZus{}sem} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{PositiveSmallIntegerField}\PY{p}{(}\PYZbs{}
+            \PY{n}{choices}\PY{o}{=}\PY{n}{sem\PYZus{}choices}\PY{p}{)}
+    \PY{n}{branch} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ForeignKey}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Department}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{on\PYZus{}delete}\PY{o}{=}\PY{n}{models}\PY{o}{.}\PY{n}{CASCADE}\PY{p}{)}
     \PY{n}{batch} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
     \PY{n}{class\PYZus{}name} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{CharField}\PY{p}{(}\PY{n}{max\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{blank}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
     \PY{n}{timeTable} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{TextField}\PY{p}{(}\PY{p}{)}
-    \PY{n}{subjects} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ManyToManyField}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subjects}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{through}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TaughtBy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+    \PY{n}{subjects} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{ManyToManyField}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subject}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PYZbs{}
+            \PY{n}{verbose\PYZus{}name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Subjects}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{through}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{TaughtBy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
 
     \PY{k}{def} \PY{n+nf}{save}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}\PY{p}{:}
-        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{class\PYZus{}name} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{branch}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}sem}\PY{p}{)} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch}\PY{p}{)}
+        \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{class\PYZus{}name} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{branch}\PY{p}{)} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PYZbs{}
+                \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{current\PYZus{}sem}\PY{p}{)} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch}\PY{p}{)}
         \PY{n+nb}{super}\PY{p}{(}\PY{n}{Class}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{o}{*}\PY{n}{args}\PY{p}{,} \PY{o}{*}\PY{o}{*}\PY{n}{kwargs}\PY{p}{)}
 
     \PY{k}{def} \PY{n+nf}{get\PYZus{}subs}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
-        \PY{n}{subs} \PY{o}{=} \PY{p}{[}\PY{n}{subject}\PY{o}{.}\PY{n}{subject\PYZus{}short\PYZus{}name} \PY{k}{for} \PY{n}{subject} \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{subjects}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        \PY{n}{subs} \PY{o}{=} \PY{p}{[}\PY{n}{subject}\PY{o}{.}\PY{n}{subject\PYZus{}short\PYZus{}name} \PY{k}{for} \PY{n}{subject} \PYZbs{}
+                \PY{o+ow}{in} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{subjects}\PY{o}{.}\PY{n}{all}\PY{p}{(}\PY{p}{)}\PY{p}{]}
         \PY{k}{return} \PY{n}{subs}
 
     \PY{k}{def} \PY{n+nf}{get\PYZus{}tt}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
