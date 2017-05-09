@@ -148,10 +148,12 @@ body{
     font-size: 30px;
     /* border-bottom: 2px solid #ded; */
 	cursor: pointer;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .navel:hover{
     /* background-color: rgba(192, 57, 43,0.25); */
     background-color: rgba(46, 204, 113,0.25);
+    box-shadow: 2px 7px 16px 0px rgba(0,0,0,0.25);
 }
 .content{
     height: calc(100% - 70px);
@@ -161,10 +163,14 @@ body{
     float: left;
     width: calc(100% - 20px);
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .event:hover{
     /* background-color: rgba(41, 128, 185,0.25); */
-    background-color: rgba(230, 126, 34,0.25);
+    /* background-color: rgba(230, 126, 34,0.25); */
+    /* box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
+    box-shadow: 2px 7px 16px 0px rgba(0,0,0,0.25);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .date-card{
     float: right;
@@ -234,18 +240,21 @@ body{
     display: inline-block;
     white-space:nowrap;
     float: left;
-    padding-bottom: 3px;
+    padding: 3px;
+    padding-bottom: 5px;
     text-transform: uppercase;
     font-size: 15px;
     border-bottom: 1px solid #fff;
     transition-property: border-bottom;
     transition-duration: 1s;
     cursor: pointer;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 .timetable-subject:hover{
     /* text-decoration: underline; */
     border-bottom: 1px solid #000;
     color: red;
+    /* box-shadow: 2px 7px 16px 0px rgba(0,0,0,0.25); */
 }
 #login-popup{
     position: absolute;
@@ -432,6 +441,7 @@ body{
     padding-top: 0;
     margin-top: 20px;
     overflow:auto;
+    text-align: center;
 }
 .attendence-pie{
     width: 46%;
