@@ -10,86 +10,226 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Class',
+            name="Class",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('current_sem', models.PositiveSmallIntegerField(choices=[(1, 'S1'), (2, 'S2'), (3, 'S3'), (4, 'S4'), (5, 'S5'), (6, 'S6'), (7, 'S7'), (8, 'S8')])),
-                ('batch', models.CharField(max_length=1)),
-                ('class_name', models.CharField(blank=True, max_length=10)),
-                ('timeTable', models.TextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "current_sem",
+                    models.PositiveSmallIntegerField(
+                        choices=[
+                            (1, "S1"),
+                            (2, "S2"),
+                            (3, "S3"),
+                            (4, "S4"),
+                            (5, "S5"),
+                            (6, "S6"),
+                            (7, "S7"),
+                            (8, "S8"),
+                        ]
+                    ),
+                ),
+                ("batch", models.CharField(max_length=1)),
+                ("class_name", models.CharField(blank=True, max_length=10)),
+                ("timeTable", models.TextField()),
             ],
         ),
         migrations.CreateModel(
-            name='Department',
+            name="Department",
             fields=[
-                ('dep_code', models.CharField(max_length=3, primary_key=True, serialize=False, verbose_name='Department Code')),
-                ('dep_name', models.CharField(max_length=60, verbose_name='Department Name')),
+                (
+                    "dep_code",
+                    models.CharField(
+                        max_length=3,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="Department Code",
+                    ),
+                ),
+                (
+                    "dep_name",
+                    models.CharField(max_length=60, verbose_name="Department Name"),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Events',
+            name="Events",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=40, verbose_name='Event title')),
-                ('due_date', models.DateField(verbose_name='Due date')),
-                ('event_description', models.TextField(verbose_name='Description')),
-                ('assigned_to', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Class', verbose_name='Assigned to')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=40, verbose_name="Event title")),
+                ("due_date", models.DateField(verbose_name="Due date")),
+                ("event_description", models.TextField(verbose_name="Description")),
+                (
+                    "assigned_to",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="core.Class",
+                        verbose_name="Assigned to",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Notes',
+            name="Notes",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Student',
+            name="Student",
             fields=[
-                ('SID', models.CharField(max_length=120, primary_key=True, serialize=False)),
-                ('stud_name', models.CharField(max_length=40, verbose_name='Name')),
-                ('current_class', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Class', verbose_name='Class')),
+                (
+                    "SID",
+                    models.CharField(max_length=120, primary_key=True, serialize=False),
+                ),
+                ("stud_name", models.CharField(max_length=40, verbose_name="Name")),
+                (
+                    "current_class",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="core.Class",
+                        verbose_name="Class",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Subject',
+            name="Subject",
             fields=[
-                ('subject_code', models.CharField(max_length=6, primary_key=True, serialize=False, verbose_name='Subject Code')),
-                ('subject_title', models.CharField(max_length=60, verbose_name='Subject Title')),
-                ('subject_short_name', models.CharField(max_length=3, verbose_name='Abbriviation')),
-                ('subject_sem', models.SmallIntegerField(choices=[(1, 'S1'), (2, 'S2'), (3, 'S3'), (4, 'S4'), (5, 'S5'), (6, 'S6'), (7, 'S7'), (8, 'S8')], null=True)),
-                ('subject_dep', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Department', verbose_name='Branch')),
+                (
+                    "subject_code",
+                    models.CharField(
+                        max_length=6,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="Subject Code",
+                    ),
+                ),
+                (
+                    "subject_title",
+                    models.CharField(max_length=60, verbose_name="Subject Title"),
+                ),
+                (
+                    "subject_short_name",
+                    models.CharField(max_length=3, verbose_name="Abbriviation"),
+                ),
+                (
+                    "subject_sem",
+                    models.SmallIntegerField(
+                        choices=[
+                            (1, "S1"),
+                            (2, "S2"),
+                            (3, "S3"),
+                            (4, "S4"),
+                            (5, "S5"),
+                            (6, "S6"),
+                            (7, "S7"),
+                            (8, "S8"),
+                        ],
+                        null=True,
+                    ),
+                ),
+                (
+                    "subject_dep",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="core.Department",
+                        verbose_name="Branch",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TaughtBy',
+            name="TaughtBy",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('classes', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Class')),
-                ('subject', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Subject')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "classes",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.Class"
+                    ),
+                ),
+                (
+                    "subject",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="core.Subject"
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Teacher',
+            name="Teacher",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('teacher_name', models.CharField(max_length=40)),
-                ('dept', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Department')),
-                ('subjects', models.ManyToManyField(to='core.Subject', verbose_name='Subjects')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("teacher_name", models.CharField(max_length=40)),
+                (
+                    "dept",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="core.Department",
+                    ),
+                ),
+                (
+                    "subjects",
+                    models.ManyToManyField(to="core.Subject", verbose_name="Subjects"),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='taughtby',
-            name='teachers',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Teacher'),
+            model_name="taughtby",
+            name="teachers",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="core.Teacher"
+            ),
         ),
         migrations.AddField(
-            model_name='class',
-            name='branch',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.Department'),
+            model_name="class",
+            name="branch",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="core.Department"
+            ),
         ),
     ]

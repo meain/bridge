@@ -9,18 +9,27 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0006_auto_20170329_1846'),
+        ("core", "0006_auto_20170329_1846"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='event',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='core.Student', verbose_name='User'),
+            model_name="event",
+            name="user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="core.Student",
+                verbose_name="User",
+            ),
         ),
         migrations.AddField(
-            model_name='note',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='core.Student'),
+            model_name="note",
+            name="user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="core.Student",
+            ),
         ),
     ]

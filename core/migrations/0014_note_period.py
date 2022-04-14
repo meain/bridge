@@ -8,13 +8,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0013_auto_20170430_0830'),
+        ("core", "0013_auto_20170430_0830"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='note',
-            name='period',
-            field=models.SmallIntegerField(max_length=1, null=True, verbose_name='Period'),
+            model_name="note",
+            name="period",
+            field=models.SmallIntegerField(
+                max_length=1, null=True, verbose_name="Period"
+            ),
         ),
     ]

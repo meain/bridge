@@ -9,37 +9,56 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0009_auto_20170329_1938'),
+        ("core", "0009_auto_20170329_1938"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='event',
-            name='event_description',
+            model_name="event",
+            name="event_description",
         ),
         migrations.AddField(
-            model_name='event',
-            name='description',
-            field=models.TextField(null=True, verbose_name='Description'),
+            model_name="event",
+            name="description",
+            field=models.TextField(null=True, verbose_name="Description"),
         ),
         migrations.AddField(
-            model_name='event',
-            name='subject',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='core.Subject'),
+            model_name="event",
+            name="subject",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="core.Subject",
+            ),
         ),
         migrations.AddField(
-            model_name='event',
-            name='teacher',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='core.Teacher'),
+            model_name="event",
+            name="teacher",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="core.Teacher",
+            ),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='assigned_to',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='core.Class', verbose_name='Assigned to class'),
+            model_name="event",
+            name="assigned_to",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="core.Class",
+                verbose_name="Assigned to class",
+            ),
         ),
         migrations.AlterField(
-            model_name='event',
-            name='user',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='core.Student', verbose_name='Assigned to student'),
+            model_name="event",
+            name="user",
+            field=models.ForeignKey(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="core.Student",
+                verbose_name="Assigned to student",
+            ),
         ),
     ]

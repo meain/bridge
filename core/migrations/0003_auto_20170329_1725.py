@@ -8,20 +8,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_class_subjects'),
+        ("core", "0002_class_subjects"),
     ]
 
     operations = [
         migrations.RenameModel(
-            old_name='Events',
-            new_name='Event',
+            old_name="Events",
+            new_name="Event",
         ),
         migrations.RenameModel(
-            old_name='Notes',
-            new_name='Note',
+            old_name="Notes",
+            new_name="Note",
         ),
         migrations.AlterModelOptions(
-            name='class',
-            options={'verbose_name_plural': 'Classes'},
+            name="class",
+            options={"verbose_name_plural": "Classes"},
         ),
     ]

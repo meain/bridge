@@ -8,18 +8,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0005_remove_student_register_no'),
+        ("core", "0005_remove_student_register_no"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='note',
-            name='note_text',
-            field=models.TextField(null=True, verbose_name='Note text'),
+            model_name="note",
+            name="note_text",
+            field=models.TextField(null=True, verbose_name="Note text"),
         ),
         migrations.AddField(
-            model_name='note',
-            name='title',
-            field=models.CharField(max_length=40, null=True, verbose_name='Note title'),
+            model_name="note",
+            name="title",
+            field=models.CharField(max_length=40, null=True, verbose_name="Note title"),
         ),
     ]

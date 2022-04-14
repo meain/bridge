@@ -8,13 +8,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0010_auto_20170329_1955'),
+        ("core", "0010_auto_20170329_1955"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='student',
-            name='attendence',
+            model_name="student",
+            name="attendence",
             field=models.TextField(null=True),
         ),
     ]
