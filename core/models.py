@@ -116,10 +116,22 @@ class Event(models.Model):
     title = models.CharField(max_length=40, verbose_name="Event title")
     due_date = models.DateField(verbose_name="Due date")
     description = models.TextField(verbose_name="Description", null=True)
-    teacher = models.ForeignKey("Teacher", null=True)
-    subject = models.ForeignKey("Subject", null=True)
+    teacher = models.ForeignKey(
+        "Teacher",
+        null=True,
+        on_delete=models.CASCADE,
+    )
+    subject = models.ForeignKey(
+        "Subject",
+        null=True,
+        on_delete=models.CASCADE,
+    )
     assigned_to = models.ForeignKey(
-        "Class", verbose_name="Assigned to class", null=True, blank=True
+        "Class",
+        verbose_name="Assigned to class",
+        null=True,
+        blank=True,
+        on_delete=models.CASCADE,
     )
 
     def __str__(self):
@@ -129,6 +141,6 @@ class Event(models.Model):
 class Note(models.Model):
     user = models.ForeignKey("Student", on_delete=models.CASCADE, null=True)
     date = models.CharField(max_length=12, verbose_name="date", null=True)
-    period = models.SmallIntegerField(max_length=1, verbose_name="Period", null=True)
-    subject = models.ForeignKey("Subject", null=True)
+    period = models.SmallIntegerField(verbose_name="Period", null=True)
+    subject = models.ForeignKey("Subject", null=True, on_delete=models.CASCADE)
     data = models.TextField(null=True)

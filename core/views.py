@@ -51,6 +51,8 @@ def get_sub_data(request, user_id):
             for x in query
         }
 
+        print("ts_dict:", ts_dict)
+        print("daytable:", daytable)
         for sub_code in daytable:
             return_dict[sub_code] = {
                 "teacher": ts_dict[sub_code][0],
@@ -193,7 +195,7 @@ def get_cal_data(request, user_id):
 def get_attendence(request, user_id):
     user = Student.objects.get(SID=user_id)
     attendence_data = user.get_attendence_data()
-    if len(attendence_data) is 0:
+    if len(attendence_data) == 0:
         # quick patch ( issue only if new user already created)
         daytable = user.current_class.get_tt()
         subs = {}

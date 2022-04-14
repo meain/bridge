@@ -1,4 +1,4 @@
-var server_address = 'http://localhost:8080'
+var server_address = 'http://localhost:8000'
 var fuid = 0
 
 var user_data = {}
